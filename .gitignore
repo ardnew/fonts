@@ -3,8 +3,8 @@
 
 # exclude any repository meta files
 !.git*
-!*README*
-!*LICENSE*
+!/*README*
+!/*LICENSE*
 
 # add explicit exceptions for submodules
 !/_extra/programmingfonts/
