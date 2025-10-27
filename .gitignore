@@ -6,12 +6,12 @@
 !/*README*
 !/*LICENSE*
 
-# add explicit exceptions for submodules
-!/_extra/programmingfonts/
-
 # add exceptions for parent directories
 !/**/
 
 # add exceptions for the font file types we want
 !*.[TtOo][Tt][Ff]
 !*.[Ee][Oo][Tt]
+
+# add exceptions for any other files/types
+!/rename-fonts.sh
