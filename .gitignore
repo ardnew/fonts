@@ -8,10 +8,14 @@
 
 # add exceptions for parent directories
 !/**/
-
+.delete
 # add exceptions for the font file types we want
 !*.[TtOo][Tt][Ff]
 !*.[Ee][Oo][Tt]
 
+# include the preview images
+!/_preview/*
+
 # add exceptions for any other files/types
 !/rename-fonts.sh
+!/gen-previews.sh
