@@ -17,6 +17,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="${REPO_ROOT:-$SCRIPT_DIR}"
+FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
 
 # Configuration
 PREVIEW_WIDTH=800
@@ -72,18 +73,18 @@ shopt -s globstar extglob nullglob
 
 # Counter for progress
 count=0
-total=$(find "${REPO_ROOT}" -type f \( -name "*.otf" -o -name "*.ttf" \) | wc -l)
+total=$(find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | wc -l)
 
 echo "Generating previews for ${total} font files..."
 
-for ff in "${REPO_ROOT}"/**/*.[ot]tf; do 
+for ff in "${FONTS_DIR}"/**/*.[ot]tf; do 
   # Skip if file doesn't exist (nullglob didn't work)
   [[ -f "${ff}" ]] || continue
 
   ((++count))
 
   # Generate safe filename from path
-  fp=${ff#"${REPO_ROOT}"/}
+  fp=${ff#"${FONTS_DIR}"/}
   fs=${fp//\//__}
   fs=${fs%.[ot]tf}
 

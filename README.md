@@ -12,21 +12,23 @@ A personal collection of approximately ~1,500 font files across ~150 font famili
 Fonts are organized by family, format, and style according to FontConfig conventions:
 
 ```text
-/opt/fonts/src/
-├── <FamilyName>/                        # One directory per font family
-│   ├── otf/                             # OpenType format fonts
-│   │   ├── <Style>/                     # Static font style subdirectory
-│   │   │   └── <Family>-<Style>.otf
-│   │   └── .duplicate/                  # Deprecated static fonts (when variable exists)
-│   └── ttf/                             # TrueType format fonts
-│       ├── <Style>/                     # Static font style subdirectory
-│       │   └── <Family>-<Style>.ttf
-│       ├── <Family>-Variable.ttf        # Variable font (upright)
-│       └── <Family>-VariableItalic.ttf  # Variable font (italic)
-│
-├── share/doc/fonts/  # Preview images and catalog
-│   ├── *.png         # Individual font preview images
-│   └── README.md     # Preview gallery with all images
+./
+├── share/
+│   ├── fonts/                           # Font files directory
+│   │   └── <FamilyName>/                # One directory per font family
+│   │       ├── otf/                     # OpenType format fonts
+│   │       │   ├── <Style>/             # Static font style subdirectory
+│   │       │   │   └── <Family>-<Style>.otf
+│   │       │   └── .duplicate/          # Deprecated static fonts (when variable exists)
+│   │       └── ttf/                     # TrueType format fonts
+│   │           ├── <Style>/             # Static font style subdirectory
+│   │           │   └── <Family>-<Style>.ttf
+│   │           ├── <Family>-Variable.ttf        # Variable font (upright)
+│   │           └── <Family>-VariableItalic.ttf  # Variable font (italic)
+│   └── doc/
+│       └── fonts/                       # Preview images and catalog
+│           ├── *.png                    # Individual font preview images
+│           └── README.md                # Preview gallery with all images
 │
 ├── gen-previews.sh   # Preview generation tool
 ├── gen-stats.sh      # Repository statistics tool
@@ -63,7 +65,7 @@ Options:
 
 The font organization tool:
 
-- Walks the entire repository to find `*.otf` and `*.ttf` files
+- Walks the `share/fonts/` directory to find `*.otf` and `*.ttf` files
 - Uses `fc-query` to extract authoritative font metadata (ignores misleading filenames)
 - Sanitizes family and style names (removes spaces, special characters, variable suffixes)
 - Groups fonts by family and format

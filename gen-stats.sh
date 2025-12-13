@@ -6,6 +6,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="${REPO_ROOT:-$SCRIPT_DIR}"
+FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
 
 usage() {
   cat <<'EOF'
@@ -39,7 +40,12 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-pushd "$REPO_ROOT" &>/dev/null
+if [[ ! -d "$FONTS_DIR" ]]; then
+  echo "Error: Fonts directory not found: $FONTS_DIR" >&2
+  exit 1
+fi
+
+pushd "$FONTS_DIR" &>/dev/null
 trap 'popd &>/dev/null' EXIT
 
 echo "Analyzing font repository..."
@@ -92,25 +98,26 @@ cat > /tmp/stats_section.txt <<EOF
 EOF
 
 # Check if README.md exists
-if [[ ! -f "README.md" ]]; then
-  echo "Error: README.md not found in $REPO_ROOT" >&2
+README_PATH="$REPO_ROOT/README.md"
+if [[ ! -f "$README_PATH" ]]; then
+  echo "Error: README.md not found at $README_PATH" >&2
   exit 1
 fi
 
 # Find the Statistics section and replace it
-if grep -q "^## Statistics" README.md; then
+if grep -q "^## Statistics" "$README_PATH"; then
   # Create temporary file with content before Statistics section
-  sed '/^## Statistics/,$d' README.md > /tmp/readme_before.txt
+  sed '/^## Statistics/,$d' "$README_PATH" > /tmp/readme_before.txt
 
   # Combine: before + new stats
-  cat /tmp/readme_before.txt /tmp/stats_section.txt > README.md
+  cat /tmp/readme_before.txt /tmp/stats_section.txt > "$README_PATH"
 
   echo "Statistics section updated in README.md"
   rm -f /tmp/readme_before.txt /tmp/stats_section.txt
 else
   # Append to end if section doesn't exist
-  echo "" >> README.md
-  cat /tmp/stats_section.txt >> README.md
+  echo "" >> "$README_PATH"
+  cat /tmp/stats_section.txt >> "$README_PATH"
   rm -f /tmp/stats_section.txt
   echo "Statistics section appended to README.md"
 fi

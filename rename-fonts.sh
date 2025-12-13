@@ -6,6 +6,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="${REPO_ROOT:-$SCRIPT_DIR}"
+FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
 
 DRY_RUN=false
 PRUNE_EMPTY=false
@@ -141,7 +142,7 @@ resolve_destination() {
   local counter=1
   while [[ -e $candidate ]]; do
     candidate="$dir/${name}-${counter}${ext}"
-    ((counter++))
+    ((++counter))
   done
 
   printf '%s' "$candidate"
@@ -185,13 +186,13 @@ perform_move() {
 }
 
 prune_empty_directories() {
-  log_info "Pruning empty directories under $(relative_path "$REPO_ROOT")"
+  log_info "Pruning empty directories under $(relative_path "$FONTS_DIR")"
 
   # Store empty directories in an array to avoid read conflicts
   local empty_dirs=()
   while IFS= read -r dir; do
     empty_dirs+=("$dir")
-  done < <(find "$REPO_ROOT" -mindepth 1 -type d -empty -not -path "$REPO_ROOT/.git/*" | sort -r)
+  done < <(find "$FONTS_DIR" -mindepth 1 -type d -empty | sort -r)
 
   if [[ ${#empty_dirs[@]} -eq 0 ]]; then
     log_verbose "No empty directories found"
@@ -299,6 +300,11 @@ if [[ ! -d $REPO_ROOT ]]; then
   exit 1
 fi
 
+if [[ ! -d $FONTS_DIR ]]; then
+  log_error "Fonts directory not found: $FONTS_DIR"
+  exit 1
+fi
+
 if ! command -v fc-query >/dev/null 2>&1; then
   log_error "fc-query is required but was not found in PATH"
   exit 1
@@ -314,10 +320,10 @@ declare -a IS_VARIABLE=()
 declare -A GROUP_INDICES=()
 declare -A FAMILY_SEEN=()
 
-mapfile -t FONT_FILES < <(find "$REPO_ROOT" -type f \( -iname '*.otf' -o -iname '*.ttf' \) -not -path "$REPO_ROOT/.git/*" | sort)
+mapfile -t FONT_FILES < <(find "$FONTS_DIR" -type f \( -iname '*.otf' -o -iname '*.ttf' \) | sort)
 
 if [[ ${#FONT_FILES[@]} -eq 0 ]]; then
-  log_info "No font files found under $(relative_path "$REPO_ROOT")"
+  log_info "No font files found under $(relative_path "$FONTS_DIR")"
   exit 0
 fi
 
@@ -393,7 +399,7 @@ for font_file in "${FONT_FILES[@]}"; do
 done
 
 if [[ ${#FILE_PATHS[@]} -eq 0 ]]; then
-  log_info "No usable font files found under $(relative_path "$REPO_ROOT")"
+  log_info "No usable font files found under $(relative_path "$FONTS_DIR")"
   exit 0
 fi
 
@@ -406,7 +412,7 @@ for key in "${GROUP_KEYS[@]}"; do
   read -ra indices <<<"${GROUP_INDICES[$key]}"
 
   family_raw="${FAMILY_RAW[${indices[0]}]}"
-  dest_format_dir="$REPO_ROOT/$family_clean/$format"
+  dest_format_dir="$FONTS_DIR/$family_clean/$format"
 
   log_info "Processing family '$family_raw' as '$family_clean' [$format]"
   log_verbose "  Group has ${#indices[@]} font file(s)"
@@ -506,6 +512,7 @@ fi
 total_families=${#FAMILY_SEEN[@]}
 log_info "Processed ${#FILE_PATHS[@]} font files across $total_families families"
 log_verbose "Repository root: $(realpath "$REPO_ROOT")"
+log_verbose "Fonts directory: $(realpath "$FONTS_DIR")"
 log_verbose "Dry-run mode: $DRY_RUN"
 log_verbose "Verbose mode: $VERBOSE"
 if [[ $DRY_RUN == "true" ]]; then
