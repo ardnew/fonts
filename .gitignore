@@ -2,20 +2,25 @@
 *
 
 # exclude any repository meta files
-!.git*
+!.gitignore
 !/*README*
 !/*LICENSE*
 
 # add exceptions for parent directories
 !/**/
 .delete
+.duplicate
 # add exceptions for the font file types we want
 !*.[TtOo][Tt][Ff]
 !*.[Ee][Oo][Tt]
 
-# include the preview images
-!/_preview/*
+# include the preview images (new location)
+!/share/
+!/share/doc/
+!/share/doc/fonts/
+!/share/doc/fonts/*
 
 # add exceptions for any other files/types
 !/rename-fonts.sh
 !/gen-previews.sh
+!/gen-stats.sh
