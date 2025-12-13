@@ -132,15 +132,10 @@ release:
 	git archive -o "$$ARCHIVE_NAME" --prefix=fonts/ HEAD; \
 	echo "    Created: $$ARCHIVE_NAME"; \
 	echo ""; \
-	echo "==> Tagging repository..."; \
-	git tag "$$NEXT_VERSION"; \
-	echo "    Tagged: $$NEXT_VERSION"; \
-	echo ""; \
 	echo "==> Publishing to GitHub..."; \
-	git push origin "$$NEXT_VERSION"; \
 	gh release create "$$NEXT_VERSION" "$$ARCHIVE_NAME" \
 		--generate-notes \
-		--title "Release $$NEXT_VERSION"; \
+		--title "$$NEXT_VERSION"; \
 	echo ""; \
 	echo "==> Release complete!"; \
 	echo "    Version: $$NEXT_VERSION"; \
