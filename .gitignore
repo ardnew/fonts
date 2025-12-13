@@ -20,7 +20,9 @@
 !/share/doc/fonts/
 !/share/doc/fonts/*
 
-# add exceptions for any other files/types
-!/rename-fonts.sh
-!/gen-previews.sh
-!/gen-stats.sh
+# add exceptions for bin directory and scripts
+!/bin/
+!/bin/**
+
+# add exceptions for build files
+!/Makefile

@@ -1,5 +1,5 @@
 # fonts
-##### Essential fonts
+### Essential fonts
 
 A personal collection of approximately ~1,500 font files across ~150 font families, organized according to FontConfig conventions.
 
@@ -30,37 +30,42 @@ Fonts are organized by family, format, and style according to FontConfig convent
 │           ├── *.png                    # Individual font preview images
 │           └── README.md                # Preview gallery with all images
 │
-├── gen-previews.sh   # Preview generation tool
-├── gen-stats.sh      # Repository statistics tool
-└── rename-fonts.sh   # Font organization tool
+├── bin/              # Maintenance scripts
+│   ├── gen-previews.sh   # Preview generation tool
+│   ├── gen-stats.sh      # Repository statistics tool
+│   └── rename-fonts.sh   # Font organization tool
+│
+└── Makefile          # Build and maintenance automation
 ```
 
 ### Organizing Fonts
 
-The [*`rename-fonts.sh`*](rename-fonts.sh) script discovers, analyzes, and organizes all font files according to FontConfig metadata:
+The [*`rename-fonts.sh`*](bin/rename-fonts.sh) script discovers, analyzes, and organizes all font files according to FontConfig metadata.
+
+Use the Makefile for convenient access:
 
 ```bash
 # Preview changes before applying
-./rename-fonts.sh --dry-run --verbose
+make dryrun
 
-# Apply changes and clean up empty directories
-./rename-fonts.sh --prune-empty force
+# Apply font organization
+make normal
 
-# Interactive cleanup
-./rename-fonts.sh --prune-empty confirm
+# Clean up duplicate and temporary directories
+make clean
 ```
 
-#### Usage
+#### Direct Script Usage
 
-```text
-./rename-fonts.sh [options]
+```bash
+# Preview changes with detailed output
+./bin/rename-fonts.sh --dry-run --verbose
 
-Options:
-  --repo-root PATH        Override repository root (default: script directory)
-  --dry-run               Preview changes without applying
-  --verbose               Show detailed analysis and processing
-  --prune-empty [MODE]    Remove empty directories (force|confirm)
-  --help, -h              Show usage information
+# Apply changes and clean up empty directories
+./bin/rename-fonts.sh --prune-empty force
+
+# Interactive cleanup
+./bin/rename-fonts.sh --prune-empty confirm
 ```
 
 The font organization tool:
@@ -82,25 +87,14 @@ Each font style includes sample images showing uppercase and lowercase alphabets
 
 ### Generating Previews
 
-Preview images are generated using the [*`gen-previews.sh`*](gen-previews.sh) script:
+Preview images are generated using the [*`gen-previews.sh`*](bin/gen-previews.sh) script:
 
 ```bash
 # Generate previews with default settings
-./gen-previews.sh
+make previews
 
-# Generate previews with custom dimensions
-./gen-previews.sh --width 1000 --pixelsize 28
-```
-
-#### Usage
-
-```text
-./gen-previews.sh [options]
-
-Options:
-  --width NUM      Set preview image width in pixels (default: 800)
-  --pixelsize NUM  Set font size in pixels (default: 24)
-  --help, -h       Show this help message
+# Or call the script directly with custom dimensions
+./bin/gen-previews.sh --width 1000 --pixelsize 28
 ```
 
 The preview generation tool:
@@ -113,9 +107,63 @@ The preview generation tool:
 
 ---
 
+## Using the Makefile
+
+The repository includes a Makefile for convenient management:
+
+```bash
+# Show all available targets
+make help
+
+# Font organization
+make normal      # Organize fonts using FontConfig metadata
+make dryrun      # Preview changes without applying
+make clean       # Remove .duplicate/.delete directories (with confirmation)
+
+# Previews and statistics
+make previews    # Generate font preview images
+make stats       # Generate repository statistics
+
+# Installation
+make install             # Install fonts to /usr/local/share/fonts
+make install PREFIX=/usr # Install to /usr/share/fonts
+make uninstall           # Uninstall fonts (with confirmation)
+
+# Release management
+make release     # Create and publish a new release
+```
+
+### Installation
+
+Install fonts to your system using the Makefile:
+
+```bash
+# Install to default location (/usr/local/share/fonts)
+sudo make install
+
+# Install to custom location
+sudo make install PREFIX=/usr
+
+# Update font cache
+fc-cache -f
+```
+
+The install target will:
+- Copy all font families to `$PREFIX/share/fonts`
+- Automatically update the font cache
+- Make fonts available system-wide
+
+To uninstall:
+
+```bash
+sudo make uninstall
+```
+
+---
+
 ## Statistics
 
-*Generated on 2025-12-13 using* [*`gen-stats.sh`*](gen-stats.sh)
+*Generated on 2025-12-13 using* [*`gen-stats.sh`*](bin/gen-stats.sh) (`make stats`)
 
 - **Total Font Files**: 1529
 - **Font Families**: 164
