@@ -1,11 +1,10 @@
 # Font Repository Makefile
 
 # Variables
-PREFIX ?= /usr/local
-SHARE_DIR = share
-FONTS_DIR = $(SHARE_DIR)/fonts
+PREFIX ?= $(HOME)/.local
+FONTS_DIR = share/fonts
 BIN_DIR = bin
-INSTALL_FONTS_DIR = $(PREFIX)/share/fonts
+INSTALL_FONTS_DIR = $(PREFIX)/$(FONTS_DIR)
 
 # Helper function to find duplicate/delete directories
 define find_prune_targets
@@ -34,7 +33,7 @@ help:
 	@echo "  make stats       - Generate repository statistics"
 	@echo ""
 	@echo "Installation:"
-	@echo "  make install     - Install fonts to PREFIX (default: /usr/local)"
+	@echo "  make install     - Install fonts to PREFIX (default: $(PREFIX))"
 	@echo "  make uninstall   - Uninstall fonts from PREFIX"
 	@echo ""
 	@echo "Release Management:"

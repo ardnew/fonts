@@ -82,7 +82,7 @@ fontimage_version=$(fontimage --version |& grep -oP 'Version:\s*\K\S(\w|.(?!\s+$
 cat > /tmp/stats_section.txt <<EOF
 ## Statistics
 
-*Generated on $(date '+%Y-%m-%d') using* [*\`gen-stats.sh\`*](gen-stats.sh)
+*Generated on $(date '+%Y-%m-%d') using* [*\`gen-stats.sh\`*](bin/gen-stats.sh) (\`make stats\`)
 
 - **Total Font Files**: ${total_fonts}
 - **Font Families**: ${families}
