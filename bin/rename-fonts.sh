@@ -4,14 +4,15 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="${REPO_ROOT:-$SCRIPT_DIR}"
-FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
+SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )
+REPO_ROOT=$( dirname "${SCRIPT_DIR}" )
+FONTS_DIR=${FONTS_DIR:-$REPO_ROOT/share/fonts}
 
 DRY_RUN=false
 PRUNE_EMPTY=false
 PRUNE_MODE="force"
 VERBOSE=false
+GIT_FILTER=""
 
 usage() {
   cat <<'EOF'
@@ -30,6 +31,8 @@ Options:
   --verbose               Enable verbose logging (analysis and processing details)
                           Combine with --dry-run to review how every font would
                           be identified and renamed without applying any changes
+  --staged, -s            Only process font files staged for commit
+  --untracked, -u         Only process untracked font files
   --help, -h              Show this cruft and exit
 EOF
 }
@@ -86,6 +89,21 @@ sanitize_family() {
   family="${family%VF}"
   family="${family%Variable}"
   family="${family%Var}"
+  # Strip common style keywords that appear at the end of family names
+  # (e.g., "AudioLinkConsoleBold" -> "AudioLinkConsole")
+  family="${family%Thin}"
+  family="${family%ExtraLight}"
+  family="${family%Light}"
+  family="${family%Regular}"
+  family="${family%Medium}"
+  family="${family%Demi}"
+  family="${family%SemiBold}"
+  family="${family%Bold}"
+  family="${family%ExtraBold}"
+  family="${family%Black}"
+  family="${family%Heavy}"
+  family="${family%Italic}"
+  family="${family%Oblique}"
   if [[ -z $family ]]; then
     family="UnknownFamily"
   fi
@@ -136,6 +154,16 @@ resolve_destination() {
         printf '%s' "$candidate"
         return
       fi
+      
+      # Check if source and destination are duplicates by checksum
+      local src_checksum dest_checksum
+      src_checksum=$(md5sum "$src" 2>/dev/null | awk '{print $1}')
+      dest_checksum=$(md5sum "$candidate" 2>/dev/null | awk '{print $1}')
+      if [[ -n $src_checksum && -n $dest_checksum && $src_checksum == "$dest_checksum" ]]; then
+        log_warn "Duplicate detected: $(relative_path "$src") is identical to $(relative_path "$candidate") - skipping"
+        printf '%s' ""  # Return empty string to signal skip
+        return
+      fi
     fi
   fi
 
@@ -162,6 +190,11 @@ perform_move() {
 
   local resolved
   resolved=$(resolve_destination "$src" "$desired")
+
+  # Empty string means duplicate was detected - skip this move
+  if [[ -z $resolved ]]; then
+    return
+  fi
 
   if [[ $src == "$resolved" ]]; then
     return
@@ -262,6 +295,12 @@ while [[ $# -gt 0 ]]; do
   --verbose)
     VERBOSE=true
     ;;
+  --staged | -s)
+    GIT_FILTER="staged"
+    ;;
+  --untracked | -u)
+    GIT_FILTER="untracked"
+    ;;
   --prune-empty)
     PRUNE_EMPTY=true
     shift
@@ -320,7 +359,26 @@ declare -a IS_VARIABLE=()
 declare -A GROUP_INDICES=()
 declare -A FAMILY_SEEN=()
 
-mapfile -t FONT_FILES < <(find "$FONTS_DIR" -type f \( -iname '*.otf' -o -iname '*.ttf' \) | sort)
+# Build list of font files based on git filter
+if [[ $GIT_FILTER == "staged" ]]; then
+  log_verbose "Filtering for staged font files..."
+  mapfile -t FONT_FILES < <(
+    git -C "$REPO_ROOT" diff --cached --name-only --diff-filter=ACMR | \
+    grep -iE '\.(otf|ttf)$' | \
+    sed "s|^|$REPO_ROOT/|" | \
+    sort
+  )
+elif [[ $GIT_FILTER == "untracked" ]]; then
+  log_verbose "Filtering for untracked font files..."
+  mapfile -t FONT_FILES < <(
+    git -C "$REPO_ROOT" ls-files --others --exclude-standard | \
+    grep -iE '\.(otf|ttf)$' | \
+    sed "s|^|$REPO_ROOT/|" | \
+    sort
+  )
+else
+  mapfile -t FONT_FILES < <(find "$FONTS_DIR" -type f \( -iname '*.otf' -o -iname '*.ttf' \) | sort)
+fi
 
 if [[ ${#FONT_FILES[@]} -eq 0 ]]; then
   log_info "No font files found under $(relative_path "$FONTS_DIR")"

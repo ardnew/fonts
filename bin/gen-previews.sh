@@ -7,6 +7,8 @@
 # Options:
 #   --width NUM      Set preview image width in pixels (default: 800)
 #   --pixelsize NUM  Set font size in pixels (default: 24)
+#   --staged, -s     Only process font files staged for commit
+#   --untracked, -u  Only process untracked font files
 #   --help, -h       Show this help message
 #
 # Output:
@@ -15,13 +17,14 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="${REPO_ROOT:-$SCRIPT_DIR}"
-FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
+SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )
+REPO_ROOT=$( dirname "${SCRIPT_DIR}" )
+FONTS_DIR=${FONTS_DIR:-$REPO_ROOT/share/fonts}
 
 # Configuration
 PREVIEW_WIDTH=800
 PIXEL_SIZE=24
+GIT_FILTER=""
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -33,6 +36,14 @@ while [[ $# -gt 0 ]]; do
     --pixelsize)
       PIXEL_SIZE="$2"
       shift 2
+      ;;
+    --staged|-s)
+      GIT_FILTER="staged"
+      shift
+      ;;
+    --untracked|-u)
+      GIT_FILTER="untracked"
+      shift
       ;;
     --help|-h)
       sed -n '2,/^$/p' "$0" | sed 's/^# \?//'
@@ -53,12 +64,12 @@ fcquery=$( type -P fc-query )
 pp="${REPO_ROOT}/share/doc/fonts"
 pm="${pp}/README.md"
 
-# Clean and recreate output directory
-rm -rf "${pp}"
-mkdir -pv "${pp}"
-
-# Initialize README
-cat > "${pm}" << 'EOF'
+# For git filter modes, preserve existing README and images
+if [[ -n $GIT_FILTER ]]; then
+  mkdir -pv "${pp}"
+  # Initialize README if it doesn't exist
+  if [[ ! -f "${pm}" ]]; then
+    cat > "${pm}" << 'EOF'
 # Font Preview Gallery
 
 This document contains preview images for all fonts in the repository.
@@ -68,17 +79,57 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ---
 
 EOF
+  fi
+else
+  # Clean and recreate output directory
+  rm -rf "${pp}"
+  mkdir -pv "${pp}"
+
+  # Initialize README
+  cat > "${pm}" << 'EOF'
+# Font Preview Gallery
+
+This document contains preview images for all fonts in the repository.
+
+Preview images are generated using FontForge's `fontimage` tool, displaying uppercase and lowercase alphabets, digits, and common symbols for each font style.
+
+---
+
+EOF
+fi
 
 shopt -s globstar extglob nullglob
 
+# Build list of font files based on git filter
+if [[ $GIT_FILTER == "staged" ]]; then
+  echo "Processing staged font files..."
+  mapfile -t FONT_FILES < <(
+    git -C "$REPO_ROOT" diff --cached --name-only --diff-filter=ACMR | \
+    grep -iE '\.(otf|ttf)$' | \
+    sed "s|^|$REPO_ROOT/|"
+  )
+elif [[ $GIT_FILTER == "untracked" ]]; then
+  echo "Processing untracked font files..."
+  mapfile -t FONT_FILES < <(
+    git -C "$REPO_ROOT" ls-files --others --exclude-standard | \
+    grep -iE '\.(otf|ttf)$' | \
+    sed "s|^|$REPO_ROOT/|"
+  )
+else
+  mapfile -t FONT_FILES < <(find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \))
+fi
+
 # Counter for progress
 count=0
-total=$(find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | wc -l)
+total=${#FONT_FILES[@]}
 
 echo "Generating previews for ${total} font files..."
 
-for ff in "${FONTS_DIR}"/**/*.[ot]tf; do 
-  # Skip if file doesn't exist (nullglob didn't work)
+# Array to store preview entries for sorting
+declare -a PREVIEW_ENTRIES=()
+
+for ff in "${FONT_FILES[@]}"; do 
+  # Skip if file doesn't exist
   [[ -f "${ff}" ]] || continue
 
   ((++count))
@@ -123,8 +174,8 @@ for ff in "${FONTS_DIR}"/**/*.[ot]tf; do
       -o "${output_file}" \
       "${ff}" &>/dev/null; then
 
-    # Add to README with relative path
-    printf '## %s\n![%s](%s)\n\n' "${fn}" "${fn}" "${fs}.png" >> "${pm}"
+    # Store preview entry for sorting
+    PREVIEW_ENTRIES+=("${fn}||${fs}.png")
 
     # Progress indicator
     if (( count % 50 == 0 )); then
@@ -135,6 +186,56 @@ for ff in "${FONTS_DIR}"/**/*.[ot]tf; do
     echo "  Warning: Failed to generate preview for: ${fp}" >&2
   fi
 done
+
+# Sort and write preview entries to README
+if [[ -n $GIT_FILTER ]]; then
+  # In git filter mode, merge new entries with existing ones
+  # Extract existing entries from README (skip header)
+  if [[ -f "${pm}" ]]; then
+    while IFS= read -r line; do
+      if [[ $line == "## "* ]]; then
+        # Extract font name from heading
+        font_name="${line#\#\# }"
+        # Read next line which should be the image
+        read -r img_line
+        if [[ $img_line == "!["*"]("*")" ]]; then
+          # Extract image filename
+          img_file="${img_line##*\(}"
+          img_file="${img_file%\)}"
+          PREVIEW_ENTRIES+=("${font_name}||${img_file}")
+        fi
+      fi
+    done < "${pm}"
+  fi
+  
+  # Remove duplicates and sort
+  mapfile -t SORTED_ENTRIES < <(printf '%s\n' "${PREVIEW_ENTRIES[@]}" | sort -u -t'|' -k1,1)
+  
+  # Rewrite README with sorted entries
+  cat > "${pm}" << 'EOF'
+# Font Preview Gallery
+
+This document contains preview images for all fonts in the repository.
+
+Preview images are generated using FontForge's `fontimage` tool, displaying uppercase and lowercase alphabets, digits, and common symbols for each font style.
+
+---
+
+EOF
+  
+  for entry in "${SORTED_ENTRIES[@]}"; do
+    IFS='||' read -r font_name img_file <<< "$entry"
+    printf '## %s\n![%s](%s)\n\n' "${font_name}" "${font_name}" "${img_file}" >> "${pm}"
+  done
+else
+  # Normal mode: just sort and write all entries
+  mapfile -t SORTED_ENTRIES < <(printf '%s\n' "${PREVIEW_ENTRIES[@]}" | sort -t'|' -k1,1)
+  
+  for entry in "${SORTED_ENTRIES[@]}"; do
+    IFS='||' read -r font_name img_file <<< "$entry"
+    printf '## %s\n![%s](%s)\n\n' "${font_name}" "${font_name}" "${img_file}" >> "${pm}"
+  done
+fi
 
 echo "Preview generation complete!"
 echo "  Output directory: ${pp}"

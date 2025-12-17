@@ -24,13 +24,19 @@ help:
 	@echo "  make help        - Show this help message"
 	@echo ""
 	@echo "Font Organization:"
-	@echo "  make normal      - Organize fonts using FontConfig metadata"
-	@echo "  make dryrun      - Preview font organization changes (dry-run mode)"
-	@echo "  make clean       - Remove .duplicate/.delete directories (with confirmation)"
+	@echo "  make normal              - Organize fonts using FontConfig metadata"
+	@echo "  make normal-staged       - Organize only staged font files"
+	@echo "  make normal-untracked    - Organize only untracked font files"
+	@echo "  make dryrun              - Preview font organization changes (dry-run mode)"
+	@echo "  make dryrun-staged       - Preview staged font organization"
+	@echo "  make dryrun-untracked    - Preview untracked font organization"
+	@echo "  make clean               - Remove .duplicate/.delete directories (with confirmation)"
 	@echo ""
 	@echo "Font Previews & Stats:"
-	@echo "  make previews    - Generate font preview images and catalog"
-	@echo "  make stats       - Generate repository statistics"
+	@echo "  make previews            - Generate font preview images and catalog"
+	@echo "  make previews-staged     - Generate previews for staged font files"
+	@echo "  make previews-untracked  - Generate previews for untracked font files"
+	@echo "  make stats               - Generate repository statistics"
 	@echo ""
 	@echo "Installation:"
 	@echo "  make install     - Install fonts to PREFIX (default: $(PREFIX))"
@@ -45,22 +51,52 @@ help:
 .PHONY: previews
 previews:
 	@echo "==> Generating font previews..."
-	@REPO_ROOT=$(CURDIR) $(BIN_DIR)/gen-previews.sh
+	$(BIN_DIR)/gen-previews.sh
+
+.PHONY: previews-staged
+previews-staged:
+	@echo "==> Generating previews for staged fonts..."
+	$(BIN_DIR)/gen-previews.sh --staged
+
+.PHONY: previews-untracked
+previews-untracked:
+	@echo "==> Generating previews for untracked fonts..."
+	$(BIN_DIR)/gen-previews.sh --untracked
 
 .PHONY: stats
 stats:
 	@echo "==> Generating repository statistics..."
-	@REPO_ROOT=$(CURDIR) $(BIN_DIR)/gen-stats.sh
+	$(BIN_DIR)/gen-stats.sh
 
 .PHONY: normal
 normal:
 	@echo "==> Organizing fonts..."
-	@REPO_ROOT=$(CURDIR) $(BIN_DIR)/rename-fonts.sh
+	$(BIN_DIR)/rename-fonts.sh
+
+.PHONY: normal-staged
+normal-staged:
+	@echo "==> Organizing staged fonts..."
+	$(BIN_DIR)/rename-fonts.sh --staged
+
+.PHONY: normal-untracked
+normal-untracked:
+	@echo "==> Organizing untracked fonts..."
+	$(BIN_DIR)/rename-fonts.sh --untracked
 
 .PHONY: dryrun
 dryrun:
 	@echo "==> Running font organization in dry-run mode..."
-	@REPO_ROOT=$(CURDIR) $(BIN_DIR)/rename-fonts.sh --dry-run --verbose
+	$(BIN_DIR)/rename-fonts.sh --dry-run --verbose
+
+.PHONY: dryrun-staged
+dryrun-staged:
+	@echo "==> Previewing staged font organization..."
+	$(BIN_DIR)/rename-fonts.sh --staged --dry-run --verbose
+
+.PHONY: dryrun-untracked
+dryrun-untracked:
+	@echo "==> Previewing untracked font organization..."
+	$(BIN_DIR)/rename-fonts.sh --untracked --dry-run --verbose
 
 .PHONY: clean
 clean:

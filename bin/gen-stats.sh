@@ -4,9 +4,9 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="${REPO_ROOT:-$SCRIPT_DIR}"
-FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
+SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )
+REPO_ROOT=$( dirname "${SCRIPT_DIR}" )
+FONTS_DIR=${FONTS_DIR:-$REPO_ROOT/share/fonts}
 
 usage() {
   cat <<'EOF'
