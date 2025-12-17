@@ -186,11 +186,11 @@ sudo make uninstall
 
 *Generated on 2025-12-17 using* [*`gen-stats.sh`*](bin/gen-stats.sh) (`make stats`)
 
-- **Total Font Files**: 1535
-- **Font Families**: 165
+- **Total Font Files**: 1537
+- **Font Families**: 166
 - **OpenType (.otf)**: 919
-- **TrueType (.ttf)**: 616
-- **Variable Fonts**: 44
+- **TrueType (.ttf)**: 618
+- **Variable Fonts**: 46
 - **Static Fonts**: 1491
 
 ### Tools Used
