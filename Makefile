@@ -39,8 +39,6 @@ help:
 	@echo ""
 	@echo "Font Previews & Stats:"
 	@echo "  make previews            - Generate font preview images and catalog"
-	@echo "  make previews-staged     - Generate previews for staged font files"
-	@echo "  make previews-untracked  - Generate previews for untracked font files"
 	@echo "  make stats               - Generate repository statistics"
 	@echo ""
 	@echo "Installation:"
@@ -57,16 +55,6 @@ help:
 previews:
 	@echo "==> Generating font previews..."
 	$(BIN_DIR)/gen-previews.sh
-
-.PHONY: previews-staged
-previews-staged:
-	@echo "==> Generating previews for staged fonts..."
-	$(BIN_DIR)/gen-previews.sh --staged
-
-.PHONY: previews-untracked
-previews-untracked:
-	@echo "==> Generating previews for untracked fonts..."
-	$(BIN_DIR)/gen-previews.sh --untracked
 
 .PHONY: stats
 stats:
