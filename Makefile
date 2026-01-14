@@ -32,6 +32,11 @@ help:
 	@echo "  make dryrun-untracked    - Preview untracked font organization"
 	@echo "  make clean               - Remove .duplicate/.delete directories (with confirmation)"
 	@echo ""
+	@echo "Single File Processing:"
+	@echo "  Process individual font files with custom destinations:"
+	@echo "    $(BIN_DIR)/rename-fonts.sh --file /path/to/font.ttf:share/fonts"
+	@echo "  The font will be organized under share/fonts/<Family>/<format>/..."
+	@echo ""
 	@echo "Font Previews & Stats:"
 	@echo "  make previews            - Generate font preview images and catalog"
 	@echo "  make previews-staged     - Generate previews for staged font files"
@@ -107,6 +112,8 @@ clean:
 		find $(FONTS_DIR) -type d \( -name ".duplicate" -o -name ".delete" \) -exec rm -rf {} + 2>/dev/null || true; \
 		echo "==> Removing empty directories..."; \
 		REPO_ROOT=$(CURDIR) $(BIN_DIR)/rename-fonts.sh --prune-empty force; \
+		echo "==> Removing rename list file..."; \
+		rm -f .font-renames.txt; \
 		echo "==> Clean complete!"; \
 	else \
 		echo "==> Clean cancelled."; \

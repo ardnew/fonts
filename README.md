@@ -66,12 +66,6 @@ make clean
 
 # Interactive cleanup
 ./bin/rename-fonts.sh --prune-empty confirm
-
-# Process only staged font files
-./bin/rename-fonts.sh --staged
-
-# Process only untracked font files
-./bin/rename-fonts.sh --untracked
 ```
 
 The font organization tool:
@@ -99,17 +93,8 @@ Preview images are generated using the [*`gen-previews.sh`*](bin/gen-previews.sh
 # Generate previews with default settings
 make previews
 
-# Generate previews for only staged fonts
-make previews-staged
-
-# Generate previews for only untracked fonts
-make previews-untracked
-
 # Or call the script directly with custom dimensions
 ./bin/gen-previews.sh --width 1000 --pixelsize 28
-
-# Process only staged files with custom dimensions
-./bin/gen-previews.sh --staged --width 1000 --pixelsize 28
 ```
 
 The preview generation tool:
@@ -131,19 +116,13 @@ The repository includes a Makefile for convenient management:
 make help
 
 # Font organization
-make normal              # Organize fonts using FontConfig metadata
-make normal-staged       # Organize only staged font files
-make normal-untracked    # Organize only untracked font files
-make dryrun              # Preview changes without applying
-make dryrun-staged       # Preview staged font organization
-make dryrun-untracked    # Preview untracked font organization
-make clean               # Remove .duplicate/.delete directories (with confirmation)
+make normal      # Organize fonts using FontConfig metadata
+make dryrun      # Preview changes without applying
+make clean       # Remove .duplicate/.delete directories (with confirmation)
 
 # Previews and statistics
-make previews            # Generate font preview images
-make previews-staged     # Generate previews for staged fonts
-make previews-untracked  # Generate previews for untracked fonts
-make stats               # Generate repository statistics
+make previews    # Generate font preview images
+make stats       # Generate repository statistics
 
 # Installation
 make install             # Install fonts to /usr/local/share/fonts
@@ -184,14 +163,14 @@ sudo make uninstall
 
 ## Statistics
 
-*Generated on 2025-12-17 using* [*`gen-stats.sh`*](bin/gen-stats.sh) (`make stats`)
+*Generated on 2026-01-13 using* [*`gen-stats.sh`*](bin/gen-stats.sh) (`make stats`)
 
-- **Total Font Files**: 1537
-- **Font Families**: 166
-- **OpenType (.otf)**: 919
+- **Total Font Files**: 1538
+- **Font Families**: 167
+- **OpenType (.otf)**: 920
 - **TrueType (.ttf)**: 618
 - **Variable Fonts**: 46
-- **Static Fonts**: 1491
+- **Static Fonts**: 1492
 
 ### Tools Used
 

@@ -5,14 +5,17 @@
 set -euo pipefail
 
 SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )
-REPO_ROOT=$( dirname "${SCRIPT_DIR}" )
+REPO_ROOT=${REPO_ROOT:-$( dirname "${SCRIPT_DIR}" )}
 FONTS_DIR=${FONTS_DIR:-$REPO_ROOT/share/fonts}
 
 DRY_RUN=false
 PRUNE_EMPTY=false
 PRUNE_MODE="force"
 VERBOSE=false
-GIT_FILTER=""
+FILE_MODE=false
+FILE_PATH=""
+DEST_ROOT=""
+RENAME_LIST_PATH=""
 
 usage() {
   cat <<'EOF'
@@ -23,16 +26,23 @@ FontConfig-driven layout described in .github/copilot-instructions.md.
 
 Options:
   --repo-root PATH        Override the repository root (defaults to script dir)
+  --file PATH:DEST        Process a single font file at PATH and place it under
+                          DEST directory. Example: --file /tmp/font.ttf:share/fonts
+                          The font will be organized according to FontConfig
+                          metadata and placed in DEST/<Family>/<format>/...
   --dry-run               Show planned changes without applying them
   --prune-empty [MODE]    Remove now-empty directories after moves
                             MODE can be either one of the following:
                               - force    # remove all directories (default)
                               - confirm  # interactively remove directories
+  --rename-list PATH      Write list of rename operations to PATH
+                          - If PATH is "-", always print the list to stdout
+                          - If PATH is specified, write to file and reference it
+                          - If not specified, auto-decide based on list length
+                            and terminal size (print if short, write if long)
   --verbose               Enable verbose logging (analysis and processing details)
                           Combine with --dry-run to review how every font would
                           be identified and renamed without applying any changes
-  --staged, -s            Only process font files staged for commit
-  --untracked, -u         Only process untracked font files
   --help, -h              Show this cruft and exit
 EOF
 }
@@ -81,29 +91,32 @@ relative_path() {
   fi
 }
 
+normalize_family() {
+  local family="${1:-}"
+  local style="${2:-}"
+
+  # If style is embedded in family name, strip it
+  # e.g., "AudioLink Console Bold" with style "Bold" -> "AudioLink Console"
+  if [[ -n $style && -n $family ]]; then
+    # Create regex-safe version of style (escape special chars)
+    local style_pattern="${style//[^[:alnum:]]/.}"
+    # Check if family ends with the style (with optional space before it)
+    if [[ $family =~ ^(.+)[[:space:]]+${style_pattern}$ ]]; then
+      family="${BASH_REMATCH[1]}"
+    fi
+  fi
+
+  printf '%s' "$family"
+}
+
 sanitize_family() {
   local family="${1:-}"
-  family="${family// /}"
-  family=$(printf '%s' "$family" | sed 's/[^A-Za-z0-9-]//g')
+  family="${family// /}"              # Remove spaces
+  family="${family//[^[:alnum:]-]/}"  # Remove non-alphanumeric (except -)
   # Strip VF, Variable, or Var suffix from family names
   family="${family%VF}"
   family="${family%Variable}"
   family="${family%Var}"
-  # Strip common style keywords that appear at the end of family names
-  # (e.g., "AudioLinkConsoleBold" -> "AudioLinkConsole")
-  family="${family%Thin}"
-  family="${family%ExtraLight}"
-  family="${family%Light}"
-  family="${family%Regular}"
-  family="${family%Medium}"
-  family="${family%Demi}"
-  family="${family%SemiBold}"
-  family="${family%Bold}"
-  family="${family%ExtraBold}"
-  family="${family%Black}"
-  family="${family%Heavy}"
-  family="${family%Italic}"
-  family="${family%Oblique}"
   if [[ -z $family ]]; then
     family="UnknownFamily"
   fi
@@ -112,8 +125,8 @@ sanitize_family() {
 
 sanitize_style() {
   local style="${1:-}"
-  style="${style// /}"
-  style=$(printf '%s' "$style" | sed 's/[^A-Za-z0-9-]//g')
+  style="${style// /}"              # Remove spaces
+  style="${style//[^[:alnum:]-]/}"  # Remove non-alphanumeric (except -)
   if [[ -z $style ]]; then
     style="Regular"
   fi
@@ -154,16 +167,6 @@ resolve_destination() {
         printf '%s' "$candidate"
         return
       fi
-      
-      # Check if source and destination are duplicates by checksum
-      local src_checksum dest_checksum
-      src_checksum=$(md5sum "$src" 2>/dev/null | awk '{print $1}')
-      dest_checksum=$(md5sum "$candidate" 2>/dev/null | awk '{print $1}')
-      if [[ -n $src_checksum && -n $dest_checksum && $src_checksum == "$dest_checksum" ]]; then
-        log_warn "Duplicate detected: $(relative_path "$src") is identical to $(relative_path "$candidate") - skipping"
-        printf '%s' ""  # Return empty string to signal skip
-        return
-      fi
     fi
   fi
 
@@ -178,6 +181,8 @@ resolve_destination() {
 
 declare -i PLANNED_MOVES=0
 declare -i EXECUTED_MOVES=0
+declare -a RENAME_SOURCES=()
+declare -a RENAME_DESTS=()
 
 perform_move() {
   local src="$1"
@@ -191,11 +196,6 @@ perform_move() {
   local resolved
   resolved=$(resolve_destination "$src" "$desired")
 
-  # Empty string means duplicate was detected - skip this move
-  if [[ -z $resolved ]]; then
-    return
-  fi
-
   if [[ $src == "$resolved" ]]; then
     return
   fi
@@ -208,6 +208,10 @@ perform_move() {
   # to prevent exiting when shell option -e (errexit) is set.
   ((++PLANNED_MOVES))
 
+  # Record this rename operation
+  RENAME_SOURCES+=("$src")
+  RENAME_DESTS+=("$resolved")
+
   if [[ $DRY_RUN == "true" ]]; then
     log_info "Would move $(relative_path "$src") -> $(relative_path "$resolved")"
   else
@@ -215,6 +219,62 @@ perform_move() {
     mv "$src" "$resolved"
     log_info "Moved $(relative_path "$src") -> $(relative_path "$resolved")"
     ((++EXECUTED_MOVES))
+  fi
+}
+
+display_rename_list() {
+  if [[ ${#RENAME_SOURCES[@]} -eq 0 ]]; then
+    return
+  fi
+
+  # Build the list content
+  local list_lines=()
+  for i in "${!RENAME_SOURCES[@]}"; do
+    list_lines+=("$(relative_path "${RENAME_SOURCES[$i]}") -> $(relative_path "${RENAME_DESTS[$i]}")")
+  done
+
+  # If explicit path is provided
+  if [[ -n $RENAME_LIST_PATH ]]; then
+    if [[ $RENAME_LIST_PATH == "-" ]]; then
+      # Always print to stdout
+      printf '\n%s\n' "=== Rename Operations ==="
+      printf '%s\n' "${list_lines[@]}"
+    else
+      # Write to file
+      printf '%s\n' "${list_lines[@]}" > "$RENAME_LIST_PATH"
+      log_info "Rename operations written to: $RENAME_LIST_PATH"
+    fi
+    return
+  fi
+
+  # Auto mode: decide based on terminal size and list length
+  local num_renames=${#RENAME_SOURCES[@]}
+  local should_write_file=false
+
+  # Check if stdout is a terminal
+  if [[ ! -t 1 ]]; then
+    should_write_file=true
+  else
+    # Get terminal height
+    local term_height
+    term_height=$(tput lines 2>/dev/null || echo 24)
+    local max_lines=$((term_height / 2))
+
+    if [[ $num_renames -gt $max_lines ]]; then
+      should_write_file=true
+    fi
+  fi
+
+  if [[ $should_write_file == "true" ]]; then
+    # Write to a temporary file in the repo root
+    local list_file="$REPO_ROOT/.font-renames.txt"
+    printf '%s\n' "${list_lines[@]}" > "$list_file"
+    log_info "Rename operations written to: $(relative_path "$list_file")"
+    log_info "  ($num_renames operations - too many to display)"
+  else
+    # Print to stdout
+    printf '\n%s\n' "=== Rename Operations ==="
+    printf '%s\n' "${list_lines[@]}"
   fi
 }
 
@@ -289,17 +349,33 @@ while [[ $# -gt 0 ]]; do
     fi
     REPO_ROOT="$(realpath "$1")"
     ;;
+  --file)
+    shift
+    if [[ $# -eq 0 ]]; then
+      log_error "--file requires a PATH:DEST argument"
+      exit 1
+    fi
+    if [[ ! $1 =~ ^([^:]+):(.+)$ ]]; then
+      log_error "--file argument must be in format PATH:DEST (e.g., /tmp/font.ttf:share/fonts)"
+      exit 1
+    fi
+    FILE_PATH="${BASH_REMATCH[1]}"
+    DEST_ROOT="${BASH_REMATCH[2]}"
+    FILE_MODE=true
+    ;;
   --dry-run)
     DRY_RUN=true
     ;;
   --verbose)
     VERBOSE=true
     ;;
-  --staged | -s)
-    GIT_FILTER="staged"
-    ;;
-  --untracked | -u)
-    GIT_FILTER="untracked"
+  --rename-list)
+    shift
+    if [[ $# -eq 0 ]]; then
+      log_error "--rename-list requires a path (use '-' for stdout)"
+      exit 1
+    fi
+    RENAME_LIST_PATH="$1"
     ;;
   --prune-empty)
     PRUNE_EMPTY=true
@@ -339,9 +415,26 @@ if [[ ! -d $REPO_ROOT ]]; then
   exit 1
 fi
 
-if [[ ! -d $FONTS_DIR ]]; then
-  log_error "Fonts directory not found: $FONTS_DIR"
-  exit 1
+if [[ $FILE_MODE == "true" ]]; then
+  if [[ ! -f $FILE_PATH ]]; then
+    log_error "Font file not found: $FILE_PATH"
+    exit 1
+  fi
+  # Make FILE_PATH absolute
+  FILE_PATH="$(realpath "$FILE_PATH")"
+  # Make DEST_ROOT absolute (relative to current directory if not absolute)
+  if [[ $DEST_ROOT != /* ]]; then
+    DEST_ROOT="$(pwd)/$DEST_ROOT"
+  fi
+  DEST_ROOT="$(realpath -m "$DEST_ROOT")"
+  # Override FONTS_DIR to use DEST_ROOT
+  FONTS_DIR="$DEST_ROOT"
+  log_verbose "File mode: processing $FILE_PATH -> $DEST_ROOT"
+else
+  if [[ ! -d $FONTS_DIR ]]; then
+    log_error "Fonts directory not found: $FONTS_DIR"
+    exit 1
+  fi
 fi
 
 if ! command -v fc-query >/dev/null 2>&1; then
@@ -355,37 +448,27 @@ declare -a FAMILY_RAW=()
 declare -a STYLE_CLEAN=()
 declare -a FORMAT=()
 declare -a IS_VARIABLE=()
+declare -a ALL_STYLES=()
 
 declare -A GROUP_INDICES=()
 declare -A FAMILY_SEEN=()
+declare -A SANITIZED_FAMILIES=()
 
-# Build list of font files based on git filter
-if [[ $GIT_FILTER == "staged" ]]; then
-  log_verbose "Filtering for staged font files..."
-  mapfile -t FONT_FILES < <(
-    git -C "$REPO_ROOT" diff --cached --name-only --diff-filter=ACMR | \
-    grep -iE '\.(otf|ttf)$' | \
-    sed "s|^|$REPO_ROOT/|" | \
-    sort
-  )
-elif [[ $GIT_FILTER == "untracked" ]]; then
-  log_verbose "Filtering for untracked font files..."
-  mapfile -t FONT_FILES < <(
-    git -C "$REPO_ROOT" ls-files --others --exclude-standard | \
-    grep -iE '\.(otf|ttf)$' | \
-    sed "s|^|$REPO_ROOT/|" | \
-    sort
-  )
+if [[ $FILE_MODE == "true" ]]; then
+  # Single file mode: process only the specified file
+  FONT_FILES=("$FILE_PATH")
+  log_verbose "Processing single file: $(relative_path "$FILE_PATH")"
 else
+  # Normal mode: process all files in FONTS_DIR
   mapfile -t FONT_FILES < <(find "$FONTS_DIR" -type f \( -iname '*.otf' -o -iname '*.ttf' \) | sort)
-fi
 
-if [[ ${#FONT_FILES[@]} -eq 0 ]]; then
-  log_info "No font files found under $(relative_path "$FONTS_DIR")"
-  exit 0
-fi
+  if [[ ${#FONT_FILES[@]} -eq 0 ]]; then
+    log_info "No font files found under $(relative_path "$FONTS_DIR")"
+    exit 0
+  fi
 
-log_verbose "Found ${#FONT_FILES[@]} font files to analyze"
+  log_verbose "Found ${#FONT_FILES[@]} font files to analyze"
+fi
 
 for font_file in "${FONT_FILES[@]}"; do
   log_verbose "Analyzing: $(relative_path "$font_file")"
@@ -414,6 +497,13 @@ for font_file in "${FONT_FILES[@]}"; do
     log_verbose "  Empty style, defaulting to 'Regular'"
   fi
 
+  # Normalize family name by stripping redundant style suffix
+  original_family="$family"
+  family=$(normalize_family "$family" "$style")
+  if [[ $family != "$original_family" ]]; then
+    log_verbose "  Normalized family: '$original_family' -> '$family' (stripped redundant style suffix)"
+  fi
+
   local_format="${font_file##*.}"
   local_format="${local_format,,}"
   if [[ $local_format != "otf" && $local_format != "ttf" ]]; then
@@ -422,15 +512,23 @@ for font_file in "${FONT_FILES[@]}"; do
   fi
 
   local_is_var="false"
+  all_styles=""
   # Check if ANY instance in the font has variable: True
   if fc-query --brief "$font_file" 2>/dev/null | grep -q "variable: True"; then
     local_is_var="true"
     log_verbose "  Detected as VARIABLE font (has at least one variable instance)"
+    # For variable fonts, collect all style instances to determine italic vs upright
+    all_styles=$(fc-query --format '%{style}\n' "$font_file" 2>/dev/null | tr '\n' ' ')
+    log_verbose "  All styles: $all_styles"
   else
     log_verbose "  Detected as STATIC font"
   fi
 
-  family_clean=$(sanitize_family "$family")
+  # Cache sanitized family names to avoid redundant processing
+  if [[ -z ${SANITIZED_FAMILIES[$family]:-} ]]; then
+    SANITIZED_FAMILIES[$family]=$(sanitize_family "$family")
+  fi
+  family_clean="${SANITIZED_FAMILIES[$family]}"
   style_clean=$(sanitize_style "$style")
 
   log_verbose "  Sanitized: family_clean='$family_clean', style_clean='$style_clean'"
@@ -442,6 +540,7 @@ for font_file in "${FONT_FILES[@]}"; do
   STYLE_CLEAN+=("$style_clean")
   FORMAT+=("$local_format")
   IS_VARIABLE+=("$local_is_var")
+  ALL_STYLES+=("$all_styles")
 
   key="$family_clean|$local_format"
   if [[ -n ${GROUP_INDICES[$key]:-} ]]; then
@@ -515,8 +614,30 @@ for key in "${GROUP_KEYS[@]}"; do
     declare -A var_checksums
     declare -a var_unique_indices
 
+    # Collect paths and compute checksums (parallelized if available)
+    declare -a var_paths=()
+    declare -a var_path_indices=()
     for idx in "${variable_indices[@]}"; do
-      checksum=$(md5sum "${FILE_PATHS[$idx]}" 2>/dev/null | awk '{print $1}')
+      var_paths+=("${FILE_PATHS[$idx]}")
+      var_path_indices+=("$idx")
+    done
+
+    # Compute checksums in parallel if GNU parallel is available
+    if command -v parallel &>/dev/null && [[ ${#var_paths[@]} -gt 1 ]]; then
+      log_verbose "    Using parallel MD5 computation for ${#var_paths[@]} files"
+      mapfile -t checksums < <(printf '%s\n' "${var_paths[@]}" | parallel -j "$(nproc)" 'md5sum {} 2>/dev/null | awk "{print \$1}"')
+    else
+      # Fallback to sequential processing
+      declare -a checksums=()
+      for path in "${var_paths[@]}"; do
+        checksums+=("$(md5sum "$path" 2>/dev/null | awk '{print $1}')")
+      done
+    fi
+
+    # Process checksums and identify unique fonts
+    for i in "${!var_path_indices[@]}"; do
+      idx="${var_path_indices[$i]}"
+      checksum="${checksums[$i]}"
       if [[ -z ${var_checksums[$checksum]:-} ]]; then
         var_checksums[$checksum]="$idx"
         var_unique_indices+=("$idx")
@@ -539,9 +660,18 @@ for key in "${GROUP_KEYS[@]}"; do
       # Multiple unique variable fonts - use style to differentiate
       log_verbose "  Multiple variable fonts - differentiating by style (Italic vs Upright)"
       for idx in "${var_unique_indices[@]}"; do
-        style_clean="${STYLE_CLEAN[$idx]}"
-        # Determine if this is an italic or upright variable font
-        if [[ $style_clean == *"Italic"* ]]; then
+        # For variable fonts, check all style instances (not just the first one)
+        # to determine if this is italic or upright
+        is_italic="false"
+        idx_all_styles="${ALL_STYLES[$idx]}"
+        if [[ -n $idx_all_styles && $idx_all_styles == *"Italic"* ]]; then
+          is_italic="true"
+        elif [[ ${STYLE_CLEAN[$idx]} == *"Italic"* ]]; then
+          # Fallback to checking the first style if all_styles wasn't captured
+          is_italic="true"
+        fi
+
+        if [[ $is_italic == "true" ]]; then
           dest_path="$dest_format_dir/${family_clean}-VariableItalic.${format}"
           log_verbose "    Italic variable: $(relative_path "${FILE_PATHS[$idx]}") -> $(relative_path "$dest_path")"
         else
@@ -566,6 +696,9 @@ if [[ $PRUNE_EMPTY == "true" ]]; then
   log_verbose "Prune empty directories mode: $PRUNE_MODE"
   prune_empty_directories
 fi
+
+# Display or write the rename list
+display_rename_list
 
 total_families=${#FAMILY_SEEN[@]}
 log_info "Processed ${#FILE_PATHS[@]} font files across $total_families families"
