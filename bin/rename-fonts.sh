@@ -562,6 +562,58 @@ fi
 
 log_verbose "Analysis complete: ${#FILE_PATHS[@]} usable font files grouped into ${#GROUP_INDICES[@]} family/format combinations"
 
+# Identify cross-format duplicates (prefer OTF over TTF)
+declare -A CROSS_FORMAT_DUPE_INDICES=()
+declare -A OTF_STYLES_BY_FAMILY=()
+
+log_verbose "Detecting cross-format duplicates (OTF vs TTF)..."
+
+# First pass: collect all OTF styles for each family
+for key in "${!GROUP_INDICES[@]}"; do
+  IFS='|' read -r family_clean format <<<"$key"
+  if [[ $format == "otf" ]]; then
+    read -ra indices <<<"${GROUP_INDICES[$key]}"
+    otf_styles=()
+    for idx in "${indices[@]}"; do
+      otf_styles+=("${STYLE_CLEAN[$idx]}")
+    done
+    # Store styles as a space-separated string for easy lookup
+    OTF_STYLES_BY_FAMILY[$family_clean]="${otf_styles[*]}"
+    log_verbose "  Family '$family_clean' has ${#otf_styles[@]} OTF styles: ${otf_styles[*]}"
+  fi
+done
+
+# Second pass: mark TTF files that have OTF equivalents
+for key in "${!GROUP_INDICES[@]}"; do
+  IFS='|' read -r family_clean format <<<"$key"
+  if [[ $format == "ttf" ]]; then
+    # Check if this family has OTF versions
+    if [[ -n ${OTF_STYLES_BY_FAMILY[$family_clean]:-} ]]; then
+      read -ra indices <<<"${GROUP_INDICES[$key]}"
+      otf_styles_str="${OTF_STYLES_BY_FAMILY[$family_clean]}"
+      dupe_count=0
+      for idx in "${indices[@]}"; do
+        ttf_style="${STYLE_CLEAN[$idx]}"
+        # Check if this TTF style exists in OTF format
+        if [[ " $otf_styles_str " == *" $ttf_style "* ]]; then
+          CROSS_FORMAT_DUPE_INDICES[$idx]="true"
+          ((++dupe_count))
+          log_verbose "  Marking as cross-format duplicate: $(relative_path "${FILE_PATHS[$idx]}") [has OTF equivalent]"
+        fi
+      done
+      if [[ $dupe_count -gt 0 ]]; then
+        log_info "  Found $dupe_count TTF file(s) in '$family_clean' with OTF equivalents"
+      fi
+    fi
+  fi
+done
+
+if [[ ${#CROSS_FORMAT_DUPE_INDICES[@]} -gt 0 ]]; then
+  log_info "Detected ${#CROSS_FORMAT_DUPE_INDICES[@]} cross-format duplicate(s) (TTF files with OTF equivalents)"
+else
+  log_verbose "No cross-format duplicates detected"
+fi
+
 mapfile -t GROUP_KEYS < <(printf '%s\n' "${!GROUP_INDICES[@]}" | sort)
 
 for key in "${GROUP_KEYS[@]}"; do
@@ -573,6 +625,37 @@ for key in "${GROUP_KEYS[@]}"; do
 
   log_info "Processing family '$family_raw' as '$family_clean' [$format]"
   log_verbose "  Group has ${#indices[@]} font file(s)"
+
+  # Handle cross-format duplicates first (TTF files with OTF equivalents)
+  if [[ $format == "ttf" ]]; then
+    cross_format_dupes=()
+    remaining_indices=()
+    for idx in "${indices[@]}"; do
+      if [[ -n ${CROSS_FORMAT_DUPE_INDICES[$idx]:-} ]]; then
+        cross_format_dupes+=("$idx")
+      else
+        remaining_indices+=("$idx")
+      fi
+    done
+
+    if [[ ${#cross_format_dupes[@]} -gt 0 ]]; then
+      log_info "  Moving ${#cross_format_dupes[@]} TTF file(s) to .duplicate/ (OTF equivalents exist)"
+      for idx in "${cross_format_dupes[@]}"; do
+        style_clean="${STYLE_CLEAN[$idx]}"
+        dest_path="$dest_format_dir/.duplicate/$style_clean/${family_clean}-${style_clean}.${format}"
+        perform_move "${FILE_PATHS[$idx]}" "$dest_path"
+      done
+      # Update indices to only process non-duplicate TTF files
+      indices=("${remaining_indices[@]}")
+      log_verbose "  ${#indices[@]} unique TTF file(s) remaining (no OTF equivalent)"
+    fi
+
+    # If all TTF files were duplicates, skip further processing
+    if [[ ${#indices[@]} -eq 0 ]]; then
+      log_verbose "  All TTF files were duplicates; skipping further processing for this group"
+      continue
+    fi
+  fi
 
   static_indices=()
   variable_indices=()

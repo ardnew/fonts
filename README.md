@@ -1,7 +1,7 @@
 # fonts
 ### Essential fonts
 
-A personal collection of approximately ~1,500 font files across ~150 font families, organized according to FontConfig conventions.
+A personal collection of approximately ~150 font families, organized according to FontConfig conventions.
 
 [**View complete preview gallery →**](share/doc/fonts/README.md)
 
@@ -163,14 +163,14 @@ sudo make uninstall
 
 ## Statistics
 
-*Generated on 2026-01-13 using* [*`gen-stats.sh`*](bin/gen-stats.sh) (`make stats`)
+*Generated on 2026-01-16 using* [*`gen-stats.sh`*](bin/gen-stats.sh) (`make stats`)
 
-- **Total Font Files**: 1539
-- **Font Families**: 167
+- **Total Font Files**: 1359
+- **Font Families**: 158
 - **OpenType (.otf)**: 919
-- **TrueType (.ttf)**: 620
-- **Variable Fonts**: 48
-- **Static Fonts**: 1491
+- **TrueType (.ttf)**: 440
+- **Variable Fonts**: 37
+- **Static Fonts**: 1322
 
 ### Tools Used
 

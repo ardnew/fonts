@@ -100,12 +100,16 @@ fi
 # Phase 2: Generate previews in parallel
 echo "  Phase 2: Generating preview images..."
 
+# Create temporary directory for font entries
+ENTRIES_DIR=$(mktemp -d)
+
 # Function to process a single font
 process_font() {
   local ff="$1"
   local pp="$2"
   local PREVIEW_WIDTH="$3"
   local PIXEL_SIZE="$4"
+  local ENTRIES_DIR="$5"
 
   # Generate safe filename from path
   local fp="${ff#"${FONTS_DIR}"/}"
@@ -140,8 +144,10 @@ process_font() {
       --text "<= >= == === != !== /= >>= <<= ||= |= // /// \\\\ =~ !~" \
       -o "${output_file}" \
       "${ff}" &>/dev/null; then
-    # Return success with font name for README
-    echo "SUCCESS|${fn}|${fs}.png"
+    # Write entry data to individual file for later sorting
+    # Format: fontname|imagefile|fontpath
+    echo "${fn}|${fs}.png|${fp}" > "${ENTRIES_DIR}/${fs}.entry"
+    echo "SUCCESS|${fp}" >&2
   else
     # Log failures
     echo "FAIL|${fp}" >&2
@@ -150,35 +156,65 @@ process_font() {
 }
 
 export -f process_font
-export FONTS_DIR pp PREVIEW_WIDTH PIXEL_SIZE CFF2_FONTS_FILE
-
-# Create temporary file for README entries
-README_ENTRIES=$(mktemp)
+export FONTS_DIR pp PREVIEW_WIDTH PIXEL_SIZE CFF2_FONTS_FILE ENTRIES_DIR
 
 # Process fonts in parallel
 if command -v parallel &>/dev/null && parallel --version 2>/dev/null | grep -q "GNU parallel"; then
-  # GNU parallel with progress bar
-  find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
-    parallel -j "$PARALLEL_JOBS" --bar process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" 2>&1 | \
-    grep "^SUCCESS" | while IFS='|' read -r status fn img; do
-      echo "## ${fn}"
-      echo "![${fn}](${img})"
-      echo ""
-    done > "$README_ENTRIES"
+  # GNU parallel (with progress bar only if running in interactive terminal)
+  if [ -t 1 ]; then
+    # Interactive mode: use progress bar
+    find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
+      parallel -j "$PARALLEL_JOBS" --bar process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" "$ENTRIES_DIR"
+  else
+    # Non-interactive mode: no progress bar
+    find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
+      parallel -j "$PARALLEL_JOBS" process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" "$ENTRIES_DIR"
+  fi
 else
   # Fallback to xargs -P
   find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
-    xargs -P "$PARALLEL_JOBS" -I {} bash -c "process_font '{}' '$pp' '$PREVIEW_WIDTH' '$PIXEL_SIZE'" 2>&1 | \
-    grep "^SUCCESS" | while IFS='|' read -r status fn img; do
-      echo "## ${fn}"
-      echo "![${fn}](${img})"
-      echo ""
-    done > "$README_ENTRIES"
+    xargs -P "$PARALLEL_JOBS" -I {} bash -c "process_font '{}' '$pp' '$PREVIEW_WIDTH' '$PIXEL_SIZE' '$ENTRIES_DIR'"
 fi
 
-# Append README entries to preview catalog
-cat "$README_ENTRIES" >> "${pm}"
-rm -f "$README_ENTRIES"
+echo ""
+echo "  Phase 3: Generating README with table of contents..."
+
+# Read all entries and sort alphabetically by font name
+declare -a entries
+while IFS='|' read -r fontname imgfile fontpath; do
+  entries+=("${fontname}|${imgfile}|${fontpath}")
+done < <(cat "${ENTRIES_DIR}"/*.entry 2>/dev/null | sort -t'|' -k1,1)
+
+# Generate table of contents
+echo "" >> "${pm}"
+echo "## Table of Contents" >> "${pm}"
+echo "" >> "${pm}"
+
+for entry in "${entries[@]}"; do
+  IFS='|' read -r fontname imgfile fontpath <<< "$entry"
+  # Create anchor from font name (lowercase, replace spaces with hyphens)
+  anchor=$(echo "$fontname" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -d '()')
+  # Create download link to font file
+  fontfile_link="${fontpath}"
+  echo "- [${fontname}](#${anchor}) [💾](../../fonts/${fontfile_link})" >> "${pm}"
+done
+
+echo "" >> "${pm}"
+echo "---" >> "${pm}"
+echo "" >> "${pm}"
+
+# Generate font preview sections
+for entry in "${entries[@]}"; do
+  IFS='|' read -r fontname imgfile fontpath <<< "$entry"
+  anchor=$(echo "$fontname" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -d '()')
+  fontfile_link="${fontpath}"
+  echo "## ${fontname} [💾](../../fonts/${fontfile_link})" >> "${pm}"
+  echo "![${fontname}](${imgfile})" >> "${pm}"
+  echo "" >> "${pm}"
+done
+
+# Cleanup temporary directory
+rm -rf "$ENTRIES_DIR"
 
 echo ""
 echo "Preview generation complete!"
