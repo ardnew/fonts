@@ -252,6 +252,12 @@ if [[ "$COMPARE_MODE" == "true" ]]; then
 else
   # Normal mode: update README.md
 
+  # Update the opening line with font counts
+  if grep -q "A curated collection of" "$README_PATH"; then
+    # Format: "A curated collection of **158 font families** (1,359 font files) organized..."
+    sed -i "s/A curated collection of \*\*[0-9,]* font families\*\* ([0-9,]* font files)/A curated collection of **$(format_number $family_count) font families** ($(format_number $total_fonts) font files)/" "$README_PATH"
+  fi
+
   # Find the Statistics section and replace it
   if grep -q "^## Statistics" "$README_PATH"; then
     # Extract content before Statistics section
