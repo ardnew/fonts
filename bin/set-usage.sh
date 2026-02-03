@@ -76,35 +76,35 @@ EOF
 # Parse arguments
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --repo-root)
-      REPO_ROOT="$2"
-      shift 2
-      ;;
-    --jobs)
-      PARALLEL_JOBS="$2"
-      shift 2
-      ;;
-    --dry-run)
-      DRY_RUN=true
-      shift
-      ;;
-    --verbose)
-      VERBOSE=true
-      shift
-      ;;
-    --help|-h)
-      usage
-      exit 0
-      ;;
-    *)
-      log_error "Unknown option: $1"
-      usage >&2
-      exit 1
-      ;;
+  --repo-root)
+    REPO_ROOT="$2"
+    shift 2
+    ;;
+  --jobs)
+    PARALLEL_JOBS="$2"
+    shift 2
+    ;;
+  --dry-run)
+    DRY_RUN=true
+    shift
+    ;;
+  --verbose)
+    VERBOSE=true
+    shift
+    ;;
+  --help | -h)
+    usage
+    exit 0
+    ;;
+  *)
+    log_error "Unknown option: $1"
+    usage >&2
+    exit 1
+    ;;
   esac
 done
 
-if [[ ! -d "$FONTS_DIR" ]]; then
+if [[ ! -d $FONTS_DIR ]]; then
   log_error "Fonts directory not found: $FONTS_DIR"
   exit 1
 fi
@@ -146,7 +146,7 @@ process_font() {
   fi
 
   # Check if ttx file was created
-  if [[ ! -f "$ttx_file" ]]; then
+  if [[ ! -f $ttx_file ]]; then
     echo "SKIP|NO_TTX|$font_file"
     return 0
   fi
@@ -155,7 +155,7 @@ process_font() {
   local current_fstype_raw
   current_fstype_raw=$(grep 'fsType value=' "$ttx_file" 2>/dev/null | sed 's/.*fsType value="\([^"]*\)".*/\1/' || echo "")
 
-  if [[ -z "$current_fstype_raw" ]]; then
+  if [[ -z $current_fstype_raw ]]; then
     rm -f "$ttx_file"
     echo "SKIP|NO_FSTYPE|$font_file"
     return 0
@@ -169,13 +169,13 @@ process_font() {
   # Bits 0-3 control embedding restrictions, setting them to 0 = Installable Embedding
   local new_fstype=$((current_fstype & 0xFFF0))
 
-  if [[ "$current_fstype" -eq "$new_fstype" ]]; then
+  if [[ $current_fstype -eq $new_fstype ]]; then
     rm -f "$ttx_file"
     echo "UNCHANGED|$current_fstype|$font_file"
     return 0
   fi
 
-  if [[ "$dry_run" == "true" ]]; then
+  if [[ $dry_run == "true" ]]; then
     rm -f "$ttx_file"
     echo "WOULD_MODIFY|$current_fstype->$new_fstype|$font_file"
     return 0
@@ -225,18 +225,18 @@ ERRORS_FILE=$(mktemp)
 
 if command -v parallel &>/dev/null && parallel --version 2>/dev/null | grep -q "GNU parallel"; then
   log_verbose "Using GNU parallel for processing"
-  printf '%s\n' "${FONT_FILES[@]}" | \
-    parallel -j "$PARALLEL_JOBS" --bar --joblog "$JOBLOG_FILE" process_font {} "$DRY_RUN" > "$RESULTS_FILE" 2>"$ERRORS_FILE"
+  printf '%s\n' "${FONT_FILES[@]}" |
+    parallel -j "$PARALLEL_JOBS" --bar --joblog "$JOBLOG_FILE" process_font {} "$DRY_RUN" >"$RESULTS_FILE" 2>"$ERRORS_FILE"
 else
   log_verbose "Using sequential processing"
   for font_file in "${FONT_FILES[@]}"; do
-    process_font "$font_file" "$DRY_RUN" >> "$RESULTS_FILE" 2>>"$ERRORS_FILE"
+    process_font "$font_file" "$DRY_RUN" >>"$RESULTS_FILE" 2>>"$ERRORS_FILE"
   done
 fi
 
 # Check for parallel job failures
 PARALLEL_FAILED=0
-if [[ -f "$JOBLOG_FILE" ]]; then
+if [[ -f $JOBLOG_FILE ]]; then
   PARALLEL_FAILED=$(awk 'NR>1 && $7!=0 {count++} END {print count+0}' "$JOBLOG_FILE")
 fi
 
@@ -250,31 +250,31 @@ declare -a FAILED_FONTS=()
 
 # Process results
 while IFS='|' read -r status info path; do
-  [[ -z "$status" ]] && continue
+  [[ -z $status ]] && continue
 
   case "$status" in
-    MODIFIED)
-      ((++modified))
-      log_verbose "Modified $(relative_path "$path"): fsType $info"
-      ;;
-    WOULD_MODIFY)
-      ((++modified))
-      log_verbose "Would modify $(relative_path "$path"): fsType $info"
-      ;;
-    UNCHANGED)
-      ((++unchanged))
-      log_verbose "Unchanged $(relative_path "$path"): fsType already $info"
-      ;;
-    SKIP)
-      ((++skipped))
-      log_verbose "Skipped $(relative_path "$path"): $info"
-      ;;
-    FAIL)
-      ((++failed))
-      FAILED_FONTS+=("$(relative_path "$path"): $info")
-      ;;
+  MODIFIED)
+    ((++modified))
+    log_verbose "Modified $(relative_path "$path"): fsType $info"
+    ;;
+  WOULD_MODIFY)
+    ((++modified))
+    log_verbose "Would modify $(relative_path "$path"): fsType $info"
+    ;;
+  UNCHANGED)
+    ((++unchanged))
+    log_verbose "Unchanged $(relative_path "$path"): fsType already $info"
+    ;;
+  SKIP)
+    ((++skipped))
+    log_verbose "Skipped $(relative_path "$path"): $info"
+    ;;
+  FAIL)
+    ((++failed))
+    FAILED_FONTS+=("$(relative_path "$path"): $info")
+    ;;
   esac
-done < "$RESULTS_FILE"
+done <"$RESULTS_FILE"
 
 # Display error diagnostics if any failures occurred
 if [[ $failed -gt 0 || $PARALLEL_FAILED -gt 0 ]]; then
@@ -291,7 +291,7 @@ if [[ $failed -gt 0 || $PARALLEL_FAILED -gt 0 ]]; then
       echo "  - $font" >&2
     done
   fi
-  if [[ -s "$ERRORS_FILE" ]]; then
+  if [[ -s $ERRORS_FILE ]]; then
     echo "" >&2
     echo "Additional errors:" >&2
     cat "$ERRORS_FILE" >&2
@@ -302,7 +302,7 @@ fi
 rm -f "$ERRORS_FILE"
 
 # Summary
-if [[ "$DRY_RUN" == "true" ]]; then
+if [[ $DRY_RUN == "true" ]]; then
   echo "Done: $modified would be modified, $unchanged unchanged, $skipped skipped"
 else
   echo "Done: $modified modified, $unchanged unchanged, $skipped skipped"
