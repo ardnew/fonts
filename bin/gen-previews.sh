@@ -86,19 +86,15 @@ shopt -s globstar extglob nullglob
 
 # Get total count
 total=$(find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | wc -l)
-echo "Generating previews for ${total} font files with ${PARALLEL_JOBS} parallel jobs..."
+echo "Generating previews for ${total} font files..."
 
 # Phase 1: Pre-scan for CFF2 fonts (unsupported by fontimage)
-echo "  Phase 1: Detecting CFF2 fonts..."
 CFF2_FONTS_FILE=$(mktemp)
 if [[ -n $(find "${FONTS_DIR}" -name "*.otf" -print -quit) ]]; then
   find "${FONTS_DIR}" -name "*.otf" -exec grep -l "CFF2" {} \; 2>/dev/null > "$CFF2_FONTS_FILE" || true
-  cff2_count=$(wc -l < "$CFF2_FONTS_FILE")
-  echo "    Found ${cff2_count} CFF2 fonts to skip"
 fi
 
 # Phase 2: Generate previews in parallel
-echo "  Phase 2: Generating preview images..."
 
 # Create temporary directory for font entries
 ENTRIES_DIR=$(mktemp -d)
@@ -159,25 +155,43 @@ export -f process_font
 export FONTS_DIR pp PREVIEW_WIDTH PIXEL_SIZE CFF2_FONTS_FILE ENTRIES_DIR
 
 # Process fonts in parallel
+JOBLOG_FILE=$(mktemp)
+ERRORS_FILE=$(mktemp)
+
 if command -v parallel &>/dev/null && parallel --version 2>/dev/null | grep -q "GNU parallel"; then
-  # GNU parallel (with progress bar only if running in interactive terminal)
-  if [ -t 1 ]; then
-    # Interactive mode: use progress bar
-    find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
-      parallel -j "$PARALLEL_JOBS" --bar process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" "$ENTRIES_DIR"
-  else
-    # Non-interactive mode: no progress bar
-    find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
-      parallel -j "$PARALLEL_JOBS" process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" "$ENTRIES_DIR"
-  fi
+  # GNU parallel with progress bar and job logging for error tracking
+  find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
+    parallel -j "$PARALLEL_JOBS" --bar --joblog "$JOBLOG_FILE" \
+      process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" "$ENTRIES_DIR" 2>"$ERRORS_FILE"
 else
   # Fallback to xargs -P
   find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | \
-    xargs -P "$PARALLEL_JOBS" -I {} bash -c "process_font '{}' '$pp' '$PREVIEW_WIDTH' '$PIXEL_SIZE' '$ENTRIES_DIR'"
+    xargs -P "$PARALLEL_JOBS" -I {} bash -c "process_font '{}' '$pp' '$PREVIEW_WIDTH' '$PIXEL_SIZE' '$ENTRIES_DIR'" 2>"$ERRORS_FILE"
 fi
 
-echo ""
-echo "  Phase 3: Generating README with table of contents..."
+# Display error diagnostics if any failures occurred
+FAILED_COUNT=0
+if [[ -f "$JOBLOG_FILE" ]]; then
+  FAILED_COUNT=$(awk 'NR>1 && $7!=0 {count++} END {print count+0}' "$JOBLOG_FILE")
+fi
+
+if [[ $FAILED_COUNT -gt 0 ]]; then
+  echo ""
+  echo "=== Error Diagnostics ===" >&2
+  echo "Failed jobs: $FAILED_COUNT" >&2
+  if [[ -s "$ERRORS_FILE" ]]; then
+    echo "" >&2
+    echo "Error details:" >&2
+    grep -E "^FAIL\|" "$ERRORS_FILE" | while IFS='|' read -r _ path; do
+      echo "  - $path" >&2
+    done
+  fi
+  echo "=========================" >&2
+fi
+
+rm -f "$JOBLOG_FILE" "$ERRORS_FILE"
+
+# Phase 3: Generate README with table of contents
 
 # Read all entries and sort alphabetically by font name
 declare -a entries
@@ -216,11 +230,9 @@ done
 # Cleanup temporary directory
 rm -rf "$ENTRIES_DIR"
 
-echo ""
-echo "Preview generation complete!"
-echo "  Output directory: ${pp}"
-echo "  Preview catalog: ${pm}"
-echo "  Total images: $(find "${pp}" -name "*.png" 2>/dev/null | wc -l)"
+# Summary
+image_count=$(find "${pp}" -name "*.png" 2>/dev/null | wc -l)
+echo "Done: ${image_count} preview images -> ${pp}"
 
 # Cleanup temporary files
 rm -f "$CFF2_FONTS_FILE"

@@ -21,7 +21,7 @@ help:
 	@echo "Font Repository Management"
 	@echo ""
 	@echo "Available targets:"
-	@echo "  make help        - Show this help message"
+	@echo "  make help                - Show this help message"
 	@echo ""
 	@echo "Font Organization:"
 	@echo "  make normal              - Organize fonts using FontConfig metadata"
@@ -30,6 +30,7 @@ help:
 	@echo "  make dryrun              - Preview font organization changes (dry-run mode)"
 	@echo "  make dryrun-staged       - Preview staged font organization"
 	@echo "  make dryrun-untracked    - Preview untracked font organization"
+	@echo "  make smoke               - Quick smoke test: validate organization + verify targets"
 	@echo "  make clean               - Remove .duplicate/.delete directories (with confirmation)"
 	@echo ""
 	@echo "Single File Processing:"
@@ -40,13 +41,14 @@ help:
 	@echo "Font Previews & Stats:"
 	@echo "  make previews            - Generate font preview images and catalog"
 	@echo "  make stats               - Generate repository statistics"
+	@echo "  make usage               - Remove all usage restrictions"
 	@echo ""
 	@echo "Installation:"
-	@echo "  make install     - Install fonts to PREFIX (default: $(PREFIX))"
-	@echo "  make uninstall   - Uninstall fonts from PREFIX"
+	@echo "  make install             - Install fonts to PREFIX (default: $(PREFIX))"
+	@echo "  make uninstall           - Uninstall fonts from PREFIX"
 	@echo ""
 	@echo "Release Management:"
-	@echo "  make release     - Create and publish a new release"
+	@echo "  make release             - Create and publish a new release"
 	@echo ""
 	@echo "Environment variables:"
 	@echo "  PREFIX=$(PREFIX)"
@@ -60,6 +62,11 @@ previews:
 stats:
 	@echo "==> Generating repository statistics..."
 	$(BIN_DIR)/gen-stats.sh
+
+.PHONY: usage
+usage:
+	@echo "==> Setting font usage restrictions..."
+	$(BIN_DIR)/set-usage.sh
 
 .PHONY: normal
 normal:
@@ -90,6 +97,74 @@ dryrun-staged:
 dryrun-untracked:
 	@echo "==> Previewing untracked font organization..."
 	$(BIN_DIR)/rename-fonts.sh --untracked --dry-run --verbose
+
+.PHONY: smoke
+smoke:
+	@echo "==> Running smoke test..."
+	@echo ""
+	@echo "[1/3] Validating font organization..."
+	@TEMP_LOG=$$(mktemp); \
+	TEMP_ERR=$$(mktemp); \
+	if $(BIN_DIR)/rename-fonts.sh --dry-run > "$$TEMP_LOG" 2> >(tee "$$TEMP_ERR" >&2); then \
+		fonts=$$(grep -oP 'Processed \K\d+(?= font files)' "$$TEMP_LOG" | tail -1); \
+		families=$$(grep -oP 'across \K\d+(?= families)' "$$TEMP_LOG" | tail -1); \
+		printf '      Status: OK (%s fonts, %s families)\n' "$${fonts:-0}" "$${families:-0}"; \
+		rm -f "$$TEMP_LOG" "$$TEMP_ERR"; \
+	else \
+		echo "      Status: FAIL"; \
+		echo ""; \
+		cat "$$TEMP_LOG"; \
+		rm -f "$$TEMP_LOG" "$$TEMP_ERR"; \
+		exit 1; \
+	fi
+	@echo ""
+	@echo "[2/3] Verifying target prerequisites..."
+	@echo -n "      previews:  "
+	@command -v fontimage >/dev/null 2>&1 || { echo "FAIL (fontimage not found)" >&2; exit 1; }
+	@command -v fc-query >/dev/null 2>&1 || { echo "FAIL (fc-query not found)" >&2; exit 1; }
+	@[ -d "$(FONTS_DIR)" ] || { echo "FAIL (fonts directory not found)" >&2; exit 1; }
+	@[ -n "$$(find $(FONTS_DIR) -type f \( -name '*.otf' -o -name '*.ttf' \) -print -quit)" ] || { echo "FAIL (no fonts found)" >&2; exit 1; }
+	@echo "OK"
+	@echo -n "      install:   "
+	@[ -d "$(FONTS_DIR)" ] || { echo "FAIL (fonts directory not found)" >&2; exit 1; }
+	@command -v fc-cache >/dev/null 2>&1 || { echo "WARN (fc-cache not found, cache update will be skipped)"; echo "OK"; }
+	@command -v fc-cache >/dev/null 2>&1 && echo "OK" || true
+	@echo -n "      release:   "
+	@command -v git >/dev/null 2>&1 || { echo "FAIL (git not found)" >&2; exit 1; }
+	@command -v gh >/dev/null 2>&1 || { echo "FAIL (gh not found)" >&2; exit 1; }
+	@if ! git diff-index --quiet HEAD -- 2>/dev/null; then echo "OK (uncommitted changes)"; else echo "OK"; fi
+	@echo -n "      usage:     "
+	@command -v fonttools >/dev/null 2>&1 || { echo "FAIL (fonttools not found)" >&2; exit 1; }
+	@echo "OK"
+	@echo ""
+	@echo "[3/3] Comparing statistics..."
+	@TEMP_LOG=$$(mktemp); \
+	if $(BIN_DIR)/gen-stats.sh --compare 2>&1 | tee "$$TEMP_LOG" | grep -E '^Analyzing' || true; then \
+		if tail -1 "$$TEMP_LOG" | grep -q "differ"; then \
+			echo "      Status: DIFFER"; \
+			echo ""; \
+			cat "$$TEMP_LOG"; \
+			echo ""; \
+			echo "      NOTE: Run 'make stats' to update README.md"; \
+			rm -f "$$TEMP_LOG"; \
+		elif tail -1 "$$TEMP_LOG" | grep -q "match"; then \
+			status=$$(tail -1 "$$TEMP_LOG"); \
+			fonts=$$(echo "$$status" | grep -oP '\(\K\d+(?= fonts)'); \
+			families=$$(echo "$$status" | grep -oP ', \K\d+(?= families)'); \
+			printf '      Status: OK (%s fonts, %s families match README.md)\n' "$${fonts:-0}" "$${families:-0}"; \
+			rm -f "$$TEMP_LOG"; \
+		else \
+			echo "      Status: ERROR"; \
+			cat "$$TEMP_LOG"; \
+			rm -f "$$TEMP_LOG"; \
+			exit 1; \
+		fi; \
+	else \
+		rm -f "$$TEMP_LOG"; \
+		exit 1; \
+	fi
+	@echo ""
+	@echo "==> Smoke test complete!"
 
 .PHONY: clean
 clean:

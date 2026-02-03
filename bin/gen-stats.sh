@@ -14,6 +14,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="${REPO_ROOT:-$(dirname "$SCRIPT_DIR")}"
 FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
 PARALLEL_JOBS="${PARALLEL_JOBS:-$(nproc 2>/dev/null || echo 4)}"
+COMPARE_MODE=false
 
 usage() {
   cat <<'EOF'
@@ -25,6 +26,7 @@ in README.md.
 Options:
   --repo-root PATH    Override the repository root (defaults to script dir)
   --jobs NUM          Number of parallel jobs (default: CPU cores)
+  --compare           Compare computed stats with current README.md without modifying
   --help, -h          Show this help message
 EOF
 }
@@ -39,6 +41,10 @@ while [[ $# -gt 0 ]]; do
     --jobs)
       PARALLEL_JOBS="$2"
       shift 2
+      ;;
+    --compare)
+      COMPARE_MODE=true
+      shift
       ;;
     --help|-h)
       usage
@@ -60,7 +66,8 @@ fi
 pushd "$FONTS_DIR" &>/dev/null
 trap 'popd &>/dev/null' EXIT
 
-echo "Analyzing font repository with $PARALLEL_JOBS parallel jobs..."
+total_files=$(find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) | wc -l)
+echo "Analyzing ${total_files} font files..."
 
 # Function to analyze a single font file
 analyze_font() {
@@ -91,22 +98,41 @@ export -f analyze_font
 declare -i total_fonts=0 otf_count=0 ttf_count=0 variable_count=0 static_count=0
 declare -A families
 
-echo "  Phase 1: Scanning and analyzing fonts..."
-
 # Use xargs for parallelization (more portable than GNU parallel)
+JOBLOG_FILE=$(mktemp)
+ERRORS_FILE=$(mktemp)
+
 if command -v parallel &>/dev/null && parallel --version 2>/dev/null | grep -q "GNU parallel"; then
-  # GNU parallel available - use it for better progress
-  echo "  Using GNU parallel for faster processing..."
+  # GNU parallel with progress bar and job logging
   ANALYSIS_OUTPUT=$(find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) | \
-    parallel -j "$PARALLEL_JOBS" --bar analyze_font {} 2>/dev/null)
+    parallel -j "$PARALLEL_JOBS" --bar --joblog "$JOBLOG_FILE" analyze_font {} 2>"$ERRORS_FILE")
 else
   # Fallback to xargs -P
-  echo "  Using xargs -P for parallel processing..."
   ANALYSIS_OUTPUT=$(find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) | \
-    xargs -P "$PARALLEL_JOBS" -I {} bash -c 'analyze_font "$@"' _ {})
+    xargs -P "$PARALLEL_JOBS" -I {} bash -c 'analyze_font "$@"' _ {} 2>"$ERRORS_FILE")
 fi
 
-echo "  Phase 2: Aggregating results..."
+# Display error diagnostics if any failures occurred
+FAILED_COUNT=0
+if [[ -f "$JOBLOG_FILE" ]]; then
+  FAILED_COUNT=$(awk 'NR>1 && $7!=0 {count++} END {print count+0}' "$JOBLOG_FILE")
+fi
+
+if [[ $FAILED_COUNT -gt 0 ]]; then
+  echo "" >&2
+  echo "=== Error Diagnostics ===" >&2
+  echo "Failed jobs: $FAILED_COUNT" >&2
+  if [[ -s "$ERRORS_FILE" ]]; then
+    echo "" >&2
+    echo "Error details:" >&2
+    cat "$ERRORS_FILE" >&2
+  fi
+  echo "=========================" >&2
+fi
+
+rm -f "$JOBLOG_FILE" "$ERRORS_FILE"
+
+# Aggregate results
 
 # Process the analysis output
 while IFS='|' read -r ext family is_variable; do
@@ -131,25 +157,21 @@ family_count=${#families[@]}
 fc_version=$(fc-query --version 2>&1 | grep -oP 'fontconfig version\s*\K[^\s]+' || echo "unknown")
 fontimage_version=$(fontimage --version 2>&1 | grep -oP 'Version:\s*\K[^\s]+' || echo "unknown")
 
-echo "  Complete!"
+# Generate statistics section (concise format)
+# Format numbers with commas for readability
+format_number() {
+  printf "%'d" "$1" 2>/dev/null || echo "$1"
+}
 
-# Generate statistics section
 cat > /tmp/stats_section.txt <<EOF
 ## Statistics
 
-*Generated on $(date '+%Y-%m-%d') using* [*\`gen-stats.sh\`*](bin/gen-stats.sh) (\`make stats\`)
+> Generated $(date '+%Y-%m-%d') • [view details](bin/gen-stats.sh)
 
-- **Total Font Files**: ${total_fonts}
-- **Font Families**: ${family_count}
-- **OpenType (.otf)**: ${otf_count}
-- **TrueType (.ttf)**: ${ttf_count}
-- **Variable Fonts**: ${variable_count}
-- **Static Fonts**: ${static_count}
-
-### Tools Used
-
-- **FontConfig Version**: ${fc_version}
-- **fontimage Version**: ${fontimage_version}
+- **Font Files:** $(format_number $total_fonts)
+- **Families:** $(format_number $family_count)
+- **Variable Fonts:** $(format_number $variable_count)
+- **Formats:** $(format_number $otf_count) OTF, $(format_number $ttf_count) TTF
 EOF
 
 # Check if README.md exists
@@ -159,27 +181,108 @@ if [[ ! -f "$README_PATH" ]]; then
   exit 1
 fi
 
-# Find the Statistics section and replace it
-if grep -q "^## Statistics" "$README_PATH"; then
-  # Create temporary file with content before Statistics section
-  sed '/^## Statistics/,$d' "$README_PATH" > /tmp/readme_before.txt
+if [[ "$COMPARE_MODE" == "true" ]]; then
+  # Compare mode: show differences without modifying README.md
 
-  # Combine: before + new stats
-  cat /tmp/readme_before.txt /tmp/stats_section.txt > "$README_PATH"
+  # Extract current stats from README.md (new concise format)
+  if grep -q "^## Statistics" "$README_PATH"; then
+    # Extract from "- **Font Files:** 1,359" format
+    current_total=$(grep "^- \*\*Font Files:\*\*" "$README_PATH" | grep -oP '\d[\d,]*' | tr -d ',' || echo "0")
+    current_families=$(grep "^- \*\*Families:\*\*" "$README_PATH" | grep -oP '\d[\d,]*' | tr -d ',' || echo "0")
+    current_variable=$(grep "^- \*\*Variable Fonts:\*\*" "$README_PATH" | grep -oP '\d[\d,]*' | tr -d ',' || echo "0")
+    # Extract from "- **Formats:** 919 OTF, 440 TTF" format
+    formats_line=$(grep "^- \*\*Formats:\*\*" "$README_PATH")
+    current_otf=$(echo "$formats_line" | grep -oP '\d[\d,]*(?= OTF)' | tr -d ',' || echo "0")
+    current_ttf=$(echo "$formats_line" | grep -oP '\d[\d,]*(?= TTF)' | tr -d ',' || echo "0")
+    current_static=$((current_total - current_variable))
 
-  echo "Statistics section updated in README.md"
-  rm -f /tmp/readme_before.txt /tmp/stats_section.txt
-else
-  # Append to end if section doesn't exist
-  echo "" >> "$README_PATH"
-  cat /tmp/stats_section.txt >> "$README_PATH"
+    # Compare and show differences
+    has_diff=false
+    diff_lines=()
+
+    if [[ "$current_total" != "$total_fonts" ]]; then
+      diff_lines+=("  Total Font Files:   $current_total -> $total_fonts")
+      has_diff=true
+    fi
+
+    if [[ "$current_families" != "$family_count" ]]; then
+      diff_lines+=("  Font Families:      $current_families -> $family_count")
+      has_diff=true
+    fi
+
+    if [[ "$current_otf" != "$otf_count" ]]; then
+      diff_lines+=("  OpenType (.otf):    $current_otf -> $otf_count")
+      has_diff=true
+    fi
+
+    if [[ "$current_ttf" != "$ttf_count" ]]; then
+      diff_lines+=("  TrueType (.ttf):    $current_ttf -> $ttf_count")
+      has_diff=true
+    fi
+
+    if [[ "$current_variable" != "$variable_count" ]]; then
+      diff_lines+=("  Variable Fonts:     $current_variable -> $variable_count")
+      has_diff=true
+    fi
+
+    if [[ "$current_static" != "$static_count" ]]; then
+      diff_lines+=("  Static Fonts:       $current_static -> $static_count")
+      has_diff=true
+    fi
+
+    if [[ "$has_diff" == "true" ]]; then
+      echo "Statistics differ from README.md:"
+      echo ""
+      for line in "${diff_lines[@]}"; do
+        echo "$line"
+      done
+      echo ""
+      exit 1
+    else
+      echo "Statistics match README.md (${total_fonts} fonts, ${family_count} families)"
+      exit 0
+    fi
+  else
+    echo "Warning: No Statistics section found in README.md" >&2
+    echo "Computed stats: ${total_fonts} fonts, ${family_count} families"
+    exit 1
+  fi
+
   rm -f /tmp/stats_section.txt
-  echo "Statistics section appended to README.md"
-fi
+else
+  # Normal mode: update README.md
 
-echo ""
-echo "Statistics:"
-echo "  - Total Font Files: ${total_fonts}"
-echo "  - Font Families: ${family_count}"
-echo "  - Variable Fonts: ${variable_count}"
-echo "  - Static Fonts: ${static_count}"
+  # Find the Statistics section and replace it
+  if grep -q "^## Statistics" "$README_PATH"; then
+    # Extract content before Statistics section
+    sed '/^## Statistics/,$d' "$README_PATH" > /tmp/readme_before.txt
+
+    # Extract content after Statistics section (from next ## heading)
+    # Find the line number of ## Statistics
+    stats_line=$(grep -n "^## Statistics" "$README_PATH" | head -1 | cut -d: -f1)
+    # Find the next ## heading after Statistics
+    next_section_line=$(tail -n +$((stats_line + 1)) "$README_PATH" | grep -n "^## " | head -1 | cut -d: -f1)
+
+    if [[ -n "$next_section_line" ]]; then
+      # There's another section after Statistics - preserve it
+      tail -n +$((stats_line + next_section_line)) "$README_PATH" > /tmp/readme_after.txt
+      # Combine: before + new stats + after
+      cat /tmp/readme_before.txt /tmp/stats_section.txt > "$README_PATH"
+      echo "" >> "$README_PATH"
+      cat /tmp/readme_after.txt >> "$README_PATH"
+      rm -f /tmp/readme_after.txt
+    else
+      # Statistics is the last section
+      cat /tmp/readme_before.txt /tmp/stats_section.txt > "$README_PATH"
+    fi
+
+    rm -f /tmp/readme_before.txt /tmp/stats_section.txt
+  else
+    # Append to end if section doesn't exist
+    echo "" >> "$README_PATH"
+    cat /tmp/stats_section.txt >> "$README_PATH"
+    rm -f /tmp/stats_section.txt
+  fi
+
+  echo "Done: ${total_fonts} fonts, ${family_count} families -> README.md"
+fi
