@@ -218,9 +218,8 @@ uninstall:
 		echo "No fonts found at $(INSTALL_FONTS_DIR)"; \
 	fi
 
-.PHONY: release
-release:
-	@echo "==> Preparing new release..."
+_release-%:
+	@echo "==> Preparing new release ($(*))..."
 	@# Check for unstaged changes
 	@if ! git diff-index --quiet HEAD --; then \
 		echo "Error: You have unstaged changes. Please commit or stash them first."; \
@@ -230,10 +229,10 @@ release:
 	@echo "==> Determining next version..."
 	@# Try to use svu, install if not available
 	@if command -v svu >/dev/null 2>&1; then \
-		NEXT_VERSION=$$(svu next --tag-mode current-branch 2>/dev/null || svu next 2>/dev/null || echo "v0.1.0"); \
+		NEXT_VERSION=$$(svu $(*) --tag-mode current-branch 2>/dev/null || svu $(*) 2>/dev/null || echo "v0.1.0"); \
 	else \
 		echo "    svu not found, installing..."; \
-		NEXT_VERSION=$$(go run github.com/caarlos0/svu@latest next --tag-mode current-branch 2>/dev/null || go run github.com/caarlos0/svu@latest next 2>/dev/null || echo "v0.1.0"); \
+		NEXT_VERSION=$$(go run github.com/caarlos0/svu@latest $(*) --tag-mode current-branch 2>/dev/null || go run github.com/caarlos0/svu@latest $(*) 2>/dev/null || echo "v0.1.0"); \
 	fi; \
 	echo "    Next version: $$NEXT_VERSION"; \
 	echo ""; \
@@ -249,4 +248,36 @@ release:
 	echo ""; \
 	echo "==> Release complete!"; \
 	echo "    Version: $$NEXT_VERSION"; \
+	echo "    Archive: $$ARCHIVE_NAME"
+
+.PHONY: release-minor
+release-minor: _release-minor
+.PHONY: release-major
+release-major: _release-major
+.PHONY: release-patch
+release-patch: _release-patch
+
+.PHONY: release-amend
+release-amend:
+	@echo "==> Amending latest release..."
+	@# Check for unstaged changes
+	@if ! git diff-index --quiet HEAD --; then \
+		echo "Error: You have unstaged changes. Please commit or stash them first."; \
+		git status --short; \
+		exit 1; \
+	fi
+	@# Get latest tag
+	LATEST_TAG=$$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.1.0"); \
+	echo "    Latest tag: $$LATEST_TAG"; \
+	echo ""; \
+	echo "==> Creating release archive..."; \
+	ARCHIVE_NAME="fonts-$$LATEST_TAG-amend.zip"; \
+	git archive -o "$$ARCHIVE_NAME" --prefix=fonts/ HEAD; \
+	echo "    Created: $$ARCHIVE_NAME"; \
+	echo ""; \
+	echo "==> Amending release on GitHub..."; \
+	gh release upload "$$LATEST_TAG" "$$ARCHIVE_NAME" --clobber; \
+	echo ""; \
+	echo "==> Amend complete!"; \
+	echo "    Tag: $$LATEST_TAG"; \
 	echo "    Archive: $$ARCHIVE_NAME"
