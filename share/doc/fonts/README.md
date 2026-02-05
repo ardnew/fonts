@@ -13,8 +13,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [AdaptiveMonoOT-BoldOblique](#adaptivemonoot-boldoblique) [💾](../../fonts/AdaptiveMonoOT/otf/BoldOblique/AdaptiveMonoOT-BoldOblique.otf)
 - [AdaptiveMonoOT-Oblique](#adaptivemonoot-oblique) [💾](../../fonts/AdaptiveMonoOT/otf/Oblique/AdaptiveMonoOT-Oblique.otf)
 - [AdaptiveMonoOT-Regular](#adaptivemonoot-regular) [💾](../../fonts/AdaptiveMonoOT/otf/Regular/AdaptiveMonoOT-Regular.otf)
-- [Aglet Mono VF (Variable)](#aglet-mono-vf-variable) [💾](../../fonts/AgletMono/otf/AgletMono-Variable.otf)
 - [Aglet Mono VF (Variable)](#aglet-mono-vf-variable) [💾](../../fonts/AgletMono/otf/AgletMono-VariableItalic.otf)
+- [Aglet Mono VF (Variable)](#aglet-mono-vf-variable) [💾](../../fonts/AgletMono/otf/AgletMono-Variable.otf)
 - [Annotation Mono (Variable)](#annotation-mono-variable) [💾](../../fonts/AnnotationMono/ttf/AnnotationMono-Variable.ttf)
 - [Apparat Black](#apparat-black) [💾](../../fonts/Apparat/otf/Black/Apparat-Black.otf)
 - [Apparat Black Italic](#apparat-black-italic) [💾](../../fonts/Apparat/otf/BlackItalic/Apparat-BlackItalic.otf)
@@ -58,6 +58,9 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Associate Mono Light Italic](#associate-mono-light-italic) [💾](../../fonts/AssociateMono/ttf/LightItalic/AssociateMono-LightItalic.ttf)
 - [Associate Mono Medium](#associate-mono-medium) [💾](../../fonts/AssociateMono/ttf/Medium/AssociateMono-Medium.ttf)
 - [Associate Mono Medium Italic](#associate-mono-medium-italic) [💾](../../fonts/AssociateMono/ttf/MediumItalic/AssociateMono-MediumItalic.ttf)
+- [AtkinsonHyperlegible-Bold](#atkinsonhyperlegible-bold) [💾](../../fonts/AtkinsonHyperlegible/otf/Bold/AtkinsonHyperlegible-Bold.otf)
+- [AtkinsonHyperlegible-BoldItalic](#atkinsonhyperlegible-bolditalic) [💾](../../fonts/AtkinsonHyperlegible/otf/BoldItalic/AtkinsonHyperlegible-BoldItalic.otf)
+- [AtkinsonHyperlegible-Italic](#atkinsonhyperlegible-italic) [💾](../../fonts/AtkinsonHyperlegible/otf/Italic/AtkinsonHyperlegible-Italic.otf)
 - [Atkinson Hyperlegible Mono Bold](#atkinson-hyperlegible-mono-bold) [💾](../../fonts/AtkinsonHyperlegibleMono/otf/Bold/AtkinsonHyperlegibleMono-Bold.otf)
 - [Atkinson Hyperlegible Mono Bold Italic](#atkinson-hyperlegible-mono-bold-italic) [💾](../../fonts/AtkinsonHyperlegibleMono/otf/BoldItalic/AtkinsonHyperlegibleMono-BoldItalic.otf)
 - [Atkinson Hyperlegible Mono ExtraBold](#atkinson-hyperlegible-mono-extrabold) [💾](../../fonts/AtkinsonHyperlegibleMono/otf/ExtraBold/AtkinsonHyperlegibleMono-ExtraBold.otf)
@@ -86,9 +89,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Atkinson Hyperlegible Next Regular Italic](#atkinson-hyperlegible-next-regular-italic) [💾](../../fonts/AtkinsonHyperlegibleNext/otf/RegularItalic/AtkinsonHyperlegibleNext-RegularItalic.otf)
 - [Atkinson Hyperlegible Next SemiBold](#atkinson-hyperlegible-next-semibold) [💾](../../fonts/AtkinsonHyperlegibleNext/otf/SemiBold/AtkinsonHyperlegibleNext-SemiBold.otf)
 - [Atkinson Hyperlegible Next SemiBold Italic](#atkinson-hyperlegible-next-semibold-italic) [💾](../../fonts/AtkinsonHyperlegibleNext/otf/SemiBoldItalic/AtkinsonHyperlegibleNext-SemiBoldItalic.otf)
-- [AtkinsonHyperlegible-Bold](#atkinsonhyperlegible-bold) [💾](../../fonts/AtkinsonHyperlegible/otf/Bold/AtkinsonHyperlegible-Bold.otf)
-- [AtkinsonHyperlegible-BoldItalic](#atkinsonhyperlegible-bolditalic) [💾](../../fonts/AtkinsonHyperlegible/otf/BoldItalic/AtkinsonHyperlegible-BoldItalic.otf)
-- [AtkinsonHyperlegible-Italic](#atkinsonhyperlegible-italic) [💾](../../fonts/AtkinsonHyperlegible/otf/Italic/AtkinsonHyperlegible-Italic.otf)
 - [AtkinsonHyperlegible-Regular](#atkinsonhyperlegible-regular) [💾](../../fonts/AtkinsonHyperlegible/otf/Regular/AtkinsonHyperlegible-Regular.otf)
 - [Attribute Mono](#attribute-mono) [💾](../../fonts/AttributeMono/otf/Regular/AttributeMono-Regular.otf)
 - [Attribute Mono Black](#attribute-mono-black) [💾](../../fonts/AttributeMono/otf/Black/AttributeMono-Black.otf)
@@ -143,11 +143,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Berkeley Mono Bold](#berkeley-mono-bold) [💾](../../fonts/BerkeleyMono/otf/Bold/BerkeleyMono-Bold.otf)
 - [Berkeley Mono Bold Italic](#berkeley-mono-bold-italic) [💾](../../fonts/BerkeleyMono/otf/BoldItalic/BerkeleyMono-BoldItalic.otf)
 - [Berkeley Mono Italic](#berkeley-mono-italic) [💾](../../fonts/BerkeleyMono/otf/Italic/BerkeleyMono-Italic.otf)
-- [Berkeley Mono Regular](#berkeley-mono-regular) [💾](../../fonts/BerkeleyMono/otf/Regular/BerkeleyMono-Regular.otf)
 - [BerkeleyMono Nerd Font](#berkeleymono-nerd-font) [💾](../../fonts/BerkeleyMonoNerdFont/ttf/Regular/BerkeleyMonoNerdFont-Regular.ttf)
 - [BerkeleyMono Nerd Font Bold](#berkeleymono-nerd-font-bold) [💾](../../fonts/BerkeleyMonoNerdFont/ttf/Bold/BerkeleyMonoNerdFont-Bold.ttf)
 - [BerkeleyMono Nerd Font Bold Italic](#berkeleymono-nerd-font-bold-italic) [💾](../../fonts/BerkeleyMonoNerdFont/ttf/BoldItalic/BerkeleyMonoNerdFont-BoldItalic.ttf)
 - [BerkeleyMono Nerd Font Italic](#berkeleymono-nerd-font-italic) [💾](../../fonts/BerkeleyMonoNerdFont/ttf/Italic/BerkeleyMonoNerdFont-Italic.ttf)
+- [Berkeley Mono Regular](#berkeley-mono-regular) [💾](../../fonts/BerkeleyMono/otf/Regular/BerkeleyMono-Regular.otf)
 - [Blender Pro Bold](#blender-pro-bold) [💾](../../fonts/BlenderPro/ttf/Bold/BlenderPro-Bold.ttf)
 - [Blender Pro Bold Italic](#blender-pro-bold-italic) [💾](../../fonts/BlenderPro/ttf/BoldItalic/BlenderPro-BoldItalic.ttf)
 - [Blender Pro Book](#blender-pro-book) [💾](../../fonts/BlenderPro/ttf/Book/BlenderPro-Book.ttf)
@@ -272,8 +272,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Ellograph CF Light Italic](#ellograph-cf-light-italic) [💾](../../fonts/EllographCF/ttf/LightItalic/EllographCF-LightItalic.ttf)
 - [Ellograph CF Thin](#ellograph-cf-thin) [💾](../../fonts/EllographCF/ttf/Thin/EllographCF-Thin.ttf)
 - [Ellograph CF Thin Italic](#ellograph-cf-thin-italic) [💾](../../fonts/EllographCF/ttf/ThinItalic/EllographCF-ThinItalic.ttf)
-- [Encode Sans (Variable)](#encode-sans-variable) [💾](../../fonts/EncodeSans/ttf/EncodeSans-Variable.ttf)
 - [Encode Sans SC (Variable)](#encode-sans-sc-variable) [💾](../../fonts/EncodeSansSC/ttf/EncodeSansSC-Variable.ttf)
+- [Encode Sans (Variable)](#encode-sans-variable) [💾](../../fonts/EncodeSans/ttf/EncodeSans-Variable.ttf)
 - [EssonnesDisplay-Italic](#essonnesdisplay-italic) [💾](../../fonts/Essonnes/otf/DisplayItalic/Essonnes-DisplayItalic.otf)
 - [EssonnesDisplay-Light](#essonnesdisplay-light) [💾](../../fonts/Essonnes/otf/DisplayLight/Essonnes-DisplayLight.otf)
 - [EssonnesDisplay-LightItalic](#essonnesdisplay-lightitalic) [💾](../../fonts/Essonnes/otf/DisplayLightItalic/Essonnes-DisplayLightItalic.otf)
@@ -332,6 +332,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Foreday Sans Medium Italic](#foreday-sans-medium-italic) [💾](../../fonts/ForedaySans/otf/MediumItalic/ForedaySans-MediumItalic.otf)
 - [Forma DJR Display Bold](#forma-djr-display-bold) [💾](../../fonts/FormaDJRDisplay/otf/Bold/FormaDJRDisplay-Bold.otf)
 - [Forma DJR Display Bold Italic](#forma-djr-display-bold-italic) [💾](../../fonts/FormaDJRDisplay/otf/BoldItalic/FormaDJRDisplay-BoldItalic.otf)
+- [FormaDJRDisplay Medium Italic](#formadjrdisplay-medium-italic) [💾](../../fonts/FormaDJRDisplay/otf/MediumItalic/FormaDJRDisplay-MediumItalic.otf)
+- [FormaDJRDisplay Medium Regular](#formadjrdisplay-medium-regular) [💾](../../fonts/FormaDJRDisplay/otf/Medium/FormaDJRDisplay-Medium.otf)
 - [Forma DJR Mono Bk](#forma-djr-mono-bk) [💾](../../fonts/FormaDJRMono/otf/Black/FormaDJRMono-Black.otf)
 - [Forma DJR Mono Bk It](#forma-djr-mono-bk-it) [💾](../../fonts/FormaDJRMono/otf/BlackItalic/FormaDJRMono-BlackItalic.otf)
 - [Forma DJR Mono Bold](#forma-djr-mono-bold) [💾](../../fonts/FormaDJRMono/otf/Bold/FormaDJRMono-Bold.otf)
@@ -350,8 +352,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Forma DJR Mono Regular](#forma-djr-mono-regular) [💾](../../fonts/FormaDJRMono/otf/Regular/FormaDJRMono-Regular.otf)
 - [Forma DJR Mono Thin](#forma-djr-mono-thin) [💾](../../fonts/FormaDJRMono/otf/Thin/FormaDJRMono-Thin.otf)
 - [Forma DJR Mono Thin It](#forma-djr-mono-thin-it) [💾](../../fonts/FormaDJRMono/otf/ThinItalic/FormaDJRMono-ThinItalic.otf)
-- [FormaDJRDisplay Medium Italic](#formadjrdisplay-medium-italic) [💾](../../fonts/FormaDJRDisplay/otf/MediumItalic/FormaDJRDisplay-MediumItalic.otf)
-- [FormaDJRDisplay Medium Regular](#formadjrdisplay-medium-regular) [💾](../../fonts/FormaDJRDisplay/otf/Medium/FormaDJRDisplay-Medium.otf)
 - [Fragment Mono Italic](#fragment-mono-italic) [💾](../../fonts/FragmentMono/otf/Italic/FragmentMono-Italic.otf)
 - [Fragment Mono Regular](#fragment-mono-regular) [💾](../../fonts/FragmentMono/otf/Regular/FragmentMono-Regular.otf)
 - [Geist Mono Black](#geist-mono-black) [💾](../../fonts/GeistMono/otf/Black/GeistMono-Black.otf)
@@ -385,18 +385,18 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [GoodHeadlinePro-WideNewsItalic](#goodheadlinepro-widenewsitalic) [💾](../../fonts/GoodHeadlinePro/otf/WideNewsItalic/GoodHeadlinePro-WideNewsItalic.otf)
 - [GoodHeadlinePro-WideUltra](#goodheadlinepro-wideultra) [💾](../../fonts/GoodHeadlinePro/otf/WideUltra/GoodHeadlinePro-WideUltra.otf)
 - [GoodHeadlinePro-WideUltraItalic](#goodheadlinepro-wideultraitalic) [💾](../../fonts/GoodHeadlinePro/otf/WideUltraItalic/GoodHeadlinePro-WideUltraItalic.otf)
-- [Google Sans Code (Variable)](#google-sans-code-variable) [💾](../../fonts/GoogleSansCode/ttf/GoogleSansCode-Variable.ttf)
 - [Google Sans Code (Variable)](#google-sans-code-variable) [💾](../../fonts/GoogleSansCode/ttf/GoogleSansCode-VariableItalic.ttf)
+- [Google Sans Code (Variable)](#google-sans-code-variable) [💾](../../fonts/GoogleSansCode/ttf/GoogleSansCode-Variable.ttf)
 - [Hack Bold](#hack-bold) [💾](../../fonts/Hack/ttf/Bold/Hack-Bold.ttf)
 - [Hack Bold Italic](#hack-bold-italic) [💾](../../fonts/Hack/ttf/BoldItalic/Hack-BoldItalic.ttf)
 - [Hack Italic](#hack-italic) [💾](../../fonts/Hack/ttf/Italic/Hack-Italic.ttf)
 - [Hack Regular](#hack-regular) [💾](../../fonts/Hack/ttf/Regular/Hack-Regular.ttf)
-- [Halyard Display (Variable)](#halyard-display-variable) [💾](../../fonts/HalyardDisplay/otf/HalyardDisplay-Variable.otf)
 - [Halyard Display (Variable)](#halyard-display-variable) [💾](../../fonts/HalyardDisplay/otf/HalyardDisplay-VariableItalic.otf)
-- [Halyard Micro (Variable)](#halyard-micro-variable) [💾](../../fonts/HalyardMicro/otf/HalyardMicro-Variable.otf)
+- [Halyard Display (Variable)](#halyard-display-variable) [💾](../../fonts/HalyardDisplay/otf/HalyardDisplay-Variable.otf)
 - [Halyard Micro (Variable)](#halyard-micro-variable) [💾](../../fonts/HalyardMicro/otf/HalyardMicro-VariableItalic.otf)
-- [Halyard Text (Variable)](#halyard-text-variable) [💾](../../fonts/HalyardText/otf/HalyardText-Variable.otf)
+- [Halyard Micro (Variable)](#halyard-micro-variable) [💾](../../fonts/HalyardMicro/otf/HalyardMicro-Variable.otf)
 - [Halyard Text (Variable)](#halyard-text-variable) [💾](../../fonts/HalyardText/otf/HalyardText-VariableItalic.otf)
+- [Halyard Text (Variable)](#halyard-text-variable) [💾](../../fonts/HalyardText/otf/HalyardText-Variable.otf)
 - [Hasklig](#hasklig) [💾](../../fonts/Hasklig/otf/Regular/Hasklig-Regular.otf)
 - [Hasklig Black](#hasklig-black) [💾](../../fonts/Hasklig/otf/Black/Hasklig-Black.otf)
 - [Hasklig Black Italic](#hasklig-black-italic) [💾](../../fonts/Hasklig/otf/BlackItalic/Hasklig-BlackItalic.otf)
@@ -459,8 +459,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [IBM Plex Serif Text Italic](#ibm-plex-serif-text-italic) [💾](../../fonts/IBMPlexSerif/otf/TextItalic/IBMPlexSerif-TextItalic.otf)
 - [IBM Plex Serif Thin](#ibm-plex-serif-thin) [💾](../../fonts/IBMPlexSerif/otf/Thin/IBMPlexSerif-Thin.otf)
 - [IBM Plex Serif Thin Italic](#ibm-plex-serif-thin-italic) [💾](../../fonts/IBMPlexSerif/otf/ThinItalic/IBMPlexSerif-ThinItalic.otf)
-- [Iki Mono VF (Variable)](#iki-mono-vf-variable) [💾](../../fonts/IkiMono/otf/IkiMono-Variable.otf)
 - [Iki Mono VF (Variable)](#iki-mono-vf-variable) [💾](../../fonts/IkiMono/otf/IkiMono-VariableItalic.otf)
+- [Iki Mono VF (Variable)](#iki-mono-vf-variable) [💾](../../fonts/IkiMono/otf/IkiMono-Variable.otf)
 - [Ingra Light](#ingra-light) [💾](../../fonts/Ingra/otf/Light/Ingra-Light.otf)
 - [Ingra Medium](#ingra-medium) [💾](../../fonts/Ingra/otf/Medium/Ingra-Medium.otf)
 - [Ingra UltraLight](#ingra-ultralight) [💾](../../fonts/Ingra/otf/UltraLight/Ingra-UltraLight.otf)
@@ -469,15 +469,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [InputMono BlackIta](#inputmono-blackita) [💾](../../fonts/InputMono/ttf/BlackItalic/InputMono-BlackItalic.ttf)
 - [InputMono Bold](#inputmono-bold) [💾](../../fonts/InputMono/ttf/Bold/InputMono-Bold.ttf)
 - [InputMono BoldIta](#inputmono-boldita) [💾](../../fonts/InputMono/ttf/BoldItalic/InputMono-BoldItalic.ttf)
-- [InputMono ExLight](#inputmono-exlight) [💾](../../fonts/InputMono/ttf/ExtraLight/InputMono-ExtraLight.ttf)
-- [InputMono ExLightIta](#inputmono-exlightita) [💾](../../fonts/InputMono/ttf/ExtraLightItalic/InputMono-ExtraLightItalic.ttf)
-- [InputMono Italic](#inputmono-italic) [💾](../../fonts/InputMono/ttf/Italic/InputMono-Italic.ttf)
-- [InputMono Light](#inputmono-light) [💾](../../fonts/InputMono/ttf/Light/InputMono-Light.ttf)
-- [InputMono LightIta](#inputmono-lightita) [💾](../../fonts/InputMono/ttf/LightItalic/InputMono-LightItalic.ttf)
-- [InputMono Medium](#inputmono-medium) [💾](../../fonts/InputMono/ttf/Medium/InputMono-Medium.ttf)
-- [InputMono MediumIta](#inputmono-mediumita) [💾](../../fonts/InputMono/ttf/MediumItalic/InputMono-MediumItalic.ttf)
-- [InputMono Thin](#inputmono-thin) [💾](../../fonts/InputMono/ttf/Thin/InputMono-Thin.ttf)
-- [InputMono ThinIta](#inputmono-thinita) [💾](../../fonts/InputMono/ttf/ThinItalic/InputMono-ThinItalic.ttf)
 - [InputMonoCompressed](#inputmonocompressed) [💾](../../fonts/InputMonoCompressed/ttf/Regular/InputMonoCompressed-Regular.ttf)
 - [InputMonoCompressed Black](#inputmonocompressed-black) [💾](../../fonts/InputMonoCompressed/ttf/Black/InputMonoCompressed-Black.ttf)
 - [InputMonoCompressed BlackIta](#inputmonocompressed-blackita) [💾](../../fonts/InputMonoCompressed/ttf/BlackItalic/InputMonoCompressed-BlackItalic.ttf)
@@ -492,6 +483,13 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [InputMonoCompressed MediumIta](#inputmonocompressed-mediumita) [💾](../../fonts/InputMonoCompressed/ttf/MediumItalic/InputMonoCompressed-MediumItalic.ttf)
 - [InputMonoCompressed Thin](#inputmonocompressed-thin) [💾](../../fonts/InputMonoCompressed/ttf/Thin/InputMonoCompressed-Thin.ttf)
 - [InputMonoCompressed ThinIta](#inputmonocompressed-thinita) [💾](../../fonts/InputMonoCompressed/ttf/ThinItalic/InputMonoCompressed-ThinItalic.ttf)
+- [InputMono ExLight](#inputmono-exlight) [💾](../../fonts/InputMono/ttf/ExtraLight/InputMono-ExtraLight.ttf)
+- [InputMono ExLightIta](#inputmono-exlightita) [💾](../../fonts/InputMono/ttf/ExtraLightItalic/InputMono-ExtraLightItalic.ttf)
+- [InputMono Italic](#inputmono-italic) [💾](../../fonts/InputMono/ttf/Italic/InputMono-Italic.ttf)
+- [InputMono Light](#inputmono-light) [💾](../../fonts/InputMono/ttf/Light/InputMono-Light.ttf)
+- [InputMono LightIta](#inputmono-lightita) [💾](../../fonts/InputMono/ttf/LightItalic/InputMono-LightItalic.ttf)
+- [InputMono Medium](#inputmono-medium) [💾](../../fonts/InputMono/ttf/Medium/InputMono-Medium.ttf)
+- [InputMono MediumIta](#inputmono-mediumita) [💾](../../fonts/InputMono/ttf/MediumItalic/InputMono-MediumItalic.ttf)
 - [InputMonoNarrow](#inputmononarrow) [💾](../../fonts/InputMonoNarrow/ttf/Regular/InputMonoNarrow-Regular.ttf)
 - [InputMonoNarrow Black](#inputmononarrow-black) [💾](../../fonts/InputMonoNarrow/ttf/Black/InputMonoNarrow-Black.ttf)
 - [InputMonoNarrow BlackIta](#inputmononarrow-blackita) [💾](../../fonts/InputMonoNarrow/ttf/BlackItalic/InputMonoNarrow-BlackItalic.ttf)
@@ -506,20 +504,13 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [InputMonoNarrow MediumIta](#inputmononarrow-mediumita) [💾](../../fonts/InputMonoNarrow/ttf/MediumItalic/InputMonoNarrow-MediumItalic.ttf)
 - [InputMonoNarrow Thin](#inputmononarrow-thin) [💾](../../fonts/InputMonoNarrow/ttf/Thin/InputMonoNarrow-Thin.ttf)
 - [InputMonoNarrow ThinIta](#inputmononarrow-thinita) [💾](../../fonts/InputMonoNarrow/ttf/ThinItalic/InputMonoNarrow-ThinItalic.ttf)
+- [InputMono Thin](#inputmono-thin) [💾](../../fonts/InputMono/ttf/Thin/InputMono-Thin.ttf)
+- [InputMono ThinIta](#inputmono-thinita) [💾](../../fonts/InputMono/ttf/ThinItalic/InputMono-ThinItalic.ttf)
 - [InputSans](#inputsans) [💾](../../fonts/InputSans/ttf/Regular/InputSans-Regular.ttf)
 - [InputSans Black](#inputsans-black) [💾](../../fonts/InputSans/ttf/Black/InputSans-Black.ttf)
 - [InputSans BlackIta](#inputsans-blackita) [💾](../../fonts/InputSans/ttf/BlackItalic/InputSans-BlackItalic.ttf)
 - [InputSans Bold](#inputsans-bold) [💾](../../fonts/InputSans/ttf/Bold/InputSans-Bold.ttf)
 - [InputSans BoldIta](#inputsans-boldita) [💾](../../fonts/InputSans/ttf/BoldItalic/InputSans-BoldItalic.ttf)
-- [InputSans ExLight](#inputsans-exlight) [💾](../../fonts/InputSans/ttf/ExtraLight/InputSans-ExtraLight.ttf)
-- [InputSans ExLightIta](#inputsans-exlightita) [💾](../../fonts/InputSans/ttf/ExtraLightItalic/InputSans-ExtraLightItalic.ttf)
-- [InputSans Italic](#inputsans-italic) [💾](../../fonts/InputSans/ttf/Italic/InputSans-Italic.ttf)
-- [InputSans Light](#inputsans-light) [💾](../../fonts/InputSans/ttf/Light/InputSans-Light.ttf)
-- [InputSans LightIta](#inputsans-lightita) [💾](../../fonts/InputSans/ttf/LightItalic/InputSans-LightItalic.ttf)
-- [InputSans Medium](#inputsans-medium) [💾](../../fonts/InputSans/ttf/Medium/InputSans-Medium.ttf)
-- [InputSans MediumIta](#inputsans-mediumita) [💾](../../fonts/InputSans/ttf/MediumItalic/InputSans-MediumItalic.ttf)
-- [InputSans Thin](#inputsans-thin) [💾](../../fonts/InputSans/ttf/Thin/InputSans-Thin.ttf)
-- [InputSans ThinIta](#inputsans-thinita) [💾](../../fonts/InputSans/ttf/ThinItalic/InputSans-ThinItalic.ttf)
 - [InputSansCompressed](#inputsanscompressed) [💾](../../fonts/InputSansCompressed/ttf/Regular/InputSansCompressed-Regular.ttf)
 - [InputSansCompressed Black](#inputsanscompressed-black) [💾](../../fonts/InputSansCompressed/ttf/Black/InputSansCompressed-Black.ttf)
 - [InputSansCompressed BlackIta](#inputsanscompressed-blackita) [💾](../../fonts/InputSansCompressed/ttf/BlackItalic/InputSansCompressed-BlackItalic.ttf)
@@ -534,6 +525,13 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [InputSansCompressed MediumIta](#inputsanscompressed-mediumita) [💾](../../fonts/InputSansCompressed/ttf/MediumItalic/InputSansCompressed-MediumItalic.ttf)
 - [InputSansCompressed Thin](#inputsanscompressed-thin) [💾](../../fonts/InputSansCompressed/ttf/Thin/InputSansCompressed-Thin.ttf)
 - [InputSansCompressed ThinIta](#inputsanscompressed-thinita) [💾](../../fonts/InputSansCompressed/ttf/ThinItalic/InputSansCompressed-ThinItalic.ttf)
+- [InputSans ExLight](#inputsans-exlight) [💾](../../fonts/InputSans/ttf/ExtraLight/InputSans-ExtraLight.ttf)
+- [InputSans ExLightIta](#inputsans-exlightita) [💾](../../fonts/InputSans/ttf/ExtraLightItalic/InputSans-ExtraLightItalic.ttf)
+- [InputSans Italic](#inputsans-italic) [💾](../../fonts/InputSans/ttf/Italic/InputSans-Italic.ttf)
+- [InputSans Light](#inputsans-light) [💾](../../fonts/InputSans/ttf/Light/InputSans-Light.ttf)
+- [InputSans LightIta](#inputsans-lightita) [💾](../../fonts/InputSans/ttf/LightItalic/InputSans-LightItalic.ttf)
+- [InputSans Medium](#inputsans-medium) [💾](../../fonts/InputSans/ttf/Medium/InputSans-Medium.ttf)
+- [InputSans MediumIta](#inputsans-mediumita) [💾](../../fonts/InputSans/ttf/MediumItalic/InputSans-MediumItalic.ttf)
 - [InputSansNarrow](#inputsansnarrow) [💾](../../fonts/InputSansNarrow/ttf/Regular/InputSansNarrow-Regular.ttf)
 - [InputSansNarrow Black](#inputsansnarrow-black) [💾](../../fonts/InputSansNarrow/ttf/Black/InputSansNarrow-Black.ttf)
 - [InputSansNarrow BlackIta](#inputsansnarrow-blackita) [💾](../../fonts/InputSansNarrow/ttf/BlackItalic/InputSansNarrow-BlackItalic.ttf)
@@ -548,20 +546,13 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [InputSansNarrow MediumIta](#inputsansnarrow-mediumita) [💾](../../fonts/InputSansNarrow/ttf/MediumItalic/InputSansNarrow-MediumItalic.ttf)
 - [InputSansNarrow Thin](#inputsansnarrow-thin) [💾](../../fonts/InputSansNarrow/ttf/Thin/InputSansNarrow-Thin.ttf)
 - [InputSansNarrow ThinIta](#inputsansnarrow-thinita) [💾](../../fonts/InputSansNarrow/ttf/ThinItalic/InputSansNarrow-ThinItalic.ttf)
+- [InputSans Thin](#inputsans-thin) [💾](../../fonts/InputSans/ttf/Thin/InputSans-Thin.ttf)
+- [InputSans ThinIta](#inputsans-thinita) [💾](../../fonts/InputSans/ttf/ThinItalic/InputSans-ThinItalic.ttf)
 - [InputSerif](#inputserif) [💾](../../fonts/InputSerif/ttf/Regular/InputSerif-Regular.ttf)
 - [InputSerif Black](#inputserif-black) [💾](../../fonts/InputSerif/ttf/Black/InputSerif-Black.ttf)
 - [InputSerif BlackIta](#inputserif-blackita) [💾](../../fonts/InputSerif/ttf/BlackItalic/InputSerif-BlackItalic.ttf)
 - [InputSerif Bold](#inputserif-bold) [💾](../../fonts/InputSerif/ttf/Bold/InputSerif-Bold.ttf)
 - [InputSerif BoldIta](#inputserif-boldita) [💾](../../fonts/InputSerif/ttf/BoldItalic/InputSerif-BoldItalic.ttf)
-- [InputSerif ExLight](#inputserif-exlight) [💾](../../fonts/InputSerif/ttf/ExtraLight/InputSerif-ExtraLight.ttf)
-- [InputSerif ExLightIta](#inputserif-exlightita) [💾](../../fonts/InputSerif/ttf/ExtraLightItalic/InputSerif-ExtraLightItalic.ttf)
-- [InputSerif Italic](#inputserif-italic) [💾](../../fonts/InputSerif/ttf/Italic/InputSerif-Italic.ttf)
-- [InputSerif Light](#inputserif-light) [💾](../../fonts/InputSerif/ttf/Light/InputSerif-Light.ttf)
-- [InputSerif LightIta](#inputserif-lightita) [💾](../../fonts/InputSerif/ttf/LightItalic/InputSerif-LightItalic.ttf)
-- [InputSerif Medium](#inputserif-medium) [💾](../../fonts/InputSerif/ttf/Medium/InputSerif-Medium.ttf)
-- [InputSerif MediumIta](#inputserif-mediumita) [💾](../../fonts/InputSerif/ttf/MediumItalic/InputSerif-MediumItalic.ttf)
-- [InputSerif Thin](#inputserif-thin) [💾](../../fonts/InputSerif/ttf/Thin/InputSerif-Thin.ttf)
-- [InputSerif ThinIta](#inputserif-thinita) [💾](../../fonts/InputSerif/ttf/ThinItalic/InputSerif-ThinItalic.ttf)
 - [InputSerifCompressed](#inputserifcompressed) [💾](../../fonts/InputSerifCompressed/ttf/Regular/InputSerifCompressed-Regular.ttf)
 - [InputSerifCompressed Black](#inputserifcompressed-black) [💾](../../fonts/InputSerifCompressed/ttf/Black/InputSerifCompressed-Black.ttf)
 - [InputSerifCompressed BlackIta](#inputserifcompressed-blackita) [💾](../../fonts/InputSerifCompressed/ttf/BlackItalic/InputSerifCompressed-BlackItalic.ttf)
@@ -576,6 +567,13 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [InputSerifCompressed MediumIta](#inputserifcompressed-mediumita) [💾](../../fonts/InputSerifCompressed/ttf/MediumItalic/InputSerifCompressed-MediumItalic.ttf)
 - [InputSerifCompressed Thin](#inputserifcompressed-thin) [💾](../../fonts/InputSerifCompressed/ttf/Thin/InputSerifCompressed-Thin.ttf)
 - [InputSerifCompressed ThinIta](#inputserifcompressed-thinita) [💾](../../fonts/InputSerifCompressed/ttf/ThinItalic/InputSerifCompressed-ThinItalic.ttf)
+- [InputSerif ExLight](#inputserif-exlight) [💾](../../fonts/InputSerif/ttf/ExtraLight/InputSerif-ExtraLight.ttf)
+- [InputSerif ExLightIta](#inputserif-exlightita) [💾](../../fonts/InputSerif/ttf/ExtraLightItalic/InputSerif-ExtraLightItalic.ttf)
+- [InputSerif Italic](#inputserif-italic) [💾](../../fonts/InputSerif/ttf/Italic/InputSerif-Italic.ttf)
+- [InputSerif Light](#inputserif-light) [💾](../../fonts/InputSerif/ttf/Light/InputSerif-Light.ttf)
+- [InputSerif LightIta](#inputserif-lightita) [💾](../../fonts/InputSerif/ttf/LightItalic/InputSerif-LightItalic.ttf)
+- [InputSerif Medium](#inputserif-medium) [💾](../../fonts/InputSerif/ttf/Medium/InputSerif-Medium.ttf)
+- [InputSerif MediumIta](#inputserif-mediumita) [💾](../../fonts/InputSerif/ttf/MediumItalic/InputSerif-MediumItalic.ttf)
 - [InputSerifNarrow](#inputserifnarrow) [💾](../../fonts/InputSerifNarrow/ttf/Regular/InputSerifNarrow-Regular.ttf)
 - [InputSerifNarrow Black](#inputserifnarrow-black) [💾](../../fonts/InputSerifNarrow/ttf/Black/InputSerifNarrow-Black.ttf)
 - [InputSerifNarrow BlackIta](#inputserifnarrow-blackita) [💾](../../fonts/InputSerifNarrow/ttf/BlackItalic/InputSerifNarrow-BlackItalic.ttf)
@@ -590,6 +588,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [InputSerifNarrow MediumIta](#inputserifnarrow-mediumita) [💾](../../fonts/InputSerifNarrow/ttf/MediumItalic/InputSerifNarrow-MediumItalic.ttf)
 - [InputSerifNarrow Thin](#inputserifnarrow-thin) [💾](../../fonts/InputSerifNarrow/ttf/Thin/InputSerifNarrow-Thin.ttf)
 - [InputSerifNarrow ThinIta](#inputserifnarrow-thinita) [💾](../../fonts/InputSerifNarrow/ttf/ThinItalic/InputSerifNarrow-ThinItalic.ttf)
+- [InputSerif Thin](#inputserif-thin) [💾](../../fonts/InputSerif/ttf/Thin/InputSerif-Thin.ttf)
+- [InputSerif ThinIta](#inputserif-thinita) [💾](../../fonts/InputSerif/ttf/ThinItalic/InputSerif-ThinItalic.ttf)
 - [Intel One Mono](#intel-one-mono) [💾](../../fonts/IntelOneMono/otf/Regular/IntelOneMono-Regular.otf)
 - [Intel One Mono Bold](#intel-one-mono-bold) [💾](../../fonts/IntelOneMono/otf/Bold/IntelOneMono-Bold.otf)
 - [Intel One Mono Bold Italic](#intel-one-mono-bold-italic) [💾](../../fonts/IntelOneMono/otf/BoldItalic/IntelOneMono-BoldItalic.otf)
@@ -626,8 +626,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Ioskeley Mono Medium Italic](#ioskeley-mono-medium-italic) [💾](../../fonts/IoskeleyMono/ttf/MediumItalic/IoskeleyMono-MediumItalic.ttf)
 - [Ioskeley Mono Semibold](#ioskeley-mono-semibold) [💾](../../fonts/IoskeleyMono/ttf/Semibold/IoskeleyMono-Semibold.ttf)
 - [Ioskeley Mono Semibold Italic](#ioskeley-mono-semibold-italic) [💾](../../fonts/IoskeleyMono/ttf/SemiboldItalic/IoskeleyMono-SemiboldItalic.ttf)
-- [JetBrains Mono (Variable)](#jetbrains-mono-variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-Variable.ttf)
-- [JetBrains Mono (Variable)](#jetbrains-mono-variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-VariableItalic.ttf)
 - [JetBrains Mono NL Bold](#jetbrains-mono-nl-bold) [💾](../../fonts/JetBrainsMonoNL/ttf/Bold/JetBrainsMonoNL-Bold.ttf)
 - [JetBrains Mono NL Bold Italic](#jetbrains-mono-nl-bold-italic) [💾](../../fonts/JetBrainsMonoNL/ttf/BoldItalic/JetBrainsMonoNL-BoldItalic.ttf)
 - [JetBrains Mono NL ExtraBold](#jetbrains-mono-nl-extrabold) [💾](../../fonts/JetBrainsMonoNL/ttf/ExtraBold/JetBrainsMonoNL-ExtraBold.ttf)
@@ -644,26 +642,28 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [JetBrains Mono NL SemiBold Italic](#jetbrains-mono-nl-semibold-italic) [💾](../../fonts/JetBrainsMonoNL/ttf/SemiBoldItalic/JetBrainsMonoNL-SemiBoldItalic.ttf)
 - [JetBrains Mono NL Thin](#jetbrains-mono-nl-thin) [💾](../../fonts/JetBrainsMonoNL/ttf/Thin/JetBrainsMonoNL-Thin.ttf)
 - [JetBrains Mono NL Thin Italic](#jetbrains-mono-nl-thin-italic) [💾](../../fonts/JetBrainsMonoNL/ttf/ThinItalic/JetBrainsMonoNL-ThinItalic.ttf)
-- [Kopius Black Italic](#kopius-black-italic) [💾](../../fonts/Kopius/otf/BlackItalic/Kopius-BlackItalic.otf)
-- [Kopius Book Italic](#kopius-book-italic) [💾](../../fonts/Kopius/otf/BookItalic/Kopius-BookItalic.otf)
-- [Kopius Extrabold Italic](#kopius-extrabold-italic) [💾](../../fonts/Kopius/otf/ExtraboldItalic/Kopius-ExtraboldItalic.otf)
-- [Kopius Light Italic](#kopius-light-italic) [💾](../../fonts/Kopius/otf/LightItalic/Kopius-LightItalic.otf)
+- [JetBrains Mono (Variable)](#jetbrains-mono-variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-VariableItalic.ttf)
+- [JetBrains Mono (Variable)](#jetbrains-mono-variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-Variable.ttf)
 - [Kopius-Black](#kopius-black) [💾](../../fonts/Kopius/otf/Black/Kopius-Black.otf)
+- [Kopius Black Italic](#kopius-black-italic) [💾](../../fonts/Kopius/otf/BlackItalic/Kopius-BlackItalic.otf)
 - [Kopius-Book](#kopius-book) [💾](../../fonts/Kopius/otf/Book/Kopius-Book.otf)
+- [Kopius Book Italic](#kopius-book-italic) [💾](../../fonts/Kopius/otf/BookItalic/Kopius-BookItalic.otf)
 - [Kopius-Extrabold](#kopius-extrabold) [💾](../../fonts/Kopius/otf/Extrabold/Kopius-Extrabold.otf)
-- [Kopius-Light](#kopius-light) [💾](../../fonts/Kopius/otf/Light/Kopius-Light.otf)
+- [Kopius Extrabold Italic](#kopius-extrabold-italic) [💾](../../fonts/Kopius/otf/ExtraboldItalic/Kopius-ExtraboldItalic.otf)
 - [KopiusExtras-BoxHeadings](#kopiusextras-boxheadings) [💾](../../fonts/KopiusExtras/otf/BoxHeadings/KopiusExtras-BoxHeadings.otf)
 - [KopiusExtras-Labels](#kopiusextras-labels) [💾](../../fonts/KopiusExtras/otf/Labels/KopiusExtras-Labels.otf)
+- [Kopius-Light](#kopius-light) [💾](../../fonts/Kopius/otf/Light/Kopius-Light.otf)
+- [Kopius Light Italic](#kopius-light-italic) [💾](../../fonts/Kopius/otf/LightItalic/Kopius-LightItalic.otf)
 - [Lato Black](#lato-black) [💾](../../fonts/Lato/ttf/Black/Lato-Black.ttf)
 - [Lato Black Italic](#lato-black-italic) [💾](../../fonts/Lato/ttf/BlackItalic/Lato-BlackItalic.ttf)
 - [Lato Bold](#lato-bold) [💾](../../fonts/Lato/ttf/Bold/Lato-Bold.ttf)
 - [Lato Bold Italic](#lato-bold-italic) [💾](../../fonts/Lato/ttf/BoldItalic/Lato-BoldItalic.ttf)
-- [Lato Italic](#lato-italic) [💾](../../fonts/Lato/ttf/Italic/Lato-Italic.ttf)
-- [Lato Regular](#lato-regular) [💾](../../fonts/Lato/ttf/Regular/Lato-Regular.ttf)
 - [Lato-Hairline](#lato-hairline) [💾](../../fonts/Lato/ttf/Hairline/Lato-Hairline.ttf)
 - [Lato-HairlineItalic](#lato-hairlineitalic) [💾](../../fonts/Lato/ttf/HairlineItalic/Lato-HairlineItalic.ttf)
+- [Lato Italic](#lato-italic) [💾](../../fonts/Lato/ttf/Italic/Lato-Italic.ttf)
 - [Lato-Light](#lato-light) [💾](../../fonts/Lato/ttf/Light/Lato-Light.ttf)
 - [Lato-LightItalic](#lato-lightitalic) [💾](../../fonts/Lato/ttf/LightItalic/Lato-LightItalic.ttf)
+- [Lato Regular](#lato-regular) [💾](../../fonts/Lato/ttf/Regular/Lato-Regular.ttf)
 - [LetterGothicStd](#lettergothicstd) [💾](../../fonts/LetterGothicStd/otf/Regular/LetterGothicStd-Regular.otf)
 - [LetterGothicStd-Bold](#lettergothicstd-bold) [💾](../../fonts/LetterGothicStd/otf/Bold/LetterGothicStd-Bold.otf)
 - [LetterGothicStd-BoldSlanted](#lettergothicstd-boldslanted) [💾](../../fonts/LetterGothicStd/otf/BoldItalic/LetterGothicStd-BoldItalic.otf)
@@ -921,8 +921,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Monaspace Xenon Wide Regular](#monaspace-xenon-wide-regular) [💾](../../fonts/MonaspaceXenon/otf/WideRegular/MonaspaceXenon-WideRegular.otf)
 - [Monaspace Xenon Wide SemiBold](#monaspace-xenon-wide-semibold) [💾](../../fonts/MonaspaceXenon/otf/WideSemiBold/MonaspaceXenon-WideSemiBold.otf)
 - [Monaspace Xenon Wide SemiBold Italic](#monaspace-xenon-wide-semibold-italic) [💾](../../fonts/MonaspaceXenon/otf/WideSemiBoldItalic/MonaspaceXenon-WideSemiBoldItalic.otf)
-- [MonoLisa (Variable)](#monolisa-variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-Variable.ttf)
-- [MonoLisa (Variable)](#monolisa-variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-VariableItalic.ttf)
 - [Monoflow Regular](#monoflow-regular) [💾](../../fonts/Monoflow/ttf/Regular/Monoflow-Regular.ttf)
 - [Monoflow Regular Italic](#monoflow-regular-italic) [💾](../../fonts/Monoflow/ttf/RegularItalic/Monoflow-RegularItalic.ttf)
 - [Monoid Bold](#monoid-bold) [💾](../../fonts/Monoid/ttf/Bold/Monoid-Bold.ttf)
@@ -930,6 +928,26 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Monoid Regular](#monoid-regular) [💾](../../fonts/Monoid/ttf/Regular/Monoid-Regular.ttf)
 - [Monoid Retina](#monoid-retina) [💾](../../fonts/Monoid/ttf/Retina/Monoid-Retina.ttf)
 - [Monoisome Regular](#monoisome-regular) [💾](../../fonts/Monoisome/ttf/Regular/Monoisome-Regular.ttf)
+- [MonoLisaLiga Nerd Font](#monolisaliga-nerd-font) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/Regular/MonoLisaLigaNerdFont-Regular.ttf)
+- [MonoLisaLiga Nerd Font Black](#monolisaliga-nerd-font-black) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/BlackRegular/MonoLisaLigaNerdFont-BlackRegular.ttf)
+- [MonoLisaLiga Nerd Font Black Italic](#monolisaliga-nerd-font-black-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/BlackItalic/MonoLisaLigaNerdFont-BlackItalic.ttf)
+- [MonoLisaLiga Nerd Font Bold](#monolisaliga-nerd-font-bold) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/Bold/MonoLisaLigaNerdFont-Bold.ttf)
+- [MonoLisaLiga Nerd Font Bold Italic](#monolisaliga-nerd-font-bold-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/BoldItalic/MonoLisaLigaNerdFont-BoldItalic.ttf)
+- [MonoLisaLiga Nerd Font ExtraBold](#monolisaliga-nerd-font-extrabold) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraBoldRegular/MonoLisaLigaNerdFont-ExtraBoldRegular.ttf)
+- [MonoLisaLiga Nerd Font ExtraBold Italic](#monolisaliga-nerd-font-extrabold-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraBoldItalic/MonoLisaLigaNerdFont-ExtraBoldItalic.ttf)
+- [MonoLisaLiga Nerd Font ExtraLight](#monolisaliga-nerd-font-extralight) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraLightRegular/MonoLisaLigaNerdFont-ExtraLightRegular.ttf)
+- [MonoLisaLiga Nerd Font ExtraLight Italic](#monolisaliga-nerd-font-extralight-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraLightItalic/MonoLisaLigaNerdFont-ExtraLightItalic.ttf)
+- [MonoLisaLiga Nerd Font Italic](#monolisaliga-nerd-font-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/Italic/MonoLisaLigaNerdFont-Italic.ttf)
+- [MonoLisaLiga Nerd Font Light](#monolisaliga-nerd-font-light) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/LightRegular/MonoLisaLigaNerdFont-LightRegular.ttf)
+- [MonoLisaLiga Nerd Font Light Italic](#monolisaliga-nerd-font-light-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/LightItalic/MonoLisaLigaNerdFont-LightItalic.ttf)
+- [MonoLisaLiga Nerd Font Medium](#monolisaliga-nerd-font-medium) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/MediumRegular/MonoLisaLigaNerdFont-MediumRegular.ttf)
+- [MonoLisaLiga Nerd Font Medium Italic](#monolisaliga-nerd-font-medium-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/MediumItalic/MonoLisaLigaNerdFont-MediumItalic.ttf)
+- [MonoLisaLiga Nerd Font SemiBold](#monolisaliga-nerd-font-semibold) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/SemiBoldRegular/MonoLisaLigaNerdFont-SemiBoldRegular.ttf)
+- [MonoLisaLiga Nerd Font SemiBold Italic](#monolisaliga-nerd-font-semibold-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/SemiBoldItalic/MonoLisaLigaNerdFont-SemiBoldItalic.ttf)
+- [MonoLisaLiga Nerd Font Thin](#monolisaliga-nerd-font-thin) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ThinRegular/MonoLisaLigaNerdFont-ThinRegular.ttf)
+- [MonoLisaLiga Nerd Font Thin Italic](#monolisaliga-nerd-font-thin-italic) [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ThinItalic/MonoLisaLigaNerdFont-ThinItalic.ttf)
+- [MonoLisa (Variable)](#monolisa-variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-VariableItalic.ttf)
+- [MonoLisa (Variable)](#monolisa-variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-Variable.ttf)
 - [Monotalic Bold](#monotalic-bold) [💾](../../fonts/Monotalic/otf/Bold/Monotalic-Bold.otf)
 - [Monotalic Light](#monotalic-light) [💾](../../fonts/Monotalic/otf/Light/Monotalic-Light.otf)
 - [Monotalic Medium](#monotalic-medium) [💾](../../fonts/Monotalic/otf/Medium/Monotalic-Medium.otf)
@@ -967,8 +985,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Noto Sans Black Italic](#noto-sans-black-italic) [💾](../../fonts/NotoSans/ttf/BlackItalic/NotoSans-BlackItalic.ttf)
 - [Noto Sans Bold](#noto-sans-bold) [💾](../../fonts/NotoSans/ttf/Bold/NotoSans-Bold.ttf)
 - [Noto Sans Bold Italic](#noto-sans-bold-italic) [💾](../../fonts/NotoSans/ttf/BoldItalic/NotoSans-BoldItalic.ttf)
-- [Noto Sans Display (Variable)](#noto-sans-display-variable) [💾](../../fonts/NotoSansDisplay/ttf/NotoSansDisplay-Variable.ttf)
 - [Noto Sans Display (Variable)](#noto-sans-display-variable) [💾](../../fonts/NotoSansDisplay/ttf/NotoSansDisplay-VariableItalic.ttf)
+- [Noto Sans Display (Variable)](#noto-sans-display-variable) [💾](../../fonts/NotoSansDisplay/ttf/NotoSansDisplay-Variable.ttf)
 - [Noto Sans ExtraBold](#noto-sans-extrabold) [💾](../../fonts/NotoSans/ttf/ExtraBold/NotoSans-ExtraBold.ttf)
 - [Noto Sans ExtraBold Italic](#noto-sans-extrabold-italic) [💾](../../fonts/NotoSans/ttf/ExtraBoldItalic/NotoSans-ExtraBoldItalic.ttf)
 - [Noto Sans ExtraLight](#noto-sans-extralight) [💾](../../fonts/NotoSans/ttf/ExtraLight/NotoSans-ExtraLight.ttf)
@@ -984,22 +1002,22 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Noto Sans SemiBold](#noto-sans-semibold) [💾](../../fonts/NotoSans/ttf/SemiBold/NotoSans-SemiBold.ttf)
 - [Noto Sans SemiBold Italic](#noto-sans-semibold-italic) [💾](../../fonts/NotoSans/ttf/SemiBoldItalic/NotoSans-SemiBoldItalic.ttf)
 - [Noto Sans SignWriting Regular](#noto-sans-signwriting-regular) [💾](../../fonts/NotoSansSignWriting/ttf/Regular/NotoSansSignWriting-Regular.ttf)
-- [Noto Sans Symbols (Variable)](#noto-sans-symbols-variable) [💾](../../fonts/NotoSansSymbols/ttf/NotoSansSymbols-Variable.ttf)
 - [Noto Sans Symbols 2 Regular](#noto-sans-symbols-2-regular) [💾](../../fonts/NotoSansSymbols2/ttf/Regular/NotoSansSymbols2-Regular.ttf)
+- [Noto Sans Symbols (Variable)](#noto-sans-symbols-variable) [💾](../../fonts/NotoSansSymbols/ttf/NotoSansSymbols-Variable.ttf)
 - [Noto Sans Thin](#noto-sans-thin) [💾](../../fonts/NotoSans/ttf/Thin/NotoSans-Thin.ttf)
 - [Noto Sans Thin Italic](#noto-sans-thin-italic) [💾](../../fonts/NotoSans/ttf/ThinItalic/NotoSans-ThinItalic.ttf)
 - [Noto Serif](#noto-serif) [💾](../../fonts/NotoSerif/ttf/Regular/NotoSerif-Regular.ttf)
 - [Noto Serif Bold](#noto-serif-bold) [💾](../../fonts/NotoSerif/ttf/Bold/NotoSerif-Bold.ttf)
 - [Noto Serif Bold Italic](#noto-serif-bold-italic) [💾](../../fonts/NotoSerif/ttf/BoldItalic/NotoSerif-BoldItalic.ttf)
-- [Noto Serif Display (Variable)](#noto-serif-display-variable) [💾](../../fonts/NotoSerifDisplay/ttf/NotoSerifDisplay-Variable.ttf)
 - [Noto Serif Display (Variable)](#noto-serif-display-variable) [💾](../../fonts/NotoSerifDisplay/ttf/NotoSerifDisplay-VariableItalic.ttf)
+- [Noto Serif Display (Variable)](#noto-serif-display-variable) [💾](../../fonts/NotoSerifDisplay/ttf/NotoSerifDisplay-Variable.ttf)
 - [Noto Serif Italic](#noto-serif-italic) [💾](../../fonts/NotoSerif/ttf/Italic/NotoSerif-Italic.ttf)
 - [Officina Sans ITC Pro Bold](#officina-sans-itc-pro-bold) [💾](../../fonts/OfficinaSansITCPro/otf/Bold/OfficinaSansITCPro-Bold.otf)
 - [Officina Sans ITC Pro Book](#officina-sans-itc-pro-book) [💾](../../fonts/OfficinaSansITCPro/otf/Book/OfficinaSansITCPro-Book.otf)
 - [Officina Sans ITC Pro Medium](#officina-sans-itc-pro-medium) [💾](../../fonts/OfficinaSansITCPro/otf/Medium/OfficinaSansITCPro-Medium.otf)
 - [Ohno Softie Variable (Variable)](#ohno-softie-variable-variable) [💾](../../fonts/OhnoSoftie/otf/OhnoSoftie-Variable.otf)
-- [Open Sans (Variable)](#open-sans-variable) [💾](../../fonts/OpenSans/ttf/OpenSans-Variable.ttf)
 - [Open Sans (Variable)](#open-sans-variable) [💾](../../fonts/OpenSans/ttf/OpenSans-VariableItalic.ttf)
+- [Open Sans (Variable)](#open-sans-variable) [💾](../../fonts/OpenSans/ttf/OpenSans-Variable.ttf)
 - [Operator Mono Bold](#operator-mono-bold) [💾](../../fonts/OperatorMono/otf/Bold/OperatorMono-Bold.otf)
 - [Operator Mono Bold Italic](#operator-mono-bold-italic) [💾](../../fonts/OperatorMono/otf/BoldItalic/OperatorMono-BoldItalic.otf)
 - [Operator Mono Bold Italic Nerd Font Complete](#operator-mono-bold-italic-nerd-font-complete) [💾](../../fonts/OperatorMonoNerdFont/ttf/BoldItalic/OperatorMonoNerdFont-BoldItalic.ttf)
@@ -1012,12 +1030,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Operator Mono Extra Light Nerd Font Complete](#operator-mono-extra-light-nerd-font-complete) [💾](../../fonts/OperatorMonoNerdFont/ttf/ExtraLight/OperatorMonoNerdFont-ExtraLight.ttf)
 - [Operator Mono Lig Book](#operator-mono-lig-book) [💾](../../fonts/OperatorMonoLig/otf/Book/OperatorMonoLig-Book.otf)
 - [Operator Mono Lig Book Italic](#operator-mono-lig-book-italic) [💾](../../fonts/OperatorMonoLig/otf/BookItalic/OperatorMonoLig-BookItalic.otf)
-- [Operator Mono Lig Light](#operator-mono-lig-light) [💾](../../fonts/OperatorMonoLig/otf/Light/OperatorMonoLig-Light.otf)
-- [Operator Mono Lig Light Italic](#operator-mono-lig-light-italic) [💾](../../fonts/OperatorMonoLig/otf/LightItalic/OperatorMonoLig-LightItalic.otf)
 - [Operator Mono Light](#operator-mono-light) [💾](../../fonts/OperatorMono/otf/Light/OperatorMono-Light.otf)
 - [Operator Mono Light Italic](#operator-mono-light-italic) [💾](../../fonts/OperatorMono/otf/LightItalic/OperatorMono-LightItalic.otf)
 - [Operator Mono Light Italic Nerd Font Complete](#operator-mono-light-italic-nerd-font-complete) [💾](../../fonts/OperatorMonoNerdFont/ttf/LightItalic/OperatorMonoNerdFont-LightItalic.ttf)
 - [Operator Mono Light Nerd Font Complete](#operator-mono-light-nerd-font-complete) [💾](../../fonts/OperatorMonoNerdFont/ttf/Light/OperatorMonoNerdFont-Light.ttf)
+- [Operator Mono Lig Light](#operator-mono-lig-light) [💾](../../fonts/OperatorMonoLig/otf/Light/OperatorMonoLig-Light.otf)
+- [Operator Mono Lig Light Italic](#operator-mono-lig-light-italic) [💾](../../fonts/OperatorMonoLig/otf/LightItalic/OperatorMonoLig-LightItalic.otf)
 - [Operator Mono Medium](#operator-mono-medium) [💾](../../fonts/OperatorMono/otf/Medium/OperatorMono-Medium.otf)
 - [Operator Mono Medium Italic](#operator-mono-medium-italic) [💾](../../fonts/OperatorMono/otf/MediumItalic/OperatorMono-MediumItalic.otf)
 - [Operator Mono Medium Italic Nerd Font Complete](#operator-mono-medium-italic-nerd-font-complete) [💾](../../fonts/OperatorMonoNerdFont/ttf/MediumItalic/OperatorMonoNerdFont-MediumItalic.ttf)
@@ -1038,6 +1056,18 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Overlock Bold Italic](#overlock-bold-italic) [💾](../../fonts/Overlock/ttf/BoldItalic/Overlock-BoldItalic.ttf)
 - [Overlock Italic](#overlock-italic) [💾](../../fonts/Overlock/ttf/Italic/Overlock-Italic.ttf)
 - [Overlock Regular](#overlock-regular) [💾](../../fonts/Overlock/ttf/Regular/Overlock-Regular.ttf)
+- [ParadroidMono Soft Bold](#paradroidmono-soft-bold) [💾](../../fonts/ParadroidMonoSoft/otf/Bold/ParadroidMonoSoft-Bold.otf)
+- [ParadroidMono Soft Bold Italic](#paradroidmono-soft-bold-italic) [💾](../../fonts/ParadroidMonoSoft/otf/BoldItalic/ParadroidMonoSoft-BoldItalic.otf)
+- [ParadroidMono Soft ExtraBold](#paradroidmono-soft-extrabold) [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBold/ParadroidMonoSoft-ExtraBold.otf)
+- [ParadroidMono Soft ExtraBold Italic](#paradroidmono-soft-extrabold-italic) [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBoldItalic/ParadroidMonoSoft-ExtraBoldItalic.otf)
+- [ParadroidMono Soft Italic](#paradroidmono-soft-italic) [💾](../../fonts/ParadroidMonoSoft/otf/Italic/ParadroidMonoSoft-Italic.otf)
+- [ParadroidMono Soft Light](#paradroidmono-soft-light) [💾](../../fonts/ParadroidMonoSoft/otf/Light/ParadroidMonoSoft-Light.otf)
+- [ParadroidMono Soft Light Italic](#paradroidmono-soft-light-italic) [💾](../../fonts/ParadroidMonoSoft/otf/LightItalic/ParadroidMonoSoft-LightItalic.otf)
+- [ParadroidMono Soft Regular](#paradroidmono-soft-regular) [💾](../../fonts/ParadroidMonoSoft/otf/Regular/ParadroidMonoSoft-Regular.otf)
+- [psudoFont Liga Mono Bold](#psudofont-liga-mono-bold) [💾](../../fonts/psudoFontLigaMono/ttf/Bold/psudoFontLigaMono-Bold.ttf)
+- [psudoFont Liga Mono Bold Italic](#psudofont-liga-mono-bold-italic) [💾](../../fonts/psudoFontLigaMono/ttf/BoldItalic/psudoFontLigaMono-BoldItalic.ttf)
+- [psudoFont Liga Mono Italic](#psudofont-liga-mono-italic) [💾](../../fonts/psudoFontLigaMono/ttf/Italic/psudoFontLigaMono-Italic.ttf)
+- [psudoFont Liga Mono Regular](#psudofont-liga-mono-regular) [💾](../../fonts/psudoFontLigaMono/ttf/Regular/psudoFontLigaMono-Regular.ttf)
 - [PT Sans Pro](#pt-sans-pro) [💾](../../fonts/PTSansPro/otf/Regular/PTSansPro-Regular.otf)
 - [PT Sans Pro Black](#pt-sans-pro-black) [💾](../../fonts/PTSansPro/otf/Black/PTSansPro-Black.otf)
 - [PT Sans Pro Black Italic](#pt-sans-pro-black-italic) [💾](../../fonts/PTSansPro/otf/BlackItalic/PTSansPro-BlackItalic.otf)
@@ -1050,14 +1080,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [PT Sans Pro Italic](#pt-sans-pro-italic) [💾](../../fonts/PTSansPro/otf/Italic/PTSansPro-Italic.otf)
 - [PT Sans Pro Light](#pt-sans-pro-light) [💾](../../fonts/PTSansPro/otf/Light/PTSansPro-Light.otf)
 - [PT Sans Pro Light Italic](#pt-sans-pro-light-italic) [💾](../../fonts/PTSansPro/otf/LightItalic/PTSansPro-LightItalic.otf)
-- [ParadroidMono Soft Bold](#paradroidmono-soft-bold) [💾](../../fonts/ParadroidMonoSoft/otf/Bold/ParadroidMonoSoft-Bold.otf)
-- [ParadroidMono Soft Bold Italic](#paradroidmono-soft-bold-italic) [💾](../../fonts/ParadroidMonoSoft/otf/BoldItalic/ParadroidMonoSoft-BoldItalic.otf)
-- [ParadroidMono Soft ExtraBold](#paradroidmono-soft-extrabold) [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBold/ParadroidMonoSoft-ExtraBold.otf)
-- [ParadroidMono Soft ExtraBold Italic](#paradroidmono-soft-extrabold-italic) [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBoldItalic/ParadroidMonoSoft-ExtraBoldItalic.otf)
-- [ParadroidMono Soft Italic](#paradroidmono-soft-italic) [💾](../../fonts/ParadroidMonoSoft/otf/Italic/ParadroidMonoSoft-Italic.otf)
-- [ParadroidMono Soft Light](#paradroidmono-soft-light) [💾](../../fonts/ParadroidMonoSoft/otf/Light/ParadroidMonoSoft-Light.otf)
-- [ParadroidMono Soft Light Italic](#paradroidmono-soft-light-italic) [💾](../../fonts/ParadroidMonoSoft/otf/LightItalic/ParadroidMonoSoft-LightItalic.otf)
-- [ParadroidMono Soft Regular](#paradroidmono-soft-regular) [💾](../../fonts/ParadroidMonoSoft/otf/Regular/ParadroidMonoSoft-Regular.otf)
 - [Puffin Display Soft](#puffin-display-soft) [💾](../../fonts/PuffinDisplaySoft/otf/Regular/PuffinDisplaySoft-Regular.otf)
 - [Puffin Display Soft Blk](#puffin-display-soft-blk) [💾](../../fonts/PuffinDisplaySoft/otf/Black/PuffinDisplaySoft-Black.otf)
 - [Puffin Display Soft Blk Italic](#puffin-display-soft-blk-italic) [💾](../../fonts/PuffinDisplaySoft/otf/BlackItalic/PuffinDisplaySoft-BlackItalic.otf)
@@ -1072,14 +1094,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Puffin Display Soft Medm Italic](#puffin-display-soft-medm-italic) [💾](../../fonts/PuffinDisplaySoft/otf/MediumItalic/PuffinDisplaySoft-MediumItalic.otf)
 - [Puffin Display Soft SmBd](#puffin-display-soft-smbd) [💾](../../fonts/PuffinDisplaySoft/otf/SemiBold/PuffinDisplaySoft-SemiBold.otf)
 - [Puffin Display Soft SmBd Italic](#puffin-display-soft-smbd-italic) [💾](../../fonts/PuffinDisplaySoft/otf/SemiBoldItalic/PuffinDisplaySoft-SemiBoldItalic.otf)
-- [RFRostin-Bold](#rfrostin-bold) [💾](../../fonts/RFRostin/otf/Bold/RFRostin-Bold.otf)
-- [RFRostin-BoldItalic](#rfrostin-bolditalic) [💾](../../fonts/RFRostin/otf/BoldItalic/RFRostin-BoldItalic.otf)
-- [RFRostin-Italic](#rfrostin-italic) [💾](../../fonts/RFRostin/otf/Italic/RFRostin-Italic.otf)
-- [RFRostin-Light](#rfrostin-light) [💾](../../fonts/RFRostin/otf/Light/RFRostin-Light.otf)
-- [RFRostin-LightItalic](#rfrostin-lightitalic) [💾](../../fonts/RFRostin/otf/LightItalic/RFRostin-LightItalic.otf)
-- [RFRostin-Regular](#rfrostin-regular) [💾](../../fonts/RFRostin/otf/Regular/RFRostin-Regular.otf)
-- [RFRostin-Ultralight](#rfrostin-ultralight) [💾](../../fonts/RFRostin/otf/Ultralight/RFRostin-Ultralight.otf)
-- [RFRostin-UltralightItalic](#rfrostin-ultralightitalic) [💾](../../fonts/RFRostin/otf/UltralightItalic/RFRostin-UltralightItalic.otf)
 - [Rec Mono Casual](#rec-mono-casual) [💾](../../fonts/RecMonoCasual/ttf/Regular/RecMonoCasual-Regular.ttf)
 - [Rec Mono Casual Bold](#rec-mono-casual-bold) [💾](../../fonts/RecMonoCasual/ttf/Bold/RecMonoCasual-Bold.ttf)
 - [Rec Mono Casual Bold Italic](#rec-mono-casual-bold-italic) [💾](../../fonts/RecMonoCasual/ttf/BoldItalic/RecMonoCasual-BoldItalic.ttf)
@@ -1096,7 +1110,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Rec Mono Semicasual Bold](#rec-mono-semicasual-bold) [💾](../../fonts/RecMonoSemicasual/ttf/Bold/RecMonoSemicasual-Bold.ttf)
 - [Rec Mono Semicasual Bold Italic](#rec-mono-semicasual-bold-italic) [💾](../../fonts/RecMonoSemicasual/ttf/BoldItalic/RecMonoSemicasual-BoldItalic.ttf)
 - [Rec Mono Semicasual Italic](#rec-mono-semicasual-italic) [💾](../../fonts/RecMonoSemicasual/ttf/Italic/RecMonoSemicasual-Italic.ttf)
-- [Recursive (Variable)](#recursive-variable) [💾](../../fonts/Recursive/ttf/Recursive-Variable.ttf)
 - [Recursive Mn Csl St](#recursive-mn-csl-st) [💾](../../fonts/RecursiveMonoCasualStatic/otf/Regular/RecursiveMonoCasualStatic-Regular.otf)
 - [Recursive Mn Csl St Blk](#recursive-mn-csl-st-blk) [💾](../../fonts/RecursiveMonoCasualStatic/otf/Black/RecursiveMonoCasualStatic-Black.otf)
 - [Recursive Mn Csl St Blk Italic](#recursive-mn-csl-st-blk-italic) [💾](../../fonts/RecursiveMonoCasualStatic/otf/BlackItalic/RecursiveMonoCasualStatic-BlackItalic.otf)
@@ -1161,12 +1174,21 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Recursive Sn Lnr St XBd Italic](#recursive-sn-lnr-st-xbd-italic) [💾](../../fonts/RecursiveSansLinearStatic/otf/ExtraBoldItalic/RecursiveSansLinearStatic-ExtraBoldItalic.otf)
 - [Recursive Sn Lnr St XBk](#recursive-sn-lnr-st-xbk) [💾](../../fonts/RecursiveSansLinearStatic/otf/ExtraBlack/RecursiveSansLinearStatic-ExtraBlack.otf)
 - [Recursive Sn Lnr St XBk Italic](#recursive-sn-lnr-st-xbk-italic) [💾](../../fonts/RecursiveSansLinearStatic/otf/ExtraBlackItalic/RecursiveSansLinearStatic-ExtraBlackItalic.otf)
-- [Roboto (Variable)](#roboto-variable) [💾](../../fonts/Roboto/ttf/Roboto-Variable.ttf)
-- [Roboto (Variable)](#roboto-variable) [💾](../../fonts/Roboto/ttf/Roboto-VariableItalic.ttf)
+- [Recursive (Variable)](#recursive-variable) [💾](../../fonts/Recursive/ttf/Recursive-Variable.ttf)
+- [RFRostin-Bold](#rfrostin-bold) [💾](../../fonts/RFRostin/otf/Bold/RFRostin-Bold.otf)
+- [RFRostin-BoldItalic](#rfrostin-bolditalic) [💾](../../fonts/RFRostin/otf/BoldItalic/RFRostin-BoldItalic.otf)
+- [RFRostin-Italic](#rfrostin-italic) [💾](../../fonts/RFRostin/otf/Italic/RFRostin-Italic.otf)
+- [RFRostin-Light](#rfrostin-light) [💾](../../fonts/RFRostin/otf/Light/RFRostin-Light.otf)
+- [RFRostin-LightItalic](#rfrostin-lightitalic) [💾](../../fonts/RFRostin/otf/LightItalic/RFRostin-LightItalic.otf)
+- [RFRostin-Regular](#rfrostin-regular) [💾](../../fonts/RFRostin/otf/Regular/RFRostin-Regular.otf)
+- [RFRostin-Ultralight](#rfrostin-ultralight) [💾](../../fonts/RFRostin/otf/Ultralight/RFRostin-Ultralight.otf)
+- [RFRostin-UltralightItalic](#rfrostin-ultralightitalic) [💾](../../fonts/RFRostin/otf/UltralightItalic/RFRostin-UltralightItalic.otf)
 - [Roboto Flex (Variable)](#roboto-flex-variable) [💾](../../fonts/RobotoFlex/ttf/RobotoFlex-Variable.ttf)
-- [Roboto Serif (Variable)](#roboto-serif-variable) [💾](../../fonts/RobotoSerif/ttf/RobotoSerif-Variable.ttf)
 - [Roboto Serif (Variable)](#roboto-serif-variable) [💾](../../fonts/RobotoSerif/ttf/RobotoSerif-VariableItalic.ttf)
+- [Roboto Serif (Variable)](#roboto-serif-variable) [💾](../../fonts/RobotoSerif/ttf/RobotoSerif-Variable.ttf)
 - [Roboto Slab (Variable)](#roboto-slab-variable) [💾](../../fonts/RobotoSlab/ttf/RobotoSlab-Variable.ttf)
+- [Roboto (Variable)](#roboto-variable) [💾](../../fonts/Roboto/ttf/Roboto-VariableItalic.ttf)
+- [Roboto (Variable)](#roboto-variable) [💾](../../fonts/Roboto/ttf/Roboto-Variable.ttf)
 - [Sauna Mono Pro Bold](#sauna-mono-pro-bold) [💾](../../fonts/SaunaMonoPro/otf/Bold/SaunaMonoPro-Bold.otf)
 - [Sauna Mono Pro Bold It](#sauna-mono-pro-bold-it) [💾](../../fonts/SaunaMonoPro/otf/BoldItalic/SaunaMonoPro-BoldItalic.otf)
 - [Sauna Mono Pro Reg](#sauna-mono-pro-reg) [💾](../../fonts/SaunaMonoPro/otf/Regular/SaunaMonoPro-Regular.otf)
@@ -1195,7 +1217,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Slate Light Italic](#slate-light-italic) [💾](../../fonts/Slate/ttf/LightItalic/Slate-LightItalic.ttf)
 - [Slate Medium](#slate-medium) [💾](../../fonts/Slate/ttf/Medium/Slate-Medium.ttf)
 - [Slate Medium Italic](#slate-medium-italic) [💾](../../fonts/Slate/ttf/MediumItalic/Slate-MediumItalic.ttf)
-- [Slate Regular](#slate-regular) [💾](../../fonts/Slate/ttf/Regular/Slate-Regular.ttf)
 - [SlatePro](#slatepro) [💾](../../fonts/SlatePro/ttf/Regular/SlatePro-Regular.ttf)
 - [SlatePro-Bk](#slatepro-bk) [💾](../../fonts/SlatePro/ttf/Bk/SlatePro-Bk.ttf)
 - [SlatePro-BkCondensed](#slatepro-bkcondensed) [💾](../../fonts/SlatePro/ttf/BkCondensed/SlatePro-BkCondensed.ttf)
@@ -1214,6 +1235,7 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [SlatePro-Medium](#slatepro-medium) [💾](../../fonts/SlatePro/ttf/Medium/SlatePro-Medium.ttf)
 - [SlatePro-MediumCondensed](#slatepro-mediumcondensed) [💾](../../fonts/SlatePro/ttf/MediumCondensed/SlatePro-MediumCondensed.ttf)
 - [SlatePro-MediumItalic](#slatepro-mediumitalic) [💾](../../fonts/SlatePro/ttf/MediumItalic/SlatePro-MediumItalic.ttf)
+- [Slate Regular](#slate-regular) [💾](../../fonts/Slate/ttf/Regular/Slate-Regular.ttf)
 - [Source Code Pro](#source-code-pro) [💾](../../fonts/SourceCodePro/otf/Regular/SourceCodePro-Regular.otf)
 - [Source Code Pro Black](#source-code-pro-black) [💾](../../fonts/SourceCodePro/otf/Black/SourceCodePro-Black.otf)
 - [Source Code Pro Black Italic](#source-code-pro-black-italic) [💾](../../fonts/SourceCodePro/otf/BlackItalic/SourceCodePro-BlackItalic.otf)
@@ -1230,9 +1252,9 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Source Code Pro Semibold Italic](#source-code-pro-semibold-italic) [💾](../../fonts/SourceCodePro/otf/SemiboldItalic/SourceCodePro-SemiboldItalic.otf)
 - [Spumante](#spumante) [💾](../../fonts/Spumante/otf/Regular/Spumante-Regular.otf)
 - [Spumante-Bold](#spumante-bold) [💾](../../fonts/Spumante/otf/Bold/Spumante-Bold.otf)
-- [Syne (Variable)](#syne-variable) [💾](../../fonts/Syne/ttf/Syne-Variable.ttf)
 - [Syne Mono Regular](#syne-mono-regular) [💾](../../fonts/SyneMono/ttf/Regular/SyneMono-Regular.ttf)
 - [Syne Tactile Regular](#syne-tactile-regular) [💾](../../fonts/SyneTactile/ttf/Regular/SyneTactile-Regular.ttf)
+- [Syne (Variable)](#syne-variable) [💾](../../fonts/Syne/ttf/Syne-Variable.ttf)
 - [TG Praktikal Black](#tg-praktikal-black) [💾](../../fonts/TGPraktikal/otf/Black/TGPraktikal-Black.otf)
 - [TG Praktikal Bold](#tg-praktikal-bold) [💾](../../fonts/TGPraktikal/otf/Bold/TGPraktikal-Bold.otf)
 - [TG Praktikal ExtraBold](#tg-praktikal-extrabold) [💾](../../fonts/TGPraktikal/otf/ExtraBold/TGPraktikal-ExtraBold.otf)
@@ -1247,6 +1269,22 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [TT Autonomous Mono Medium](#tt-autonomous-mono-medium) [💾](../../fonts/TTAutonomousMono/otf/Medium/TTAutonomousMono-Medium.otf)
 - [TT Autonomous Mono Medium Italic](#tt-autonomous-mono-medium-italic) [💾](../../fonts/TTAutonomousMono/otf/MediumItalic/TTAutonomousMono-MediumItalic.otf)
 - [TT Autonomous Mono Regular](#tt-autonomous-mono-regular) [💾](../../fonts/TTAutonomousMono/otf/Regular/TTAutonomousMono-Regular.otf)
+- [Twilio Sans Mono](#twilio-sans-mono) [💾](../../fonts/TwilioSansMono/otf/Regular/TwilioSansMono-Regular.otf)
+- [Twilio Sans Mono Bold](#twilio-sans-mono-bold) [💾](../../fonts/TwilioSansMono/otf/Bold/TwilioSansMono-Bold.otf)
+- [Twilio Sans Mono Bold Italic](#twilio-sans-mono-bold-italic) [💾](../../fonts/TwilioSansMono/otf/BoldItalic/TwilioSansMono-BoldItalic.otf)
+- [Twilio Sans Mono ExBld](#twilio-sans-mono-exbld) [💾](../../fonts/TwilioSansMono/otf/Extrabold/TwilioSansMono-Extrabold.otf)
+- [Twilio Sans Mono ExBld Italic](#twilio-sans-mono-exbld-italic) [💾](../../fonts/TwilioSansMono/otf/ExtraboldItalic/TwilioSansMono-ExtraboldItalic.otf)
+- [Twilio Sans Mono Heavy](#twilio-sans-mono-heavy) [💾](../../fonts/TwilioSansMono/otf/Heavy/TwilioSansMono-Heavy.otf)
+- [Twilio Sans Mono Heavy Italic](#twilio-sans-mono-heavy-italic) [💾](../../fonts/TwilioSansMono/otf/HeavyItalic/TwilioSansMono-HeavyItalic.otf)
+- [Twilio Sans Mono Italic](#twilio-sans-mono-italic) [💾](../../fonts/TwilioSansMono/otf/RegularItalic/TwilioSansMono-RegularItalic.otf)
+- [Twilio Sans Mono Light](#twilio-sans-mono-light) [💾](../../fonts/TwilioSansMono/otf/Light/TwilioSansMono-Light.otf)
+- [Twilio Sans Mono Light Italic](#twilio-sans-mono-light-italic) [💾](../../fonts/TwilioSansMono/otf/LightItalic/TwilioSansMono-LightItalic.otf)
+- [Twilio Sans Mono Medium](#twilio-sans-mono-medium) [💾](../../fonts/TwilioSansMono/otf/Medium/TwilioSansMono-Medium.otf)
+- [Twilio Sans Mono Medium Italic](#twilio-sans-mono-medium-italic) [💾](../../fonts/TwilioSansMono/otf/MediumItalic/TwilioSansMono-MediumItalic.otf)
+- [Twilio Sans Mono Retina](#twilio-sans-mono-retina) [💾](../../fonts/TwilioSansMono/otf/Retina/TwilioSansMono-Retina.otf)
+- [Twilio Sans Mono Retina Italic](#twilio-sans-mono-retina-italic) [💾](../../fonts/TwilioSansMono/otf/RetinaItalic/TwilioSansMono-RetinaItalic.otf)
+- [Twilio Sans Mono SmBld](#twilio-sans-mono-smbld) [💾](../../fonts/TwilioSansMono/otf/Semibold/TwilioSansMono-Semibold.otf)
+- [Twilio Sans Mono SmBld Italic](#twilio-sans-mono-smbld-italic) [💾](../../fonts/TwilioSansMono/otf/SemiboldItalic/TwilioSansMono-SemiboldItalic.otf)
 - [TX-02 Black](#tx-02-black) [💾](../../fonts/TX-02/otf/Black/TX-02-Black.otf)
 - [TX-02 Black Oblique](#tx-02-black-oblique) [💾](../../fonts/TX-02/otf/BlackOblique/TX-02-BlackOblique.otf)
 - [TX-02 Bold](#tx-02-bold) [💾](../../fonts/TX-02/otf/Bold/TX-02-Bold.otf)
@@ -1267,22 +1305,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [TX-02 SemiLight Oblique](#tx-02-semilight-oblique) [💾](../../fonts/TX-02/otf/SemiLightOblique/TX-02-SemiLightOblique.otf)
 - [TX-02 Thin](#tx-02-thin) [💾](../../fonts/TX-02/otf/Thin/TX-02-Thin.otf)
 - [TX-02 Thin Oblique](#tx-02-thin-oblique) [💾](../../fonts/TX-02/otf/ThinOblique/TX-02-ThinOblique.otf)
-- [Twilio Sans Mono](#twilio-sans-mono) [💾](../../fonts/TwilioSansMono/otf/Regular/TwilioSansMono-Regular.otf)
-- [Twilio Sans Mono Bold](#twilio-sans-mono-bold) [💾](../../fonts/TwilioSansMono/otf/Bold/TwilioSansMono-Bold.otf)
-- [Twilio Sans Mono Bold Italic](#twilio-sans-mono-bold-italic) [💾](../../fonts/TwilioSansMono/otf/BoldItalic/TwilioSansMono-BoldItalic.otf)
-- [Twilio Sans Mono ExBld](#twilio-sans-mono-exbld) [💾](../../fonts/TwilioSansMono/otf/Extrabold/TwilioSansMono-Extrabold.otf)
-- [Twilio Sans Mono ExBld Italic](#twilio-sans-mono-exbld-italic) [💾](../../fonts/TwilioSansMono/otf/ExtraboldItalic/TwilioSansMono-ExtraboldItalic.otf)
-- [Twilio Sans Mono Heavy](#twilio-sans-mono-heavy) [💾](../../fonts/TwilioSansMono/otf/Heavy/TwilioSansMono-Heavy.otf)
-- [Twilio Sans Mono Heavy Italic](#twilio-sans-mono-heavy-italic) [💾](../../fonts/TwilioSansMono/otf/HeavyItalic/TwilioSansMono-HeavyItalic.otf)
-- [Twilio Sans Mono Italic](#twilio-sans-mono-italic) [💾](../../fonts/TwilioSansMono/otf/RegularItalic/TwilioSansMono-RegularItalic.otf)
-- [Twilio Sans Mono Light](#twilio-sans-mono-light) [💾](../../fonts/TwilioSansMono/otf/Light/TwilioSansMono-Light.otf)
-- [Twilio Sans Mono Light Italic](#twilio-sans-mono-light-italic) [💾](../../fonts/TwilioSansMono/otf/LightItalic/TwilioSansMono-LightItalic.otf)
-- [Twilio Sans Mono Medium](#twilio-sans-mono-medium) [💾](../../fonts/TwilioSansMono/otf/Medium/TwilioSansMono-Medium.otf)
-- [Twilio Sans Mono Medium Italic](#twilio-sans-mono-medium-italic) [💾](../../fonts/TwilioSansMono/otf/MediumItalic/TwilioSansMono-MediumItalic.otf)
-- [Twilio Sans Mono Retina](#twilio-sans-mono-retina) [💾](../../fonts/TwilioSansMono/otf/Retina/TwilioSansMono-Retina.otf)
-- [Twilio Sans Mono Retina Italic](#twilio-sans-mono-retina-italic) [💾](../../fonts/TwilioSansMono/otf/RetinaItalic/TwilioSansMono-RetinaItalic.otf)
-- [Twilio Sans Mono SmBld](#twilio-sans-mono-smbld) [💾](../../fonts/TwilioSansMono/otf/Semibold/TwilioSansMono-Semibold.otf)
-- [Twilio Sans Mono SmBld Italic](#twilio-sans-mono-smbld-italic) [💾](../../fonts/TwilioSansMono/otf/SemiboldItalic/TwilioSansMono-SemiboldItalic.otf)
 - [Uber Move Mono](#uber-move-mono) [💾](../../fonts/UberMoveMono/ttf/Regular/UberMoveMono-Regular.ttf)
 - [Uber Move Mono Medium](#uber-move-mono-medium) [💾](../../fonts/UberMoveMono/ttf/Medium/UberMoveMono-Medium.ttf)
 - [Uber Move Mono Medium 190923](#uber-move-mono-medium-190923) [💾](../../fonts/UberMoveMono/ttf/Medium190923/UberMoveMono-Medium190923.ttf)
@@ -1364,10 +1386,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Zeitung Pro Semibold Italic](#zeitung-pro-semibold-italic) [💾](../../fonts/ZeitungPro/otf/SemiboldItalic/ZeitungPro-SemiboldItalic.otf)
 - [Zeitung Pro Thin](#zeitung-pro-thin) [💾](../../fonts/ZeitungPro/otf/Thin/ZeitungPro-Thin.otf)
 - [Zeitung Pro Thin Italic](#zeitung-pro-thin-italic) [💾](../../fonts/ZeitungPro/otf/ThinItalic/ZeitungPro-ThinItalic.otf)
-- [psudoFont Liga Mono Bold](#psudofont-liga-mono-bold) [💾](../../fonts/psudoFontLigaMono/ttf/Bold/psudoFontLigaMono-Bold.ttf)
-- [psudoFont Liga Mono Bold Italic](#psudofont-liga-mono-bold-italic) [💾](../../fonts/psudoFontLigaMono/ttf/BoldItalic/psudoFontLigaMono-BoldItalic.ttf)
-- [psudoFont Liga Mono Italic](#psudofont-liga-mono-italic) [💾](../../fonts/psudoFontLigaMono/ttf/Italic/psudoFontLigaMono-Italic.ttf)
-- [psudoFont Liga Mono Regular](#psudofont-liga-mono-regular) [💾](../../fonts/psudoFontLigaMono/ttf/Regular/psudoFontLigaMono-Regular.ttf)
 
 ---
 
@@ -1383,11 +1401,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## AdaptiveMonoOT-Regular [💾](../../fonts/AdaptiveMonoOT/otf/Regular/AdaptiveMonoOT-Regular.otf)
 ![AdaptiveMonoOT-Regular](AdaptiveMonoOT__otf__Regular__AdaptiveMonoOT-Regular.png)
 
-## Aglet Mono VF (Variable) [💾](../../fonts/AgletMono/otf/AgletMono-Variable.otf)
-![Aglet Mono VF (Variable)](AgletMono__otf__AgletMono-Variable.png)
-
 ## Aglet Mono VF (Variable) [💾](../../fonts/AgletMono/otf/AgletMono-VariableItalic.otf)
 ![Aglet Mono VF (Variable)](AgletMono__otf__AgletMono-VariableItalic.png)
+
+## Aglet Mono VF (Variable) [💾](../../fonts/AgletMono/otf/AgletMono-Variable.otf)
+![Aglet Mono VF (Variable)](AgletMono__otf__AgletMono-Variable.png)
 
 ## Annotation Mono (Variable) [💾](../../fonts/AnnotationMono/ttf/AnnotationMono-Variable.ttf)
 ![Annotation Mono (Variable)](AnnotationMono__ttf__AnnotationMono-Variable.png)
@@ -1518,6 +1536,15 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Associate Mono Medium Italic [💾](../../fonts/AssociateMono/ttf/MediumItalic/AssociateMono-MediumItalic.ttf)
 ![Associate Mono Medium Italic](AssociateMono__ttf__MediumItalic__AssociateMono-MediumItalic.png)
 
+## AtkinsonHyperlegible-Bold [💾](../../fonts/AtkinsonHyperlegible/otf/Bold/AtkinsonHyperlegible-Bold.otf)
+![AtkinsonHyperlegible-Bold](AtkinsonHyperlegible__otf__Bold__AtkinsonHyperlegible-Bold.png)
+
+## AtkinsonHyperlegible-BoldItalic [💾](../../fonts/AtkinsonHyperlegible/otf/BoldItalic/AtkinsonHyperlegible-BoldItalic.otf)
+![AtkinsonHyperlegible-BoldItalic](AtkinsonHyperlegible__otf__BoldItalic__AtkinsonHyperlegible-BoldItalic.png)
+
+## AtkinsonHyperlegible-Italic [💾](../../fonts/AtkinsonHyperlegible/otf/Italic/AtkinsonHyperlegible-Italic.otf)
+![AtkinsonHyperlegible-Italic](AtkinsonHyperlegible__otf__Italic__AtkinsonHyperlegible-Italic.png)
+
 ## Atkinson Hyperlegible Mono Bold [💾](../../fonts/AtkinsonHyperlegibleMono/otf/Bold/AtkinsonHyperlegibleMono-Bold.otf)
 ![Atkinson Hyperlegible Mono Bold](AtkinsonHyperlegibleMono__otf__Bold__AtkinsonHyperlegibleMono-Bold.png)
 
@@ -1601,15 +1628,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## Atkinson Hyperlegible Next SemiBold Italic [💾](../../fonts/AtkinsonHyperlegibleNext/otf/SemiBoldItalic/AtkinsonHyperlegibleNext-SemiBoldItalic.otf)
 ![Atkinson Hyperlegible Next SemiBold Italic](AtkinsonHyperlegibleNext__otf__SemiBoldItalic__AtkinsonHyperlegibleNext-SemiBoldItalic.png)
-
-## AtkinsonHyperlegible-Bold [💾](../../fonts/AtkinsonHyperlegible/otf/Bold/AtkinsonHyperlegible-Bold.otf)
-![AtkinsonHyperlegible-Bold](AtkinsonHyperlegible__otf__Bold__AtkinsonHyperlegible-Bold.png)
-
-## AtkinsonHyperlegible-BoldItalic [💾](../../fonts/AtkinsonHyperlegible/otf/BoldItalic/AtkinsonHyperlegible-BoldItalic.otf)
-![AtkinsonHyperlegible-BoldItalic](AtkinsonHyperlegible__otf__BoldItalic__AtkinsonHyperlegible-BoldItalic.png)
-
-## AtkinsonHyperlegible-Italic [💾](../../fonts/AtkinsonHyperlegible/otf/Italic/AtkinsonHyperlegible-Italic.otf)
-![AtkinsonHyperlegible-Italic](AtkinsonHyperlegible__otf__Italic__AtkinsonHyperlegible-Italic.png)
 
 ## AtkinsonHyperlegible-Regular [💾](../../fonts/AtkinsonHyperlegible/otf/Regular/AtkinsonHyperlegible-Regular.otf)
 ![AtkinsonHyperlegible-Regular](AtkinsonHyperlegible__otf__Regular__AtkinsonHyperlegible-Regular.png)
@@ -1773,9 +1791,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Berkeley Mono Italic [💾](../../fonts/BerkeleyMono/otf/Italic/BerkeleyMono-Italic.otf)
 ![Berkeley Mono Italic](BerkeleyMono__otf__Italic__BerkeleyMono-Italic.png)
 
-## Berkeley Mono Regular [💾](../../fonts/BerkeleyMono/otf/Regular/BerkeleyMono-Regular.otf)
-![Berkeley Mono Regular](BerkeleyMono__otf__Regular__BerkeleyMono-Regular.png)
-
 ## BerkeleyMono Nerd Font [💾](../../fonts/BerkeleyMonoNerdFont/ttf/Regular/BerkeleyMonoNerdFont-Regular.ttf)
 ![BerkeleyMono Nerd Font](BerkeleyMonoNerdFont__ttf__Regular__BerkeleyMonoNerdFont-Regular.png)
 
@@ -1787,6 +1802,9 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## BerkeleyMono Nerd Font Italic [💾](../../fonts/BerkeleyMonoNerdFont/ttf/Italic/BerkeleyMonoNerdFont-Italic.ttf)
 ![BerkeleyMono Nerd Font Italic](BerkeleyMonoNerdFont__ttf__Italic__BerkeleyMonoNerdFont-Italic.png)
+
+## Berkeley Mono Regular [💾](../../fonts/BerkeleyMono/otf/Regular/BerkeleyMono-Regular.otf)
+![Berkeley Mono Regular](BerkeleyMono__otf__Regular__BerkeleyMono-Regular.png)
 
 ## Blender Pro Bold [💾](../../fonts/BlenderPro/ttf/Bold/BlenderPro-Bold.ttf)
 ![Blender Pro Bold](BlenderPro__ttf__Bold__BlenderPro-Bold.png)
@@ -2160,11 +2178,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Ellograph CF Thin Italic [💾](../../fonts/EllographCF/ttf/ThinItalic/EllographCF-ThinItalic.ttf)
 ![Ellograph CF Thin Italic](EllographCF__ttf__ThinItalic__EllographCF-ThinItalic.png)
 
-## Encode Sans (Variable) [💾](../../fonts/EncodeSans/ttf/EncodeSans-Variable.ttf)
-![Encode Sans (Variable)](EncodeSans__ttf__EncodeSans-Variable.png)
-
 ## Encode Sans SC (Variable) [💾](../../fonts/EncodeSansSC/ttf/EncodeSansSC-Variable.ttf)
 ![Encode Sans SC (Variable)](EncodeSansSC__ttf__EncodeSansSC-Variable.png)
+
+## Encode Sans (Variable) [💾](../../fonts/EncodeSans/ttf/EncodeSans-Variable.ttf)
+![Encode Sans (Variable)](EncodeSans__ttf__EncodeSans-Variable.png)
 
 ## EssonnesDisplay-Italic [💾](../../fonts/Essonnes/otf/DisplayItalic/Essonnes-DisplayItalic.otf)
 ![EssonnesDisplay-Italic](Essonnes__otf__DisplayItalic__Essonnes-DisplayItalic.png)
@@ -2340,6 +2358,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Forma DJR Display Bold Italic [💾](../../fonts/FormaDJRDisplay/otf/BoldItalic/FormaDJRDisplay-BoldItalic.otf)
 ![Forma DJR Display Bold Italic](FormaDJRDisplay__otf__BoldItalic__FormaDJRDisplay-BoldItalic.png)
 
+## FormaDJRDisplay Medium Italic [💾](../../fonts/FormaDJRDisplay/otf/MediumItalic/FormaDJRDisplay-MediumItalic.otf)
+![FormaDJRDisplay Medium Italic](FormaDJRDisplay__otf__MediumItalic__FormaDJRDisplay-MediumItalic.png)
+
+## FormaDJRDisplay Medium Regular [💾](../../fonts/FormaDJRDisplay/otf/Medium/FormaDJRDisplay-Medium.otf)
+![FormaDJRDisplay Medium Regular](FormaDJRDisplay__otf__Medium__FormaDJRDisplay-Medium.png)
+
 ## Forma DJR Mono Bk [💾](../../fonts/FormaDJRMono/otf/Black/FormaDJRMono-Black.otf)
 ![Forma DJR Mono Bk](FormaDJRMono__otf__Black__FormaDJRMono-Black.png)
 
@@ -2393,12 +2417,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## Forma DJR Mono Thin It [💾](../../fonts/FormaDJRMono/otf/ThinItalic/FormaDJRMono-ThinItalic.otf)
 ![Forma DJR Mono Thin It](FormaDJRMono__otf__ThinItalic__FormaDJRMono-ThinItalic.png)
-
-## FormaDJRDisplay Medium Italic [💾](../../fonts/FormaDJRDisplay/otf/MediumItalic/FormaDJRDisplay-MediumItalic.otf)
-![FormaDJRDisplay Medium Italic](FormaDJRDisplay__otf__MediumItalic__FormaDJRDisplay-MediumItalic.png)
-
-## FormaDJRDisplay Medium Regular [💾](../../fonts/FormaDJRDisplay/otf/Medium/FormaDJRDisplay-Medium.otf)
-![FormaDJRDisplay Medium Regular](FormaDJRDisplay__otf__Medium__FormaDJRDisplay-Medium.png)
 
 ## Fragment Mono Italic [💾](../../fonts/FragmentMono/otf/Italic/FragmentMono-Italic.otf)
 ![Fragment Mono Italic](FragmentMono__otf__Italic__FragmentMono-Italic.png)
@@ -2499,11 +2517,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## GoodHeadlinePro-WideUltraItalic [💾](../../fonts/GoodHeadlinePro/otf/WideUltraItalic/GoodHeadlinePro-WideUltraItalic.otf)
 ![GoodHeadlinePro-WideUltraItalic](GoodHeadlinePro__otf__WideUltraItalic__GoodHeadlinePro-WideUltraItalic.png)
 
-## Google Sans Code (Variable) [💾](../../fonts/GoogleSansCode/ttf/GoogleSansCode-Variable.ttf)
-![Google Sans Code (Variable)](GoogleSansCode__ttf__GoogleSansCode-Variable.png)
-
 ## Google Sans Code (Variable) [💾](../../fonts/GoogleSansCode/ttf/GoogleSansCode-VariableItalic.ttf)
 ![Google Sans Code (Variable)](GoogleSansCode__ttf__GoogleSansCode-VariableItalic.png)
+
+## Google Sans Code (Variable) [💾](../../fonts/GoogleSansCode/ttf/GoogleSansCode-Variable.ttf)
+![Google Sans Code (Variable)](GoogleSansCode__ttf__GoogleSansCode-Variable.png)
 
 ## Hack Bold [💾](../../fonts/Hack/ttf/Bold/Hack-Bold.ttf)
 ![Hack Bold](Hack__ttf__Bold__Hack-Bold.png)
@@ -2517,23 +2535,23 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Hack Regular [💾](../../fonts/Hack/ttf/Regular/Hack-Regular.ttf)
 ![Hack Regular](Hack__ttf__Regular__Hack-Regular.png)
 
-## Halyard Display (Variable) [💾](../../fonts/HalyardDisplay/otf/HalyardDisplay-Variable.otf)
-![Halyard Display (Variable)](HalyardDisplay__otf__HalyardDisplay-Variable.png)
-
 ## Halyard Display (Variable) [💾](../../fonts/HalyardDisplay/otf/HalyardDisplay-VariableItalic.otf)
 ![Halyard Display (Variable)](HalyardDisplay__otf__HalyardDisplay-VariableItalic.png)
 
-## Halyard Micro (Variable) [💾](../../fonts/HalyardMicro/otf/HalyardMicro-Variable.otf)
-![Halyard Micro (Variable)](HalyardMicro__otf__HalyardMicro-Variable.png)
+## Halyard Display (Variable) [💾](../../fonts/HalyardDisplay/otf/HalyardDisplay-Variable.otf)
+![Halyard Display (Variable)](HalyardDisplay__otf__HalyardDisplay-Variable.png)
 
 ## Halyard Micro (Variable) [💾](../../fonts/HalyardMicro/otf/HalyardMicro-VariableItalic.otf)
 ![Halyard Micro (Variable)](HalyardMicro__otf__HalyardMicro-VariableItalic.png)
 
-## Halyard Text (Variable) [💾](../../fonts/HalyardText/otf/HalyardText-Variable.otf)
-![Halyard Text (Variable)](HalyardText__otf__HalyardText-Variable.png)
+## Halyard Micro (Variable) [💾](../../fonts/HalyardMicro/otf/HalyardMicro-Variable.otf)
+![Halyard Micro (Variable)](HalyardMicro__otf__HalyardMicro-Variable.png)
 
 ## Halyard Text (Variable) [💾](../../fonts/HalyardText/otf/HalyardText-VariableItalic.otf)
 ![Halyard Text (Variable)](HalyardText__otf__HalyardText-VariableItalic.png)
+
+## Halyard Text (Variable) [💾](../../fonts/HalyardText/otf/HalyardText-Variable.otf)
+![Halyard Text (Variable)](HalyardText__otf__HalyardText-Variable.png)
 
 ## Hasklig [💾](../../fonts/Hasklig/otf/Regular/Hasklig-Regular.otf)
 ![Hasklig](Hasklig__otf__Regular__Hasklig-Regular.png)
@@ -2721,11 +2739,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## IBM Plex Serif Thin Italic [💾](../../fonts/IBMPlexSerif/otf/ThinItalic/IBMPlexSerif-ThinItalic.otf)
 ![IBM Plex Serif Thin Italic](IBMPlexSerif__otf__ThinItalic__IBMPlexSerif-ThinItalic.png)
 
-## Iki Mono VF (Variable) [💾](../../fonts/IkiMono/otf/IkiMono-Variable.otf)
-![Iki Mono VF (Variable)](IkiMono__otf__IkiMono-Variable.png)
-
 ## Iki Mono VF (Variable) [💾](../../fonts/IkiMono/otf/IkiMono-VariableItalic.otf)
 ![Iki Mono VF (Variable)](IkiMono__otf__IkiMono-VariableItalic.png)
+
+## Iki Mono VF (Variable) [💾](../../fonts/IkiMono/otf/IkiMono-Variable.otf)
+![Iki Mono VF (Variable)](IkiMono__otf__IkiMono-Variable.png)
 
 ## Ingra Light [💾](../../fonts/Ingra/otf/Light/Ingra-Light.otf)
 ![Ingra Light](Ingra__otf__Light__Ingra-Light.png)
@@ -2750,33 +2768,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## InputMono BoldIta [💾](../../fonts/InputMono/ttf/BoldItalic/InputMono-BoldItalic.ttf)
 ![InputMono BoldIta](InputMono__ttf__BoldItalic__InputMono-BoldItalic.png)
-
-## InputMono ExLight [💾](../../fonts/InputMono/ttf/ExtraLight/InputMono-ExtraLight.ttf)
-![InputMono ExLight](InputMono__ttf__ExtraLight__InputMono-ExtraLight.png)
-
-## InputMono ExLightIta [💾](../../fonts/InputMono/ttf/ExtraLightItalic/InputMono-ExtraLightItalic.ttf)
-![InputMono ExLightIta](InputMono__ttf__ExtraLightItalic__InputMono-ExtraLightItalic.png)
-
-## InputMono Italic [💾](../../fonts/InputMono/ttf/Italic/InputMono-Italic.ttf)
-![InputMono Italic](InputMono__ttf__Italic__InputMono-Italic.png)
-
-## InputMono Light [💾](../../fonts/InputMono/ttf/Light/InputMono-Light.ttf)
-![InputMono Light](InputMono__ttf__Light__InputMono-Light.png)
-
-## InputMono LightIta [💾](../../fonts/InputMono/ttf/LightItalic/InputMono-LightItalic.ttf)
-![InputMono LightIta](InputMono__ttf__LightItalic__InputMono-LightItalic.png)
-
-## InputMono Medium [💾](../../fonts/InputMono/ttf/Medium/InputMono-Medium.ttf)
-![InputMono Medium](InputMono__ttf__Medium__InputMono-Medium.png)
-
-## InputMono MediumIta [💾](../../fonts/InputMono/ttf/MediumItalic/InputMono-MediumItalic.ttf)
-![InputMono MediumIta](InputMono__ttf__MediumItalic__InputMono-MediumItalic.png)
-
-## InputMono Thin [💾](../../fonts/InputMono/ttf/Thin/InputMono-Thin.ttf)
-![InputMono Thin](InputMono__ttf__Thin__InputMono-Thin.png)
-
-## InputMono ThinIta [💾](../../fonts/InputMono/ttf/ThinItalic/InputMono-ThinItalic.ttf)
-![InputMono ThinIta](InputMono__ttf__ThinItalic__InputMono-ThinItalic.png)
 
 ## InputMonoCompressed [💾](../../fonts/InputMonoCompressed/ttf/Regular/InputMonoCompressed-Regular.ttf)
 ![InputMonoCompressed](InputMonoCompressed__ttf__Regular__InputMonoCompressed-Regular.png)
@@ -2820,6 +2811,27 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## InputMonoCompressed ThinIta [💾](../../fonts/InputMonoCompressed/ttf/ThinItalic/InputMonoCompressed-ThinItalic.ttf)
 ![InputMonoCompressed ThinIta](InputMonoCompressed__ttf__ThinItalic__InputMonoCompressed-ThinItalic.png)
 
+## InputMono ExLight [💾](../../fonts/InputMono/ttf/ExtraLight/InputMono-ExtraLight.ttf)
+![InputMono ExLight](InputMono__ttf__ExtraLight__InputMono-ExtraLight.png)
+
+## InputMono ExLightIta [💾](../../fonts/InputMono/ttf/ExtraLightItalic/InputMono-ExtraLightItalic.ttf)
+![InputMono ExLightIta](InputMono__ttf__ExtraLightItalic__InputMono-ExtraLightItalic.png)
+
+## InputMono Italic [💾](../../fonts/InputMono/ttf/Italic/InputMono-Italic.ttf)
+![InputMono Italic](InputMono__ttf__Italic__InputMono-Italic.png)
+
+## InputMono Light [💾](../../fonts/InputMono/ttf/Light/InputMono-Light.ttf)
+![InputMono Light](InputMono__ttf__Light__InputMono-Light.png)
+
+## InputMono LightIta [💾](../../fonts/InputMono/ttf/LightItalic/InputMono-LightItalic.ttf)
+![InputMono LightIta](InputMono__ttf__LightItalic__InputMono-LightItalic.png)
+
+## InputMono Medium [💾](../../fonts/InputMono/ttf/Medium/InputMono-Medium.ttf)
+![InputMono Medium](InputMono__ttf__Medium__InputMono-Medium.png)
+
+## InputMono MediumIta [💾](../../fonts/InputMono/ttf/MediumItalic/InputMono-MediumItalic.ttf)
+![InputMono MediumIta](InputMono__ttf__MediumItalic__InputMono-MediumItalic.png)
+
 ## InputMonoNarrow [💾](../../fonts/InputMonoNarrow/ttf/Regular/InputMonoNarrow-Regular.ttf)
 ![InputMonoNarrow](InputMonoNarrow__ttf__Regular__InputMonoNarrow-Regular.png)
 
@@ -2862,6 +2874,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## InputMonoNarrow ThinIta [💾](../../fonts/InputMonoNarrow/ttf/ThinItalic/InputMonoNarrow-ThinItalic.ttf)
 ![InputMonoNarrow ThinIta](InputMonoNarrow__ttf__ThinItalic__InputMonoNarrow-ThinItalic.png)
 
+## InputMono Thin [💾](../../fonts/InputMono/ttf/Thin/InputMono-Thin.ttf)
+![InputMono Thin](InputMono__ttf__Thin__InputMono-Thin.png)
+
+## InputMono ThinIta [💾](../../fonts/InputMono/ttf/ThinItalic/InputMono-ThinItalic.ttf)
+![InputMono ThinIta](InputMono__ttf__ThinItalic__InputMono-ThinItalic.png)
+
 ## InputSans [💾](../../fonts/InputSans/ttf/Regular/InputSans-Regular.ttf)
 ![InputSans](InputSans__ttf__Regular__InputSans-Regular.png)
 
@@ -2876,33 +2894,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## InputSans BoldIta [💾](../../fonts/InputSans/ttf/BoldItalic/InputSans-BoldItalic.ttf)
 ![InputSans BoldIta](InputSans__ttf__BoldItalic__InputSans-BoldItalic.png)
-
-## InputSans ExLight [💾](../../fonts/InputSans/ttf/ExtraLight/InputSans-ExtraLight.ttf)
-![InputSans ExLight](InputSans__ttf__ExtraLight__InputSans-ExtraLight.png)
-
-## InputSans ExLightIta [💾](../../fonts/InputSans/ttf/ExtraLightItalic/InputSans-ExtraLightItalic.ttf)
-![InputSans ExLightIta](InputSans__ttf__ExtraLightItalic__InputSans-ExtraLightItalic.png)
-
-## InputSans Italic [💾](../../fonts/InputSans/ttf/Italic/InputSans-Italic.ttf)
-![InputSans Italic](InputSans__ttf__Italic__InputSans-Italic.png)
-
-## InputSans Light [💾](../../fonts/InputSans/ttf/Light/InputSans-Light.ttf)
-![InputSans Light](InputSans__ttf__Light__InputSans-Light.png)
-
-## InputSans LightIta [💾](../../fonts/InputSans/ttf/LightItalic/InputSans-LightItalic.ttf)
-![InputSans LightIta](InputSans__ttf__LightItalic__InputSans-LightItalic.png)
-
-## InputSans Medium [💾](../../fonts/InputSans/ttf/Medium/InputSans-Medium.ttf)
-![InputSans Medium](InputSans__ttf__Medium__InputSans-Medium.png)
-
-## InputSans MediumIta [💾](../../fonts/InputSans/ttf/MediumItalic/InputSans-MediumItalic.ttf)
-![InputSans MediumIta](InputSans__ttf__MediumItalic__InputSans-MediumItalic.png)
-
-## InputSans Thin [💾](../../fonts/InputSans/ttf/Thin/InputSans-Thin.ttf)
-![InputSans Thin](InputSans__ttf__Thin__InputSans-Thin.png)
-
-## InputSans ThinIta [💾](../../fonts/InputSans/ttf/ThinItalic/InputSans-ThinItalic.ttf)
-![InputSans ThinIta](InputSans__ttf__ThinItalic__InputSans-ThinItalic.png)
 
 ## InputSansCompressed [💾](../../fonts/InputSansCompressed/ttf/Regular/InputSansCompressed-Regular.ttf)
 ![InputSansCompressed](InputSansCompressed__ttf__Regular__InputSansCompressed-Regular.png)
@@ -2946,6 +2937,27 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## InputSansCompressed ThinIta [💾](../../fonts/InputSansCompressed/ttf/ThinItalic/InputSansCompressed-ThinItalic.ttf)
 ![InputSansCompressed ThinIta](InputSansCompressed__ttf__ThinItalic__InputSansCompressed-ThinItalic.png)
 
+## InputSans ExLight [💾](../../fonts/InputSans/ttf/ExtraLight/InputSans-ExtraLight.ttf)
+![InputSans ExLight](InputSans__ttf__ExtraLight__InputSans-ExtraLight.png)
+
+## InputSans ExLightIta [💾](../../fonts/InputSans/ttf/ExtraLightItalic/InputSans-ExtraLightItalic.ttf)
+![InputSans ExLightIta](InputSans__ttf__ExtraLightItalic__InputSans-ExtraLightItalic.png)
+
+## InputSans Italic [💾](../../fonts/InputSans/ttf/Italic/InputSans-Italic.ttf)
+![InputSans Italic](InputSans__ttf__Italic__InputSans-Italic.png)
+
+## InputSans Light [💾](../../fonts/InputSans/ttf/Light/InputSans-Light.ttf)
+![InputSans Light](InputSans__ttf__Light__InputSans-Light.png)
+
+## InputSans LightIta [💾](../../fonts/InputSans/ttf/LightItalic/InputSans-LightItalic.ttf)
+![InputSans LightIta](InputSans__ttf__LightItalic__InputSans-LightItalic.png)
+
+## InputSans Medium [💾](../../fonts/InputSans/ttf/Medium/InputSans-Medium.ttf)
+![InputSans Medium](InputSans__ttf__Medium__InputSans-Medium.png)
+
+## InputSans MediumIta [💾](../../fonts/InputSans/ttf/MediumItalic/InputSans-MediumItalic.ttf)
+![InputSans MediumIta](InputSans__ttf__MediumItalic__InputSans-MediumItalic.png)
+
 ## InputSansNarrow [💾](../../fonts/InputSansNarrow/ttf/Regular/InputSansNarrow-Regular.ttf)
 ![InputSansNarrow](InputSansNarrow__ttf__Regular__InputSansNarrow-Regular.png)
 
@@ -2988,6 +3000,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## InputSansNarrow ThinIta [💾](../../fonts/InputSansNarrow/ttf/ThinItalic/InputSansNarrow-ThinItalic.ttf)
 ![InputSansNarrow ThinIta](InputSansNarrow__ttf__ThinItalic__InputSansNarrow-ThinItalic.png)
 
+## InputSans Thin [💾](../../fonts/InputSans/ttf/Thin/InputSans-Thin.ttf)
+![InputSans Thin](InputSans__ttf__Thin__InputSans-Thin.png)
+
+## InputSans ThinIta [💾](../../fonts/InputSans/ttf/ThinItalic/InputSans-ThinItalic.ttf)
+![InputSans ThinIta](InputSans__ttf__ThinItalic__InputSans-ThinItalic.png)
+
 ## InputSerif [💾](../../fonts/InputSerif/ttf/Regular/InputSerif-Regular.ttf)
 ![InputSerif](InputSerif__ttf__Regular__InputSerif-Regular.png)
 
@@ -3002,33 +3020,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## InputSerif BoldIta [💾](../../fonts/InputSerif/ttf/BoldItalic/InputSerif-BoldItalic.ttf)
 ![InputSerif BoldIta](InputSerif__ttf__BoldItalic__InputSerif-BoldItalic.png)
-
-## InputSerif ExLight [💾](../../fonts/InputSerif/ttf/ExtraLight/InputSerif-ExtraLight.ttf)
-![InputSerif ExLight](InputSerif__ttf__ExtraLight__InputSerif-ExtraLight.png)
-
-## InputSerif ExLightIta [💾](../../fonts/InputSerif/ttf/ExtraLightItalic/InputSerif-ExtraLightItalic.ttf)
-![InputSerif ExLightIta](InputSerif__ttf__ExtraLightItalic__InputSerif-ExtraLightItalic.png)
-
-## InputSerif Italic [💾](../../fonts/InputSerif/ttf/Italic/InputSerif-Italic.ttf)
-![InputSerif Italic](InputSerif__ttf__Italic__InputSerif-Italic.png)
-
-## InputSerif Light [💾](../../fonts/InputSerif/ttf/Light/InputSerif-Light.ttf)
-![InputSerif Light](InputSerif__ttf__Light__InputSerif-Light.png)
-
-## InputSerif LightIta [💾](../../fonts/InputSerif/ttf/LightItalic/InputSerif-LightItalic.ttf)
-![InputSerif LightIta](InputSerif__ttf__LightItalic__InputSerif-LightItalic.png)
-
-## InputSerif Medium [💾](../../fonts/InputSerif/ttf/Medium/InputSerif-Medium.ttf)
-![InputSerif Medium](InputSerif__ttf__Medium__InputSerif-Medium.png)
-
-## InputSerif MediumIta [💾](../../fonts/InputSerif/ttf/MediumItalic/InputSerif-MediumItalic.ttf)
-![InputSerif MediumIta](InputSerif__ttf__MediumItalic__InputSerif-MediumItalic.png)
-
-## InputSerif Thin [💾](../../fonts/InputSerif/ttf/Thin/InputSerif-Thin.ttf)
-![InputSerif Thin](InputSerif__ttf__Thin__InputSerif-Thin.png)
-
-## InputSerif ThinIta [💾](../../fonts/InputSerif/ttf/ThinItalic/InputSerif-ThinItalic.ttf)
-![InputSerif ThinIta](InputSerif__ttf__ThinItalic__InputSerif-ThinItalic.png)
 
 ## InputSerifCompressed [💾](../../fonts/InputSerifCompressed/ttf/Regular/InputSerifCompressed-Regular.ttf)
 ![InputSerifCompressed](InputSerifCompressed__ttf__Regular__InputSerifCompressed-Regular.png)
@@ -3072,6 +3063,27 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## InputSerifCompressed ThinIta [💾](../../fonts/InputSerifCompressed/ttf/ThinItalic/InputSerifCompressed-ThinItalic.ttf)
 ![InputSerifCompressed ThinIta](InputSerifCompressed__ttf__ThinItalic__InputSerifCompressed-ThinItalic.png)
 
+## InputSerif ExLight [💾](../../fonts/InputSerif/ttf/ExtraLight/InputSerif-ExtraLight.ttf)
+![InputSerif ExLight](InputSerif__ttf__ExtraLight__InputSerif-ExtraLight.png)
+
+## InputSerif ExLightIta [💾](../../fonts/InputSerif/ttf/ExtraLightItalic/InputSerif-ExtraLightItalic.ttf)
+![InputSerif ExLightIta](InputSerif__ttf__ExtraLightItalic__InputSerif-ExtraLightItalic.png)
+
+## InputSerif Italic [💾](../../fonts/InputSerif/ttf/Italic/InputSerif-Italic.ttf)
+![InputSerif Italic](InputSerif__ttf__Italic__InputSerif-Italic.png)
+
+## InputSerif Light [💾](../../fonts/InputSerif/ttf/Light/InputSerif-Light.ttf)
+![InputSerif Light](InputSerif__ttf__Light__InputSerif-Light.png)
+
+## InputSerif LightIta [💾](../../fonts/InputSerif/ttf/LightItalic/InputSerif-LightItalic.ttf)
+![InputSerif LightIta](InputSerif__ttf__LightItalic__InputSerif-LightItalic.png)
+
+## InputSerif Medium [💾](../../fonts/InputSerif/ttf/Medium/InputSerif-Medium.ttf)
+![InputSerif Medium](InputSerif__ttf__Medium__InputSerif-Medium.png)
+
+## InputSerif MediumIta [💾](../../fonts/InputSerif/ttf/MediumItalic/InputSerif-MediumItalic.ttf)
+![InputSerif MediumIta](InputSerif__ttf__MediumItalic__InputSerif-MediumItalic.png)
+
 ## InputSerifNarrow [💾](../../fonts/InputSerifNarrow/ttf/Regular/InputSerifNarrow-Regular.ttf)
 ![InputSerifNarrow](InputSerifNarrow__ttf__Regular__InputSerifNarrow-Regular.png)
 
@@ -3113,6 +3125,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## InputSerifNarrow ThinIta [💾](../../fonts/InputSerifNarrow/ttf/ThinItalic/InputSerifNarrow-ThinItalic.ttf)
 ![InputSerifNarrow ThinIta](InputSerifNarrow__ttf__ThinItalic__InputSerifNarrow-ThinItalic.png)
+
+## InputSerif Thin [💾](../../fonts/InputSerif/ttf/Thin/InputSerif-Thin.ttf)
+![InputSerif Thin](InputSerif__ttf__Thin__InputSerif-Thin.png)
+
+## InputSerif ThinIta [💾](../../fonts/InputSerif/ttf/ThinItalic/InputSerif-ThinItalic.ttf)
+![InputSerif ThinIta](InputSerif__ttf__ThinItalic__InputSerif-ThinItalic.png)
 
 ## Intel One Mono [💾](../../fonts/IntelOneMono/otf/Regular/IntelOneMono-Regular.otf)
 ![Intel One Mono](IntelOneMono__otf__Regular__IntelOneMono-Regular.png)
@@ -3222,12 +3240,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Ioskeley Mono Semibold Italic [💾](../../fonts/IoskeleyMono/ttf/SemiboldItalic/IoskeleyMono-SemiboldItalic.ttf)
 ![Ioskeley Mono Semibold Italic](IoskeleyMono__ttf__SemiboldItalic__IoskeleyMono-SemiboldItalic.png)
 
-## JetBrains Mono (Variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-Variable.ttf)
-![JetBrains Mono (Variable)](JetBrainsMono__ttf__JetBrainsMono-Variable.png)
-
-## JetBrains Mono (Variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-VariableItalic.ttf)
-![JetBrains Mono (Variable)](JetBrainsMono__ttf__JetBrainsMono-VariableItalic.png)
-
 ## JetBrains Mono NL Bold [💾](../../fonts/JetBrainsMonoNL/ttf/Bold/JetBrainsMonoNL-Bold.ttf)
 ![JetBrains Mono NL Bold](JetBrainsMonoNL__ttf__Bold__JetBrainsMonoNL-Bold.png)
 
@@ -3276,35 +3288,41 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## JetBrains Mono NL Thin Italic [💾](../../fonts/JetBrainsMonoNL/ttf/ThinItalic/JetBrainsMonoNL-ThinItalic.ttf)
 ![JetBrains Mono NL Thin Italic](JetBrainsMonoNL__ttf__ThinItalic__JetBrainsMonoNL-ThinItalic.png)
 
-## Kopius Black Italic [💾](../../fonts/Kopius/otf/BlackItalic/Kopius-BlackItalic.otf)
-![Kopius Black Italic](Kopius__otf__BlackItalic__Kopius-BlackItalic.png)
+## JetBrains Mono (Variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-VariableItalic.ttf)
+![JetBrains Mono (Variable)](JetBrainsMono__ttf__JetBrainsMono-VariableItalic.png)
 
-## Kopius Book Italic [💾](../../fonts/Kopius/otf/BookItalic/Kopius-BookItalic.otf)
-![Kopius Book Italic](Kopius__otf__BookItalic__Kopius-BookItalic.png)
-
-## Kopius Extrabold Italic [💾](../../fonts/Kopius/otf/ExtraboldItalic/Kopius-ExtraboldItalic.otf)
-![Kopius Extrabold Italic](Kopius__otf__ExtraboldItalic__Kopius-ExtraboldItalic.png)
-
-## Kopius Light Italic [💾](../../fonts/Kopius/otf/LightItalic/Kopius-LightItalic.otf)
-![Kopius Light Italic](Kopius__otf__LightItalic__Kopius-LightItalic.png)
+## JetBrains Mono (Variable) [💾](../../fonts/JetBrainsMono/ttf/JetBrainsMono-Variable.ttf)
+![JetBrains Mono (Variable)](JetBrainsMono__ttf__JetBrainsMono-Variable.png)
 
 ## Kopius-Black [💾](../../fonts/Kopius/otf/Black/Kopius-Black.otf)
 ![Kopius-Black](Kopius__otf__Black__Kopius-Black.png)
 
+## Kopius Black Italic [💾](../../fonts/Kopius/otf/BlackItalic/Kopius-BlackItalic.otf)
+![Kopius Black Italic](Kopius__otf__BlackItalic__Kopius-BlackItalic.png)
+
 ## Kopius-Book [💾](../../fonts/Kopius/otf/Book/Kopius-Book.otf)
 ![Kopius-Book](Kopius__otf__Book__Kopius-Book.png)
+
+## Kopius Book Italic [💾](../../fonts/Kopius/otf/BookItalic/Kopius-BookItalic.otf)
+![Kopius Book Italic](Kopius__otf__BookItalic__Kopius-BookItalic.png)
 
 ## Kopius-Extrabold [💾](../../fonts/Kopius/otf/Extrabold/Kopius-Extrabold.otf)
 ![Kopius-Extrabold](Kopius__otf__Extrabold__Kopius-Extrabold.png)
 
-## Kopius-Light [💾](../../fonts/Kopius/otf/Light/Kopius-Light.otf)
-![Kopius-Light](Kopius__otf__Light__Kopius-Light.png)
+## Kopius Extrabold Italic [💾](../../fonts/Kopius/otf/ExtraboldItalic/Kopius-ExtraboldItalic.otf)
+![Kopius Extrabold Italic](Kopius__otf__ExtraboldItalic__Kopius-ExtraboldItalic.png)
 
 ## KopiusExtras-BoxHeadings [💾](../../fonts/KopiusExtras/otf/BoxHeadings/KopiusExtras-BoxHeadings.otf)
 ![KopiusExtras-BoxHeadings](KopiusExtras__otf__BoxHeadings__KopiusExtras-BoxHeadings.png)
 
 ## KopiusExtras-Labels [💾](../../fonts/KopiusExtras/otf/Labels/KopiusExtras-Labels.otf)
 ![KopiusExtras-Labels](KopiusExtras__otf__Labels__KopiusExtras-Labels.png)
+
+## Kopius-Light [💾](../../fonts/Kopius/otf/Light/Kopius-Light.otf)
+![Kopius-Light](Kopius__otf__Light__Kopius-Light.png)
+
+## Kopius Light Italic [💾](../../fonts/Kopius/otf/LightItalic/Kopius-LightItalic.otf)
+![Kopius Light Italic](Kopius__otf__LightItalic__Kopius-LightItalic.png)
 
 ## Lato Black [💾](../../fonts/Lato/ttf/Black/Lato-Black.ttf)
 ![Lato Black](Lato__ttf__Black__Lato-Black.png)
@@ -3318,23 +3336,23 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Lato Bold Italic [💾](../../fonts/Lato/ttf/BoldItalic/Lato-BoldItalic.ttf)
 ![Lato Bold Italic](Lato__ttf__BoldItalic__Lato-BoldItalic.png)
 
-## Lato Italic [💾](../../fonts/Lato/ttf/Italic/Lato-Italic.ttf)
-![Lato Italic](Lato__ttf__Italic__Lato-Italic.png)
-
-## Lato Regular [💾](../../fonts/Lato/ttf/Regular/Lato-Regular.ttf)
-![Lato Regular](Lato__ttf__Regular__Lato-Regular.png)
-
 ## Lato-Hairline [💾](../../fonts/Lato/ttf/Hairline/Lato-Hairline.ttf)
 ![Lato-Hairline](Lato__ttf__Hairline__Lato-Hairline.png)
 
 ## Lato-HairlineItalic [💾](../../fonts/Lato/ttf/HairlineItalic/Lato-HairlineItalic.ttf)
 ![Lato-HairlineItalic](Lato__ttf__HairlineItalic__Lato-HairlineItalic.png)
 
+## Lato Italic [💾](../../fonts/Lato/ttf/Italic/Lato-Italic.ttf)
+![Lato Italic](Lato__ttf__Italic__Lato-Italic.png)
+
 ## Lato-Light [💾](../../fonts/Lato/ttf/Light/Lato-Light.ttf)
 ![Lato-Light](Lato__ttf__Light__Lato-Light.png)
 
 ## Lato-LightItalic [💾](../../fonts/Lato/ttf/LightItalic/Lato-LightItalic.ttf)
 ![Lato-LightItalic](Lato__ttf__LightItalic__Lato-LightItalic.png)
+
+## Lato Regular [💾](../../fonts/Lato/ttf/Regular/Lato-Regular.ttf)
+![Lato Regular](Lato__ttf__Regular__Lato-Regular.png)
 
 ## LetterGothicStd [💾](../../fonts/LetterGothicStd/otf/Regular/LetterGothicStd-Regular.otf)
 ![LetterGothicStd](LetterGothicStd__otf__Regular__LetterGothicStd-Regular.png)
@@ -4107,12 +4125,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Monaspace Xenon Wide SemiBold Italic [💾](../../fonts/MonaspaceXenon/otf/WideSemiBoldItalic/MonaspaceXenon-WideSemiBoldItalic.otf)
 ![Monaspace Xenon Wide SemiBold Italic](MonaspaceXenon__otf__WideSemiBoldItalic__MonaspaceXenon-WideSemiBoldItalic.png)
 
-## MonoLisa (Variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-Variable.ttf)
-![MonoLisa (Variable)](MonoLisa__ttf__MonoLisa-Variable.png)
-
-## MonoLisa (Variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-VariableItalic.ttf)
-![MonoLisa (Variable)](MonoLisa__ttf__MonoLisa-VariableItalic.png)
-
 ## Monoflow Regular [💾](../../fonts/Monoflow/ttf/Regular/Monoflow-Regular.ttf)
 ![Monoflow Regular](Monoflow__ttf__Regular__Monoflow-Regular.png)
 
@@ -4133,6 +4145,66 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## Monoisome Regular [💾](../../fonts/Monoisome/ttf/Regular/Monoisome-Regular.ttf)
 ![Monoisome Regular](Monoisome__ttf__Regular__Monoisome-Regular.png)
+
+## MonoLisaLiga Nerd Font [💾](../../fonts/MonoLisaLigaNerdFont/ttf/Regular/MonoLisaLigaNerdFont-Regular.ttf)
+![MonoLisaLiga Nerd Font](MonoLisaLigaNerdFont__ttf__Regular__MonoLisaLigaNerdFont-Regular.png)
+
+## MonoLisaLiga Nerd Font Black [💾](../../fonts/MonoLisaLigaNerdFont/ttf/BlackRegular/MonoLisaLigaNerdFont-BlackRegular.ttf)
+![MonoLisaLiga Nerd Font Black](MonoLisaLigaNerdFont__ttf__BlackRegular__MonoLisaLigaNerdFont-BlackRegular.png)
+
+## MonoLisaLiga Nerd Font Black Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/BlackItalic/MonoLisaLigaNerdFont-BlackItalic.ttf)
+![MonoLisaLiga Nerd Font Black Italic](MonoLisaLigaNerdFont__ttf__BlackItalic__MonoLisaLigaNerdFont-BlackItalic.png)
+
+## MonoLisaLiga Nerd Font Bold [💾](../../fonts/MonoLisaLigaNerdFont/ttf/Bold/MonoLisaLigaNerdFont-Bold.ttf)
+![MonoLisaLiga Nerd Font Bold](MonoLisaLigaNerdFont__ttf__Bold__MonoLisaLigaNerdFont-Bold.png)
+
+## MonoLisaLiga Nerd Font Bold Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/BoldItalic/MonoLisaLigaNerdFont-BoldItalic.ttf)
+![MonoLisaLiga Nerd Font Bold Italic](MonoLisaLigaNerdFont__ttf__BoldItalic__MonoLisaLigaNerdFont-BoldItalic.png)
+
+## MonoLisaLiga Nerd Font ExtraBold [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraBoldRegular/MonoLisaLigaNerdFont-ExtraBoldRegular.ttf)
+![MonoLisaLiga Nerd Font ExtraBold](MonoLisaLigaNerdFont__ttf__ExtraBoldRegular__MonoLisaLigaNerdFont-ExtraBoldRegular.png)
+
+## MonoLisaLiga Nerd Font ExtraBold Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraBoldItalic/MonoLisaLigaNerdFont-ExtraBoldItalic.ttf)
+![MonoLisaLiga Nerd Font ExtraBold Italic](MonoLisaLigaNerdFont__ttf__ExtraBoldItalic__MonoLisaLigaNerdFont-ExtraBoldItalic.png)
+
+## MonoLisaLiga Nerd Font ExtraLight [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraLightRegular/MonoLisaLigaNerdFont-ExtraLightRegular.ttf)
+![MonoLisaLiga Nerd Font ExtraLight](MonoLisaLigaNerdFont__ttf__ExtraLightRegular__MonoLisaLigaNerdFont-ExtraLightRegular.png)
+
+## MonoLisaLiga Nerd Font ExtraLight Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ExtraLightItalic/MonoLisaLigaNerdFont-ExtraLightItalic.ttf)
+![MonoLisaLiga Nerd Font ExtraLight Italic](MonoLisaLigaNerdFont__ttf__ExtraLightItalic__MonoLisaLigaNerdFont-ExtraLightItalic.png)
+
+## MonoLisaLiga Nerd Font Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/Italic/MonoLisaLigaNerdFont-Italic.ttf)
+![MonoLisaLiga Nerd Font Italic](MonoLisaLigaNerdFont__ttf__Italic__MonoLisaLigaNerdFont-Italic.png)
+
+## MonoLisaLiga Nerd Font Light [💾](../../fonts/MonoLisaLigaNerdFont/ttf/LightRegular/MonoLisaLigaNerdFont-LightRegular.ttf)
+![MonoLisaLiga Nerd Font Light](MonoLisaLigaNerdFont__ttf__LightRegular__MonoLisaLigaNerdFont-LightRegular.png)
+
+## MonoLisaLiga Nerd Font Light Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/LightItalic/MonoLisaLigaNerdFont-LightItalic.ttf)
+![MonoLisaLiga Nerd Font Light Italic](MonoLisaLigaNerdFont__ttf__LightItalic__MonoLisaLigaNerdFont-LightItalic.png)
+
+## MonoLisaLiga Nerd Font Medium [💾](../../fonts/MonoLisaLigaNerdFont/ttf/MediumRegular/MonoLisaLigaNerdFont-MediumRegular.ttf)
+![MonoLisaLiga Nerd Font Medium](MonoLisaLigaNerdFont__ttf__MediumRegular__MonoLisaLigaNerdFont-MediumRegular.png)
+
+## MonoLisaLiga Nerd Font Medium Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/MediumItalic/MonoLisaLigaNerdFont-MediumItalic.ttf)
+![MonoLisaLiga Nerd Font Medium Italic](MonoLisaLigaNerdFont__ttf__MediumItalic__MonoLisaLigaNerdFont-MediumItalic.png)
+
+## MonoLisaLiga Nerd Font SemiBold [💾](../../fonts/MonoLisaLigaNerdFont/ttf/SemiBoldRegular/MonoLisaLigaNerdFont-SemiBoldRegular.ttf)
+![MonoLisaLiga Nerd Font SemiBold](MonoLisaLigaNerdFont__ttf__SemiBoldRegular__MonoLisaLigaNerdFont-SemiBoldRegular.png)
+
+## MonoLisaLiga Nerd Font SemiBold Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/SemiBoldItalic/MonoLisaLigaNerdFont-SemiBoldItalic.ttf)
+![MonoLisaLiga Nerd Font SemiBold Italic](MonoLisaLigaNerdFont__ttf__SemiBoldItalic__MonoLisaLigaNerdFont-SemiBoldItalic.png)
+
+## MonoLisaLiga Nerd Font Thin [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ThinRegular/MonoLisaLigaNerdFont-ThinRegular.ttf)
+![MonoLisaLiga Nerd Font Thin](MonoLisaLigaNerdFont__ttf__ThinRegular__MonoLisaLigaNerdFont-ThinRegular.png)
+
+## MonoLisaLiga Nerd Font Thin Italic [💾](../../fonts/MonoLisaLigaNerdFont/ttf/ThinItalic/MonoLisaLigaNerdFont-ThinItalic.ttf)
+![MonoLisaLiga Nerd Font Thin Italic](MonoLisaLigaNerdFont__ttf__ThinItalic__MonoLisaLigaNerdFont-ThinItalic.png)
+
+## MonoLisa (Variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-VariableItalic.ttf)
+![MonoLisa (Variable)](MonoLisa__ttf__MonoLisa-VariableItalic.png)
+
+## MonoLisa (Variable) [💾](../../fonts/MonoLisa/ttf/MonoLisa-Variable.ttf)
+![MonoLisa (Variable)](MonoLisa__ttf__MonoLisa-Variable.png)
 
 ## Monotalic Bold [💾](../../fonts/Monotalic/otf/Bold/Monotalic-Bold.otf)
 ![Monotalic Bold](Monotalic__otf__Bold__Monotalic-Bold.png)
@@ -4245,11 +4317,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Noto Sans Bold Italic [💾](../../fonts/NotoSans/ttf/BoldItalic/NotoSans-BoldItalic.ttf)
 ![Noto Sans Bold Italic](NotoSans__ttf__BoldItalic__NotoSans-BoldItalic.png)
 
-## Noto Sans Display (Variable) [💾](../../fonts/NotoSansDisplay/ttf/NotoSansDisplay-Variable.ttf)
-![Noto Sans Display (Variable)](NotoSansDisplay__ttf__NotoSansDisplay-Variable.png)
-
 ## Noto Sans Display (Variable) [💾](../../fonts/NotoSansDisplay/ttf/NotoSansDisplay-VariableItalic.ttf)
 ![Noto Sans Display (Variable)](NotoSansDisplay__ttf__NotoSansDisplay-VariableItalic.png)
+
+## Noto Sans Display (Variable) [💾](../../fonts/NotoSansDisplay/ttf/NotoSansDisplay-Variable.ttf)
+![Noto Sans Display (Variable)](NotoSansDisplay__ttf__NotoSansDisplay-Variable.png)
 
 ## Noto Sans ExtraBold [💾](../../fonts/NotoSans/ttf/ExtraBold/NotoSans-ExtraBold.ttf)
 ![Noto Sans ExtraBold](NotoSans__ttf__ExtraBold__NotoSans-ExtraBold.png)
@@ -4296,11 +4368,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Noto Sans SignWriting Regular [💾](../../fonts/NotoSansSignWriting/ttf/Regular/NotoSansSignWriting-Regular.ttf)
 ![Noto Sans SignWriting Regular](NotoSansSignWriting__ttf__Regular__NotoSansSignWriting-Regular.png)
 
-## Noto Sans Symbols (Variable) [💾](../../fonts/NotoSansSymbols/ttf/NotoSansSymbols-Variable.ttf)
-![Noto Sans Symbols (Variable)](NotoSansSymbols__ttf__NotoSansSymbols-Variable.png)
-
 ## Noto Sans Symbols 2 Regular [💾](../../fonts/NotoSansSymbols2/ttf/Regular/NotoSansSymbols2-Regular.ttf)
 ![Noto Sans Symbols 2 Regular](NotoSansSymbols2__ttf__Regular__NotoSansSymbols2-Regular.png)
+
+## Noto Sans Symbols (Variable) [💾](../../fonts/NotoSansSymbols/ttf/NotoSansSymbols-Variable.ttf)
+![Noto Sans Symbols (Variable)](NotoSansSymbols__ttf__NotoSansSymbols-Variable.png)
 
 ## Noto Sans Thin [💾](../../fonts/NotoSans/ttf/Thin/NotoSans-Thin.ttf)
 ![Noto Sans Thin](NotoSans__ttf__Thin__NotoSans-Thin.png)
@@ -4317,11 +4389,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Noto Serif Bold Italic [💾](../../fonts/NotoSerif/ttf/BoldItalic/NotoSerif-BoldItalic.ttf)
 ![Noto Serif Bold Italic](NotoSerif__ttf__BoldItalic__NotoSerif-BoldItalic.png)
 
-## Noto Serif Display (Variable) [💾](../../fonts/NotoSerifDisplay/ttf/NotoSerifDisplay-Variable.ttf)
-![Noto Serif Display (Variable)](NotoSerifDisplay__ttf__NotoSerifDisplay-Variable.png)
-
 ## Noto Serif Display (Variable) [💾](../../fonts/NotoSerifDisplay/ttf/NotoSerifDisplay-VariableItalic.ttf)
 ![Noto Serif Display (Variable)](NotoSerifDisplay__ttf__NotoSerifDisplay-VariableItalic.png)
+
+## Noto Serif Display (Variable) [💾](../../fonts/NotoSerifDisplay/ttf/NotoSerifDisplay-Variable.ttf)
+![Noto Serif Display (Variable)](NotoSerifDisplay__ttf__NotoSerifDisplay-Variable.png)
 
 ## Noto Serif Italic [💾](../../fonts/NotoSerif/ttf/Italic/NotoSerif-Italic.ttf)
 ![Noto Serif Italic](NotoSerif__ttf__Italic__NotoSerif-Italic.png)
@@ -4338,11 +4410,11 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Ohno Softie Variable (Variable) [💾](../../fonts/OhnoSoftie/otf/OhnoSoftie-Variable.otf)
 ![Ohno Softie Variable (Variable)](OhnoSoftie__otf__OhnoSoftie-Variable.png)
 
-## Open Sans (Variable) [💾](../../fonts/OpenSans/ttf/OpenSans-Variable.ttf)
-![Open Sans (Variable)](OpenSans__ttf__OpenSans-Variable.png)
-
 ## Open Sans (Variable) [💾](../../fonts/OpenSans/ttf/OpenSans-VariableItalic.ttf)
 ![Open Sans (Variable)](OpenSans__ttf__OpenSans-VariableItalic.png)
+
+## Open Sans (Variable) [💾](../../fonts/OpenSans/ttf/OpenSans-Variable.ttf)
+![Open Sans (Variable)](OpenSans__ttf__OpenSans-Variable.png)
 
 ## Operator Mono Bold [💾](../../fonts/OperatorMono/otf/Bold/OperatorMono-Bold.otf)
 ![Operator Mono Bold](OperatorMono__otf__Bold__OperatorMono-Bold.png)
@@ -4380,12 +4452,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Operator Mono Lig Book Italic [💾](../../fonts/OperatorMonoLig/otf/BookItalic/OperatorMonoLig-BookItalic.otf)
 ![Operator Mono Lig Book Italic](OperatorMonoLig__otf__BookItalic__OperatorMonoLig-BookItalic.png)
 
-## Operator Mono Lig Light [💾](../../fonts/OperatorMonoLig/otf/Light/OperatorMonoLig-Light.otf)
-![Operator Mono Lig Light](OperatorMonoLig__otf__Light__OperatorMonoLig-Light.png)
-
-## Operator Mono Lig Light Italic [💾](../../fonts/OperatorMonoLig/otf/LightItalic/OperatorMonoLig-LightItalic.otf)
-![Operator Mono Lig Light Italic](OperatorMonoLig__otf__LightItalic__OperatorMonoLig-LightItalic.png)
-
 ## Operator Mono Light [💾](../../fonts/OperatorMono/otf/Light/OperatorMono-Light.otf)
 ![Operator Mono Light](OperatorMono__otf__Light__OperatorMono-Light.png)
 
@@ -4397,6 +4463,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## Operator Mono Light Nerd Font Complete [💾](../../fonts/OperatorMonoNerdFont/ttf/Light/OperatorMonoNerdFont-Light.ttf)
 ![Operator Mono Light Nerd Font Complete](OperatorMonoNerdFont__ttf__Light__OperatorMonoNerdFont-Light.png)
+
+## Operator Mono Lig Light [💾](../../fonts/OperatorMonoLig/otf/Light/OperatorMonoLig-Light.otf)
+![Operator Mono Lig Light](OperatorMonoLig__otf__Light__OperatorMonoLig-Light.png)
+
+## Operator Mono Lig Light Italic [💾](../../fonts/OperatorMonoLig/otf/LightItalic/OperatorMonoLig-LightItalic.otf)
+![Operator Mono Lig Light Italic](OperatorMonoLig__otf__LightItalic__OperatorMonoLig-LightItalic.png)
 
 ## Operator Mono Medium [💾](../../fonts/OperatorMono/otf/Medium/OperatorMono-Medium.otf)
 ![Operator Mono Medium](OperatorMono__otf__Medium__OperatorMono-Medium.png)
@@ -4458,6 +4530,42 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Overlock Regular [💾](../../fonts/Overlock/ttf/Regular/Overlock-Regular.ttf)
 ![Overlock Regular](Overlock__ttf__Regular__Overlock-Regular.png)
 
+## ParadroidMono Soft Bold [💾](../../fonts/ParadroidMonoSoft/otf/Bold/ParadroidMonoSoft-Bold.otf)
+![ParadroidMono Soft Bold](ParadroidMonoSoft__otf__Bold__ParadroidMonoSoft-Bold.png)
+
+## ParadroidMono Soft Bold Italic [💾](../../fonts/ParadroidMonoSoft/otf/BoldItalic/ParadroidMonoSoft-BoldItalic.otf)
+![ParadroidMono Soft Bold Italic](ParadroidMonoSoft__otf__BoldItalic__ParadroidMonoSoft-BoldItalic.png)
+
+## ParadroidMono Soft ExtraBold [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBold/ParadroidMonoSoft-ExtraBold.otf)
+![ParadroidMono Soft ExtraBold](ParadroidMonoSoft__otf__ExtraBold__ParadroidMonoSoft-ExtraBold.png)
+
+## ParadroidMono Soft ExtraBold Italic [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBoldItalic/ParadroidMonoSoft-ExtraBoldItalic.otf)
+![ParadroidMono Soft ExtraBold Italic](ParadroidMonoSoft__otf__ExtraBoldItalic__ParadroidMonoSoft-ExtraBoldItalic.png)
+
+## ParadroidMono Soft Italic [💾](../../fonts/ParadroidMonoSoft/otf/Italic/ParadroidMonoSoft-Italic.otf)
+![ParadroidMono Soft Italic](ParadroidMonoSoft__otf__Italic__ParadroidMonoSoft-Italic.png)
+
+## ParadroidMono Soft Light [💾](../../fonts/ParadroidMonoSoft/otf/Light/ParadroidMonoSoft-Light.otf)
+![ParadroidMono Soft Light](ParadroidMonoSoft__otf__Light__ParadroidMonoSoft-Light.png)
+
+## ParadroidMono Soft Light Italic [💾](../../fonts/ParadroidMonoSoft/otf/LightItalic/ParadroidMonoSoft-LightItalic.otf)
+![ParadroidMono Soft Light Italic](ParadroidMonoSoft__otf__LightItalic__ParadroidMonoSoft-LightItalic.png)
+
+## ParadroidMono Soft Regular [💾](../../fonts/ParadroidMonoSoft/otf/Regular/ParadroidMonoSoft-Regular.otf)
+![ParadroidMono Soft Regular](ParadroidMonoSoft__otf__Regular__ParadroidMonoSoft-Regular.png)
+
+## psudoFont Liga Mono Bold [💾](../../fonts/psudoFontLigaMono/ttf/Bold/psudoFontLigaMono-Bold.ttf)
+![psudoFont Liga Mono Bold](psudoFontLigaMono__ttf__Bold__psudoFontLigaMono-Bold.png)
+
+## psudoFont Liga Mono Bold Italic [💾](../../fonts/psudoFontLigaMono/ttf/BoldItalic/psudoFontLigaMono-BoldItalic.ttf)
+![psudoFont Liga Mono Bold Italic](psudoFontLigaMono__ttf__BoldItalic__psudoFontLigaMono-BoldItalic.png)
+
+## psudoFont Liga Mono Italic [💾](../../fonts/psudoFontLigaMono/ttf/Italic/psudoFontLigaMono-Italic.ttf)
+![psudoFont Liga Mono Italic](psudoFontLigaMono__ttf__Italic__psudoFontLigaMono-Italic.png)
+
+## psudoFont Liga Mono Regular [💾](../../fonts/psudoFontLigaMono/ttf/Regular/psudoFontLigaMono-Regular.ttf)
+![psudoFont Liga Mono Regular](psudoFontLigaMono__ttf__Regular__psudoFontLigaMono-Regular.png)
+
 ## PT Sans Pro [💾](../../fonts/PTSansPro/otf/Regular/PTSansPro-Regular.otf)
 ![PT Sans Pro](PTSansPro__otf__Regular__PTSansPro-Regular.png)
 
@@ -4493,30 +4601,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## PT Sans Pro Light Italic [💾](../../fonts/PTSansPro/otf/LightItalic/PTSansPro-LightItalic.otf)
 ![PT Sans Pro Light Italic](PTSansPro__otf__LightItalic__PTSansPro-LightItalic.png)
-
-## ParadroidMono Soft Bold [💾](../../fonts/ParadroidMonoSoft/otf/Bold/ParadroidMonoSoft-Bold.otf)
-![ParadroidMono Soft Bold](ParadroidMonoSoft__otf__Bold__ParadroidMonoSoft-Bold.png)
-
-## ParadroidMono Soft Bold Italic [💾](../../fonts/ParadroidMonoSoft/otf/BoldItalic/ParadroidMonoSoft-BoldItalic.otf)
-![ParadroidMono Soft Bold Italic](ParadroidMonoSoft__otf__BoldItalic__ParadroidMonoSoft-BoldItalic.png)
-
-## ParadroidMono Soft ExtraBold [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBold/ParadroidMonoSoft-ExtraBold.otf)
-![ParadroidMono Soft ExtraBold](ParadroidMonoSoft__otf__ExtraBold__ParadroidMonoSoft-ExtraBold.png)
-
-## ParadroidMono Soft ExtraBold Italic [💾](../../fonts/ParadroidMonoSoft/otf/ExtraBoldItalic/ParadroidMonoSoft-ExtraBoldItalic.otf)
-![ParadroidMono Soft ExtraBold Italic](ParadroidMonoSoft__otf__ExtraBoldItalic__ParadroidMonoSoft-ExtraBoldItalic.png)
-
-## ParadroidMono Soft Italic [💾](../../fonts/ParadroidMonoSoft/otf/Italic/ParadroidMonoSoft-Italic.otf)
-![ParadroidMono Soft Italic](ParadroidMonoSoft__otf__Italic__ParadroidMonoSoft-Italic.png)
-
-## ParadroidMono Soft Light [💾](../../fonts/ParadroidMonoSoft/otf/Light/ParadroidMonoSoft-Light.otf)
-![ParadroidMono Soft Light](ParadroidMonoSoft__otf__Light__ParadroidMonoSoft-Light.png)
-
-## ParadroidMono Soft Light Italic [💾](../../fonts/ParadroidMonoSoft/otf/LightItalic/ParadroidMonoSoft-LightItalic.otf)
-![ParadroidMono Soft Light Italic](ParadroidMonoSoft__otf__LightItalic__ParadroidMonoSoft-LightItalic.png)
-
-## ParadroidMono Soft Regular [💾](../../fonts/ParadroidMonoSoft/otf/Regular/ParadroidMonoSoft-Regular.otf)
-![ParadroidMono Soft Regular](ParadroidMonoSoft__otf__Regular__ParadroidMonoSoft-Regular.png)
 
 ## Puffin Display Soft [💾](../../fonts/PuffinDisplaySoft/otf/Regular/PuffinDisplaySoft-Regular.otf)
 ![Puffin Display Soft](PuffinDisplaySoft__otf__Regular__PuffinDisplaySoft-Regular.png)
@@ -4559,30 +4643,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## Puffin Display Soft SmBd Italic [💾](../../fonts/PuffinDisplaySoft/otf/SemiBoldItalic/PuffinDisplaySoft-SemiBoldItalic.otf)
 ![Puffin Display Soft SmBd Italic](PuffinDisplaySoft__otf__SemiBoldItalic__PuffinDisplaySoft-SemiBoldItalic.png)
-
-## RFRostin-Bold [💾](../../fonts/RFRostin/otf/Bold/RFRostin-Bold.otf)
-![RFRostin-Bold](RFRostin__otf__Bold__RFRostin-Bold.png)
-
-## RFRostin-BoldItalic [💾](../../fonts/RFRostin/otf/BoldItalic/RFRostin-BoldItalic.otf)
-![RFRostin-BoldItalic](RFRostin__otf__BoldItalic__RFRostin-BoldItalic.png)
-
-## RFRostin-Italic [💾](../../fonts/RFRostin/otf/Italic/RFRostin-Italic.otf)
-![RFRostin-Italic](RFRostin__otf__Italic__RFRostin-Italic.png)
-
-## RFRostin-Light [💾](../../fonts/RFRostin/otf/Light/RFRostin-Light.otf)
-![RFRostin-Light](RFRostin__otf__Light__RFRostin-Light.png)
-
-## RFRostin-LightItalic [💾](../../fonts/RFRostin/otf/LightItalic/RFRostin-LightItalic.otf)
-![RFRostin-LightItalic](RFRostin__otf__LightItalic__RFRostin-LightItalic.png)
-
-## RFRostin-Regular [💾](../../fonts/RFRostin/otf/Regular/RFRostin-Regular.otf)
-![RFRostin-Regular](RFRostin__otf__Regular__RFRostin-Regular.png)
-
-## RFRostin-Ultralight [💾](../../fonts/RFRostin/otf/Ultralight/RFRostin-Ultralight.otf)
-![RFRostin-Ultralight](RFRostin__otf__Ultralight__RFRostin-Ultralight.png)
-
-## RFRostin-UltralightItalic [💾](../../fonts/RFRostin/otf/UltralightItalic/RFRostin-UltralightItalic.otf)
-![RFRostin-UltralightItalic](RFRostin__otf__UltralightItalic__RFRostin-UltralightItalic.png)
 
 ## Rec Mono Casual [💾](../../fonts/RecMonoCasual/ttf/Regular/RecMonoCasual-Regular.ttf)
 ![Rec Mono Casual](RecMonoCasual__ttf__Regular__RecMonoCasual-Regular.png)
@@ -4631,9 +4691,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## Rec Mono Semicasual Italic [💾](../../fonts/RecMonoSemicasual/ttf/Italic/RecMonoSemicasual-Italic.ttf)
 ![Rec Mono Semicasual Italic](RecMonoSemicasual__ttf__Italic__RecMonoSemicasual-Italic.png)
-
-## Recursive (Variable) [💾](../../fonts/Recursive/ttf/Recursive-Variable.ttf)
-![Recursive (Variable)](Recursive__ttf__Recursive-Variable.png)
 
 ## Recursive Mn Csl St [💾](../../fonts/RecursiveMonoCasualStatic/otf/Regular/RecursiveMonoCasualStatic-Regular.otf)
 ![Recursive Mn Csl St](RecursiveMonoCasualStatic__otf__Regular__RecursiveMonoCasualStatic-Regular.png)
@@ -4827,23 +4884,50 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Recursive Sn Lnr St XBk Italic [💾](../../fonts/RecursiveSansLinearStatic/otf/ExtraBlackItalic/RecursiveSansLinearStatic-ExtraBlackItalic.otf)
 ![Recursive Sn Lnr St XBk Italic](RecursiveSansLinearStatic__otf__ExtraBlackItalic__RecursiveSansLinearStatic-ExtraBlackItalic.png)
 
-## Roboto (Variable) [💾](../../fonts/Roboto/ttf/Roboto-Variable.ttf)
-![Roboto (Variable)](Roboto__ttf__Roboto-Variable.png)
+## Recursive (Variable) [💾](../../fonts/Recursive/ttf/Recursive-Variable.ttf)
+![Recursive (Variable)](Recursive__ttf__Recursive-Variable.png)
 
-## Roboto (Variable) [💾](../../fonts/Roboto/ttf/Roboto-VariableItalic.ttf)
-![Roboto (Variable)](Roboto__ttf__Roboto-VariableItalic.png)
+## RFRostin-Bold [💾](../../fonts/RFRostin/otf/Bold/RFRostin-Bold.otf)
+![RFRostin-Bold](RFRostin__otf__Bold__RFRostin-Bold.png)
+
+## RFRostin-BoldItalic [💾](../../fonts/RFRostin/otf/BoldItalic/RFRostin-BoldItalic.otf)
+![RFRostin-BoldItalic](RFRostin__otf__BoldItalic__RFRostin-BoldItalic.png)
+
+## RFRostin-Italic [💾](../../fonts/RFRostin/otf/Italic/RFRostin-Italic.otf)
+![RFRostin-Italic](RFRostin__otf__Italic__RFRostin-Italic.png)
+
+## RFRostin-Light [💾](../../fonts/RFRostin/otf/Light/RFRostin-Light.otf)
+![RFRostin-Light](RFRostin__otf__Light__RFRostin-Light.png)
+
+## RFRostin-LightItalic [💾](../../fonts/RFRostin/otf/LightItalic/RFRostin-LightItalic.otf)
+![RFRostin-LightItalic](RFRostin__otf__LightItalic__RFRostin-LightItalic.png)
+
+## RFRostin-Regular [💾](../../fonts/RFRostin/otf/Regular/RFRostin-Regular.otf)
+![RFRostin-Regular](RFRostin__otf__Regular__RFRostin-Regular.png)
+
+## RFRostin-Ultralight [💾](../../fonts/RFRostin/otf/Ultralight/RFRostin-Ultralight.otf)
+![RFRostin-Ultralight](RFRostin__otf__Ultralight__RFRostin-Ultralight.png)
+
+## RFRostin-UltralightItalic [💾](../../fonts/RFRostin/otf/UltralightItalic/RFRostin-UltralightItalic.otf)
+![RFRostin-UltralightItalic](RFRostin__otf__UltralightItalic__RFRostin-UltralightItalic.png)
 
 ## Roboto Flex (Variable) [💾](../../fonts/RobotoFlex/ttf/RobotoFlex-Variable.ttf)
 ![Roboto Flex (Variable)](RobotoFlex__ttf__RobotoFlex-Variable.png)
 
-## Roboto Serif (Variable) [💾](../../fonts/RobotoSerif/ttf/RobotoSerif-Variable.ttf)
-![Roboto Serif (Variable)](RobotoSerif__ttf__RobotoSerif-Variable.png)
-
 ## Roboto Serif (Variable) [💾](../../fonts/RobotoSerif/ttf/RobotoSerif-VariableItalic.ttf)
 ![Roboto Serif (Variable)](RobotoSerif__ttf__RobotoSerif-VariableItalic.png)
 
+## Roboto Serif (Variable) [💾](../../fonts/RobotoSerif/ttf/RobotoSerif-Variable.ttf)
+![Roboto Serif (Variable)](RobotoSerif__ttf__RobotoSerif-Variable.png)
+
 ## Roboto Slab (Variable) [💾](../../fonts/RobotoSlab/ttf/RobotoSlab-Variable.ttf)
 ![Roboto Slab (Variable)](RobotoSlab__ttf__RobotoSlab-Variable.png)
+
+## Roboto (Variable) [💾](../../fonts/Roboto/ttf/Roboto-VariableItalic.ttf)
+![Roboto (Variable)](Roboto__ttf__Roboto-VariableItalic.png)
+
+## Roboto (Variable) [💾](../../fonts/Roboto/ttf/Roboto-Variable.ttf)
+![Roboto (Variable)](Roboto__ttf__Roboto-Variable.png)
 
 ## Sauna Mono Pro Bold [💾](../../fonts/SaunaMonoPro/otf/Bold/SaunaMonoPro-Bold.otf)
 ![Sauna Mono Pro Bold](SaunaMonoPro__otf__Bold__SaunaMonoPro-Bold.png)
@@ -4929,9 +5013,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Slate Medium Italic [💾](../../fonts/Slate/ttf/MediumItalic/Slate-MediumItalic.ttf)
 ![Slate Medium Italic](Slate__ttf__MediumItalic__Slate-MediumItalic.png)
 
-## Slate Regular [💾](../../fonts/Slate/ttf/Regular/Slate-Regular.ttf)
-![Slate Regular](Slate__ttf__Regular__Slate-Regular.png)
-
 ## SlatePro [💾](../../fonts/SlatePro/ttf/Regular/SlatePro-Regular.ttf)
 ![SlatePro](SlatePro__ttf__Regular__SlatePro-Regular.png)
 
@@ -4986,6 +5067,9 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## SlatePro-MediumItalic [💾](../../fonts/SlatePro/ttf/MediumItalic/SlatePro-MediumItalic.ttf)
 ![SlatePro-MediumItalic](SlatePro__ttf__MediumItalic__SlatePro-MediumItalic.png)
 
+## Slate Regular [💾](../../fonts/Slate/ttf/Regular/Slate-Regular.ttf)
+![Slate Regular](Slate__ttf__Regular__Slate-Regular.png)
+
 ## Source Code Pro [💾](../../fonts/SourceCodePro/otf/Regular/SourceCodePro-Regular.otf)
 ![Source Code Pro](SourceCodePro__otf__Regular__SourceCodePro-Regular.png)
 
@@ -5034,14 +5118,14 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Spumante-Bold [💾](../../fonts/Spumante/otf/Bold/Spumante-Bold.otf)
 ![Spumante-Bold](Spumante__otf__Bold__Spumante-Bold.png)
 
-## Syne (Variable) [💾](../../fonts/Syne/ttf/Syne-Variable.ttf)
-![Syne (Variable)](Syne__ttf__Syne-Variable.png)
-
 ## Syne Mono Regular [💾](../../fonts/SyneMono/ttf/Regular/SyneMono-Regular.ttf)
 ![Syne Mono Regular](SyneMono__ttf__Regular__SyneMono-Regular.png)
 
 ## Syne Tactile Regular [💾](../../fonts/SyneTactile/ttf/Regular/SyneTactile-Regular.ttf)
 ![Syne Tactile Regular](SyneTactile__ttf__Regular__SyneTactile-Regular.png)
+
+## Syne (Variable) [💾](../../fonts/Syne/ttf/Syne-Variable.ttf)
+![Syne (Variable)](Syne__ttf__Syne-Variable.png)
 
 ## TG Praktikal Black [💾](../../fonts/TGPraktikal/otf/Black/TGPraktikal-Black.otf)
 ![TG Praktikal Black](TGPraktikal__otf__Black__TGPraktikal-Black.png)
@@ -5084,6 +5168,54 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## TT Autonomous Mono Regular [💾](../../fonts/TTAutonomousMono/otf/Regular/TTAutonomousMono-Regular.otf)
 ![TT Autonomous Mono Regular](TTAutonomousMono__otf__Regular__TTAutonomousMono-Regular.png)
+
+## Twilio Sans Mono [💾](../../fonts/TwilioSansMono/otf/Regular/TwilioSansMono-Regular.otf)
+![Twilio Sans Mono](TwilioSansMono__otf__Regular__TwilioSansMono-Regular.png)
+
+## Twilio Sans Mono Bold [💾](../../fonts/TwilioSansMono/otf/Bold/TwilioSansMono-Bold.otf)
+![Twilio Sans Mono Bold](TwilioSansMono__otf__Bold__TwilioSansMono-Bold.png)
+
+## Twilio Sans Mono Bold Italic [💾](../../fonts/TwilioSansMono/otf/BoldItalic/TwilioSansMono-BoldItalic.otf)
+![Twilio Sans Mono Bold Italic](TwilioSansMono__otf__BoldItalic__TwilioSansMono-BoldItalic.png)
+
+## Twilio Sans Mono ExBld [💾](../../fonts/TwilioSansMono/otf/Extrabold/TwilioSansMono-Extrabold.otf)
+![Twilio Sans Mono ExBld](TwilioSansMono__otf__Extrabold__TwilioSansMono-Extrabold.png)
+
+## Twilio Sans Mono ExBld Italic [💾](../../fonts/TwilioSansMono/otf/ExtraboldItalic/TwilioSansMono-ExtraboldItalic.otf)
+![Twilio Sans Mono ExBld Italic](TwilioSansMono__otf__ExtraboldItalic__TwilioSansMono-ExtraboldItalic.png)
+
+## Twilio Sans Mono Heavy [💾](../../fonts/TwilioSansMono/otf/Heavy/TwilioSansMono-Heavy.otf)
+![Twilio Sans Mono Heavy](TwilioSansMono__otf__Heavy__TwilioSansMono-Heavy.png)
+
+## Twilio Sans Mono Heavy Italic [💾](../../fonts/TwilioSansMono/otf/HeavyItalic/TwilioSansMono-HeavyItalic.otf)
+![Twilio Sans Mono Heavy Italic](TwilioSansMono__otf__HeavyItalic__TwilioSansMono-HeavyItalic.png)
+
+## Twilio Sans Mono Italic [💾](../../fonts/TwilioSansMono/otf/RegularItalic/TwilioSansMono-RegularItalic.otf)
+![Twilio Sans Mono Italic](TwilioSansMono__otf__RegularItalic__TwilioSansMono-RegularItalic.png)
+
+## Twilio Sans Mono Light [💾](../../fonts/TwilioSansMono/otf/Light/TwilioSansMono-Light.otf)
+![Twilio Sans Mono Light](TwilioSansMono__otf__Light__TwilioSansMono-Light.png)
+
+## Twilio Sans Mono Light Italic [💾](../../fonts/TwilioSansMono/otf/LightItalic/TwilioSansMono-LightItalic.otf)
+![Twilio Sans Mono Light Italic](TwilioSansMono__otf__LightItalic__TwilioSansMono-LightItalic.png)
+
+## Twilio Sans Mono Medium [💾](../../fonts/TwilioSansMono/otf/Medium/TwilioSansMono-Medium.otf)
+![Twilio Sans Mono Medium](TwilioSansMono__otf__Medium__TwilioSansMono-Medium.png)
+
+## Twilio Sans Mono Medium Italic [💾](../../fonts/TwilioSansMono/otf/MediumItalic/TwilioSansMono-MediumItalic.otf)
+![Twilio Sans Mono Medium Italic](TwilioSansMono__otf__MediumItalic__TwilioSansMono-MediumItalic.png)
+
+## Twilio Sans Mono Retina [💾](../../fonts/TwilioSansMono/otf/Retina/TwilioSansMono-Retina.otf)
+![Twilio Sans Mono Retina](TwilioSansMono__otf__Retina__TwilioSansMono-Retina.png)
+
+## Twilio Sans Mono Retina Italic [💾](../../fonts/TwilioSansMono/otf/RetinaItalic/TwilioSansMono-RetinaItalic.otf)
+![Twilio Sans Mono Retina Italic](TwilioSansMono__otf__RetinaItalic__TwilioSansMono-RetinaItalic.png)
+
+## Twilio Sans Mono SmBld [💾](../../fonts/TwilioSansMono/otf/Semibold/TwilioSansMono-Semibold.otf)
+![Twilio Sans Mono SmBld](TwilioSansMono__otf__Semibold__TwilioSansMono-Semibold.png)
+
+## Twilio Sans Mono SmBld Italic [💾](../../fonts/TwilioSansMono/otf/SemiboldItalic/TwilioSansMono-SemiboldItalic.otf)
+![Twilio Sans Mono SmBld Italic](TwilioSansMono__otf__SemiboldItalic__TwilioSansMono-SemiboldItalic.png)
 
 ## TX-02 Black [💾](../../fonts/TX-02/otf/Black/TX-02-Black.otf)
 ![TX-02 Black](TX-02__otf__Black__TX-02-Black.png)
@@ -5144,54 +5276,6 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## TX-02 Thin Oblique [💾](../../fonts/TX-02/otf/ThinOblique/TX-02-ThinOblique.otf)
 ![TX-02 Thin Oblique](TX-02__otf__ThinOblique__TX-02-ThinOblique.png)
-
-## Twilio Sans Mono [💾](../../fonts/TwilioSansMono/otf/Regular/TwilioSansMono-Regular.otf)
-![Twilio Sans Mono](TwilioSansMono__otf__Regular__TwilioSansMono-Regular.png)
-
-## Twilio Sans Mono Bold [💾](../../fonts/TwilioSansMono/otf/Bold/TwilioSansMono-Bold.otf)
-![Twilio Sans Mono Bold](TwilioSansMono__otf__Bold__TwilioSansMono-Bold.png)
-
-## Twilio Sans Mono Bold Italic [💾](../../fonts/TwilioSansMono/otf/BoldItalic/TwilioSansMono-BoldItalic.otf)
-![Twilio Sans Mono Bold Italic](TwilioSansMono__otf__BoldItalic__TwilioSansMono-BoldItalic.png)
-
-## Twilio Sans Mono ExBld [💾](../../fonts/TwilioSansMono/otf/Extrabold/TwilioSansMono-Extrabold.otf)
-![Twilio Sans Mono ExBld](TwilioSansMono__otf__Extrabold__TwilioSansMono-Extrabold.png)
-
-## Twilio Sans Mono ExBld Italic [💾](../../fonts/TwilioSansMono/otf/ExtraboldItalic/TwilioSansMono-ExtraboldItalic.otf)
-![Twilio Sans Mono ExBld Italic](TwilioSansMono__otf__ExtraboldItalic__TwilioSansMono-ExtraboldItalic.png)
-
-## Twilio Sans Mono Heavy [💾](../../fonts/TwilioSansMono/otf/Heavy/TwilioSansMono-Heavy.otf)
-![Twilio Sans Mono Heavy](TwilioSansMono__otf__Heavy__TwilioSansMono-Heavy.png)
-
-## Twilio Sans Mono Heavy Italic [💾](../../fonts/TwilioSansMono/otf/HeavyItalic/TwilioSansMono-HeavyItalic.otf)
-![Twilio Sans Mono Heavy Italic](TwilioSansMono__otf__HeavyItalic__TwilioSansMono-HeavyItalic.png)
-
-## Twilio Sans Mono Italic [💾](../../fonts/TwilioSansMono/otf/RegularItalic/TwilioSansMono-RegularItalic.otf)
-![Twilio Sans Mono Italic](TwilioSansMono__otf__RegularItalic__TwilioSansMono-RegularItalic.png)
-
-## Twilio Sans Mono Light [💾](../../fonts/TwilioSansMono/otf/Light/TwilioSansMono-Light.otf)
-![Twilio Sans Mono Light](TwilioSansMono__otf__Light__TwilioSansMono-Light.png)
-
-## Twilio Sans Mono Light Italic [💾](../../fonts/TwilioSansMono/otf/LightItalic/TwilioSansMono-LightItalic.otf)
-![Twilio Sans Mono Light Italic](TwilioSansMono__otf__LightItalic__TwilioSansMono-LightItalic.png)
-
-## Twilio Sans Mono Medium [💾](../../fonts/TwilioSansMono/otf/Medium/TwilioSansMono-Medium.otf)
-![Twilio Sans Mono Medium](TwilioSansMono__otf__Medium__TwilioSansMono-Medium.png)
-
-## Twilio Sans Mono Medium Italic [💾](../../fonts/TwilioSansMono/otf/MediumItalic/TwilioSansMono-MediumItalic.otf)
-![Twilio Sans Mono Medium Italic](TwilioSansMono__otf__MediumItalic__TwilioSansMono-MediumItalic.png)
-
-## Twilio Sans Mono Retina [💾](../../fonts/TwilioSansMono/otf/Retina/TwilioSansMono-Retina.otf)
-![Twilio Sans Mono Retina](TwilioSansMono__otf__Retina__TwilioSansMono-Retina.png)
-
-## Twilio Sans Mono Retina Italic [💾](../../fonts/TwilioSansMono/otf/RetinaItalic/TwilioSansMono-RetinaItalic.otf)
-![Twilio Sans Mono Retina Italic](TwilioSansMono__otf__RetinaItalic__TwilioSansMono-RetinaItalic.png)
-
-## Twilio Sans Mono SmBld [💾](../../fonts/TwilioSansMono/otf/Semibold/TwilioSansMono-Semibold.otf)
-![Twilio Sans Mono SmBld](TwilioSansMono__otf__Semibold__TwilioSansMono-Semibold.png)
-
-## Twilio Sans Mono SmBld Italic [💾](../../fonts/TwilioSansMono/otf/SemiboldItalic/TwilioSansMono-SemiboldItalic.otf)
-![Twilio Sans Mono SmBld Italic](TwilioSansMono__otf__SemiboldItalic__TwilioSansMono-SemiboldItalic.png)
 
 ## Uber Move Mono [💾](../../fonts/UberMoveMono/ttf/Regular/UberMoveMono-Regular.ttf)
 ![Uber Move Mono](UberMoveMono__ttf__Regular__UberMoveMono-Regular.png)
@@ -5435,16 +5519,4 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 
 ## Zeitung Pro Thin Italic [💾](../../fonts/ZeitungPro/otf/ThinItalic/ZeitungPro-ThinItalic.otf)
 ![Zeitung Pro Thin Italic](ZeitungPro__otf__ThinItalic__ZeitungPro-ThinItalic.png)
-
-## psudoFont Liga Mono Bold [💾](../../fonts/psudoFontLigaMono/ttf/Bold/psudoFontLigaMono-Bold.ttf)
-![psudoFont Liga Mono Bold](psudoFontLigaMono__ttf__Bold__psudoFontLigaMono-Bold.png)
-
-## psudoFont Liga Mono Bold Italic [💾](../../fonts/psudoFontLigaMono/ttf/BoldItalic/psudoFontLigaMono-BoldItalic.ttf)
-![psudoFont Liga Mono Bold Italic](psudoFontLigaMono__ttf__BoldItalic__psudoFontLigaMono-BoldItalic.png)
-
-## psudoFont Liga Mono Italic [💾](../../fonts/psudoFontLigaMono/ttf/Italic/psudoFontLigaMono-Italic.ttf)
-![psudoFont Liga Mono Italic](psudoFontLigaMono__ttf__Italic__psudoFontLigaMono-Italic.png)
-
-## psudoFont Liga Mono Regular [💾](../../fonts/psudoFontLigaMono/ttf/Regular/psudoFontLigaMono-Regular.ttf)
-![psudoFont Liga Mono Regular](psudoFontLigaMono__ttf__Regular__psudoFontLigaMono-Regular.png)
 

@@ -22,6 +22,7 @@ help:
 	@echo ""
 	@echo "Available targets:"
 	@echo "  make help                - Show this help message"
+	@echo "  make all                 - Targets: normal, usage, previews, stats"
 	@echo ""
 	@echo "Font Organization:"
 	@echo "  make normal              - Organize fonts using FontConfig metadata"
@@ -52,6 +53,9 @@ help:
 	@echo ""
 	@echo "Environment variables:"
 	@echo "  PREFIX=$(PREFIX)"
+
+.PHONY: all
+all: normal usage previews stats
 
 .PHONY: previews
 previews:

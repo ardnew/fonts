@@ -1,6 +1,6 @@
 # fonts
 
-A curated collection of **158 font families** (1,359 font files) organized for easy installation and browsing.
+A curated collection of **159 font families** (1,377 font files) organized for easy installation and browsing.
 
 [**→ Browse font previews**](share/doc/fonts/README.md)
 
@@ -52,12 +52,12 @@ Fonts are auto-organized by family and format using FontConfig metadata.
 
 ## Statistics
 
-> Generated 2026-02-03 • [view details](bin/gen-stats.sh)
+> Generated 2026-02-05 • [view details](bin/gen-stats.sh)
 
-- **Font Files:** 1,359
-- **Families:** 158
+- **Font Files:** 1,377
+- **Families:** 159
 - **Variable Fonts:** 37
-- **Formats:** 919 OTF, 440 TTF
+- **Formats:** 919 OTF, 458 TTF
 
 ## Installation
 
