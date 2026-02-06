@@ -1,10 +1,11 @@
 # Font Repository Makefile
 
 # Variables
-PREFIX ?= $(HOME)/.local
+XDG_DATA_HOME ?= $(HOME)/.local/share
+XDG_CONFIG_HOME ?= $(HOME)/.config
 FONTS_DIR = share/fonts
 BIN_DIR = bin
-INSTALL_FONTS_DIR = $(PREFIX)/$(FONTS_DIR)
+INSTALL_FONTS_DIR = $(XDG_DATA_HOME)/fonts
 
 # Helper function to find duplicate/delete directories
 define find_prune_targets
@@ -45,14 +46,17 @@ help:
 	@echo "  make usage               - Remove all usage restrictions"
 	@echo ""
 	@echo "Installation:"
-	@echo "  make install             - Install fonts to PREFIX (default: $(PREFIX))"
-	@echo "  make uninstall           - Uninstall fonts from PREFIX"
+	@echo "  make install             - Install fonts and configure fontconfig"
+	@echo "  make uninstall           - Uninstall fonts from XDG_DATA_HOME"
+	@echo "  make fontconfig          - Generate fontconfig configuration files"
 	@echo ""
 	@echo "Release Management:"
 	@echo "  make release             - Create and publish a new release"
 	@echo ""
 	@echo "Environment variables:"
-	@echo "  PREFIX=$(PREFIX)"
+	@echo "  XDG_DATA_HOME=$(XDG_DATA_HOME)"
+	@echo "  XDG_CONFIG_HOME=$(XDG_CONFIG_HOME)"
+	@echo "  INSTALL_FONTS_DIR=$(INSTALL_FONTS_DIR)"
 
 .PHONY: all
 all: normal usage previews stats
@@ -186,15 +190,20 @@ clean:
 		echo "==> Clean cancelled."; \
 	fi
 
+.PHONY: fontconfig
+fontconfig:
+	@XDG_CONFIG_HOME=$(XDG_CONFIG_HOME) XDG_DATA_HOME=$(XDG_DATA_HOME) $(BIN_DIR)/gen-fontconfig.sh
+	@echo "==> Updating font cache..."
+	@fc-cache -f $(INSTALL_FONTS_DIR) 2>/dev/null || true
+	@echo "==> Fontconfig update complete!"
+
 .PHONY: install
 install:
 	@echo "==> Installing fonts to $(INSTALL_FONTS_DIR)..."
 	@install -d $(INSTALL_FONTS_DIR)
 	@cp -r $(FONTS_DIR)/* $(INSTALL_FONTS_DIR)/
-	@echo "==> Updating font cache..."
-	@fc-cache -f $(INSTALL_FONTS_DIR) 2>/dev/null || true
-	@echo "==> Installation complete!"
-	@echo "    Fonts installed to: $(INSTALL_FONTS_DIR)"
+	@echo "==> Fonts installed!"
+	@$(MAKE) --no-print-directory fontconfig
 
 .PHONY: uninstall
 uninstall:
