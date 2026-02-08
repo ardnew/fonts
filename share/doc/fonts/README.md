@@ -614,6 +614,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Interstate Thin Italic](#interstate-thin-italic) [💾](../../fonts/Interstate/otf/ThinItalic/Interstate-ThinItalic.otf)
 - [Interstate UltraBlack](#interstate-ultrablack) [💾](../../fonts/Interstate/otf/UltraBlack/Interstate-UltraBlack.otf)
 - [Interstate UltraBlack Italic](#interstate-ultrablack-italic) [💾](../../fonts/Interstate/otf/UltraBlackItalic/Interstate-UltraBlackItalic.otf)
+- [Inter (Variable)](#inter-variable) [💾](../../fonts/Inter/ttf/Inter-VariableItalic.ttf)
+- [Inter (Variable)](#inter-variable) [💾](../../fonts/Inter/ttf/Inter-Variable.ttf)
 - [Ioskeley Mono](#ioskeley-mono) [💾](../../fonts/IoskeleyMono/ttf/Regular/IoskeleyMono-Regular.ttf)
 - [Ioskeley Mono Bold](#ioskeley-mono-bold) [💾](../../fonts/IoskeleyMono/ttf/Bold/IoskeleyMono-Bold.ttf)
 - [Ioskeley Mono Bold Italic](#ioskeley-mono-bold-italic) [💾](../../fonts/IoskeleyMono/ttf/BoldItalic/IoskeleyMono-BoldItalic.ttf)
@@ -1175,6 +1177,7 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Recursive Sn Lnr St XBk](#recursive-sn-lnr-st-xbk) [💾](../../fonts/RecursiveSansLinearStatic/otf/ExtraBlack/RecursiveSansLinearStatic-ExtraBlack.otf)
 - [Recursive Sn Lnr St XBk Italic](#recursive-sn-lnr-st-xbk-italic) [💾](../../fonts/RecursiveSansLinearStatic/otf/ExtraBlackItalic/RecursiveSansLinearStatic-ExtraBlackItalic.otf)
 - [Recursive (Variable)](#recursive-variable) [💾](../../fonts/Recursive/ttf/Recursive-Variable.ttf)
+- [Reddit Mono (Variable)](#reddit-mono-variable) [💾](../../fonts/RedditMono/ttf/RedditMono-Variable.ttf)
 - [RFRostin-Bold](#rfrostin-bold) [💾](../../fonts/RFRostin/otf/Bold/RFRostin-Bold.otf)
 - [RFRostin-BoldItalic](#rfrostin-bolditalic) [💾](../../fonts/RFRostin/otf/BoldItalic/RFRostin-BoldItalic.otf)
 - [RFRostin-Italic](#rfrostin-italic) [💾](../../fonts/RFRostin/otf/Italic/RFRostin-Italic.otf)
@@ -1241,6 +1244,8 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Source Code Pro Black Italic](#source-code-pro-black-italic) [💾](../../fonts/SourceCodePro/otf/BlackItalic/SourceCodePro-BlackItalic.otf)
 - [Source Code Pro Bold](#source-code-pro-bold) [💾](../../fonts/SourceCodePro/otf/Bold/SourceCodePro-Bold.otf)
 - [Source Code Pro Bold Italic](#source-code-pro-bold-italic) [💾](../../fonts/SourceCodePro/otf/BoldItalic/SourceCodePro-BoldItalic.otf)
+- [Source Code Pro ExtraBold](#source-code-pro-extrabold) [💾](../../fonts/SourceCodePro/ttf/ExtraBold/SourceCodePro-ExtraBold.ttf)
+- [Source Code Pro ExtraBold Italic](#source-code-pro-extrabold-italic) [💾](../../fonts/SourceCodePro/ttf/ExtraBoldItalic/SourceCodePro-ExtraBoldItalic.ttf)
 - [Source Code Pro ExtraLight](#source-code-pro-extralight) [💾](../../fonts/SourceCodePro/otf/ExtraLight/SourceCodePro-ExtraLight.otf)
 - [Source Code Pro ExtraLight Italic](#source-code-pro-extralight-italic) [💾](../../fonts/SourceCodePro/otf/ExtraLightItalic/SourceCodePro-ExtraLightItalic.otf)
 - [Source Code Pro Italic](#source-code-pro-italic) [💾](../../fonts/SourceCodePro/otf/Italic/SourceCodePro-Italic.otf)
@@ -1249,9 +1254,15 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 - [Source Code Pro Medium](#source-code-pro-medium) [💾](../../fonts/SourceCodePro/otf/Medium/SourceCodePro-Medium.otf)
 - [Source Code Pro Medium Italic](#source-code-pro-medium-italic) [💾](../../fonts/SourceCodePro/otf/MediumItalic/SourceCodePro-MediumItalic.otf)
 - [Source Code Pro Semibold](#source-code-pro-semibold) [💾](../../fonts/SourceCodePro/otf/Semibold/SourceCodePro-Semibold.otf)
+- [Source Code Pro SemiBold](#source-code-pro-semibold) [💾](../../fonts/SourceCodePro/ttf/SemiBold/SourceCodePro-SemiBold.ttf)
 - [Source Code Pro Semibold Italic](#source-code-pro-semibold-italic) [💾](../../fonts/SourceCodePro/otf/SemiboldItalic/SourceCodePro-SemiboldItalic.otf)
+- [Source Code Pro SemiBold Italic](#source-code-pro-semibold-italic) [💾](../../fonts/SourceCodePro/ttf/SemiBoldItalic/SourceCodePro-SemiBoldItalic.ttf)
+- [Spline Sans Mono (Variable)](#spline-sans-mono-variable) [💾](../../fonts/SplineSansMono/ttf/SplineSansMono-VariableItalic.ttf)
+- [Spline Sans Mono (Variable)](#spline-sans-mono-variable) [💾](../../fonts/SplineSansMono/ttf/SplineSansMono-Variable.ttf)
 - [Spumante](#spumante) [💾](../../fonts/Spumante/otf/Regular/Spumante-Regular.otf)
 - [Spumante-Bold](#spumante-bold) [💾](../../fonts/Spumante/otf/Bold/Spumante-Bold.otf)
+- [SUSE Mono (Variable)](#suse-mono-variable) [💾](../../fonts/SUSEMono/ttf/SUSEMono-VariableItalic.ttf)
+- [SUSE Mono (Variable)](#suse-mono-variable) [💾](../../fonts/SUSEMono/ttf/SUSEMono-Variable.ttf)
 - [Syne Mono Regular](#syne-mono-regular) [💾](../../fonts/SyneMono/ttf/Regular/SyneMono-Regular.ttf)
 - [Syne Tactile Regular](#syne-tactile-regular) [💾](../../fonts/SyneTactile/ttf/Regular/SyneTactile-Regular.ttf)
 - [Syne (Variable)](#syne-variable) [💾](../../fonts/Syne/ttf/Syne-Variable.ttf)
@@ -3204,6 +3215,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Interstate UltraBlack Italic [💾](../../fonts/Interstate/otf/UltraBlackItalic/Interstate-UltraBlackItalic.otf)
 ![Interstate UltraBlack Italic](Interstate__otf__UltraBlackItalic__Interstate-UltraBlackItalic.png)
 
+## Inter (Variable) [💾](../../fonts/Inter/ttf/Inter-VariableItalic.ttf)
+![Inter (Variable)](Inter__ttf__Inter-VariableItalic.png)
+
+## Inter (Variable) [💾](../../fonts/Inter/ttf/Inter-Variable.ttf)
+![Inter (Variable)](Inter__ttf__Inter-Variable.png)
+
 ## Ioskeley Mono [💾](../../fonts/IoskeleyMono/ttf/Regular/IoskeleyMono-Regular.ttf)
 ![Ioskeley Mono](IoskeleyMono__ttf__Regular__IoskeleyMono-Regular.png)
 
@@ -4887,6 +4904,9 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Recursive (Variable) [💾](../../fonts/Recursive/ttf/Recursive-Variable.ttf)
 ![Recursive (Variable)](Recursive__ttf__Recursive-Variable.png)
 
+## Reddit Mono (Variable) [💾](../../fonts/RedditMono/ttf/RedditMono-Variable.ttf)
+![Reddit Mono (Variable)](RedditMono__ttf__RedditMono-Variable.png)
+
 ## RFRostin-Bold [💾](../../fonts/RFRostin/otf/Bold/RFRostin-Bold.otf)
 ![RFRostin-Bold](RFRostin__otf__Bold__RFRostin-Bold.png)
 
@@ -5085,6 +5105,12 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Source Code Pro Bold Italic [💾](../../fonts/SourceCodePro/otf/BoldItalic/SourceCodePro-BoldItalic.otf)
 ![Source Code Pro Bold Italic](SourceCodePro__otf__BoldItalic__SourceCodePro-BoldItalic.png)
 
+## Source Code Pro ExtraBold [💾](../../fonts/SourceCodePro/ttf/ExtraBold/SourceCodePro-ExtraBold.ttf)
+![Source Code Pro ExtraBold](SourceCodePro__ttf__ExtraBold__SourceCodePro-ExtraBold.png)
+
+## Source Code Pro ExtraBold Italic [💾](../../fonts/SourceCodePro/ttf/ExtraBoldItalic/SourceCodePro-ExtraBoldItalic.ttf)
+![Source Code Pro ExtraBold Italic](SourceCodePro__ttf__ExtraBoldItalic__SourceCodePro-ExtraBoldItalic.png)
+
 ## Source Code Pro ExtraLight [💾](../../fonts/SourceCodePro/otf/ExtraLight/SourceCodePro-ExtraLight.otf)
 ![Source Code Pro ExtraLight](SourceCodePro__otf__ExtraLight__SourceCodePro-ExtraLight.png)
 
@@ -5109,14 +5135,32 @@ Preview images are generated using FontForge's `fontimage` tool, displaying uppe
 ## Source Code Pro Semibold [💾](../../fonts/SourceCodePro/otf/Semibold/SourceCodePro-Semibold.otf)
 ![Source Code Pro Semibold](SourceCodePro__otf__Semibold__SourceCodePro-Semibold.png)
 
+## Source Code Pro SemiBold [💾](../../fonts/SourceCodePro/ttf/SemiBold/SourceCodePro-SemiBold.ttf)
+![Source Code Pro SemiBold](SourceCodePro__ttf__SemiBold__SourceCodePro-SemiBold.png)
+
 ## Source Code Pro Semibold Italic [💾](../../fonts/SourceCodePro/otf/SemiboldItalic/SourceCodePro-SemiboldItalic.otf)
 ![Source Code Pro Semibold Italic](SourceCodePro__otf__SemiboldItalic__SourceCodePro-SemiboldItalic.png)
+
+## Source Code Pro SemiBold Italic [💾](../../fonts/SourceCodePro/ttf/SemiBoldItalic/SourceCodePro-SemiBoldItalic.ttf)
+![Source Code Pro SemiBold Italic](SourceCodePro__ttf__SemiBoldItalic__SourceCodePro-SemiBoldItalic.png)
+
+## Spline Sans Mono (Variable) [💾](../../fonts/SplineSansMono/ttf/SplineSansMono-VariableItalic.ttf)
+![Spline Sans Mono (Variable)](SplineSansMono__ttf__SplineSansMono-VariableItalic.png)
+
+## Spline Sans Mono (Variable) [💾](../../fonts/SplineSansMono/ttf/SplineSansMono-Variable.ttf)
+![Spline Sans Mono (Variable)](SplineSansMono__ttf__SplineSansMono-Variable.png)
 
 ## Spumante [💾](../../fonts/Spumante/otf/Regular/Spumante-Regular.otf)
 ![Spumante](Spumante__otf__Regular__Spumante-Regular.png)
 
 ## Spumante-Bold [💾](../../fonts/Spumante/otf/Bold/Spumante-Bold.otf)
 ![Spumante-Bold](Spumante__otf__Bold__Spumante-Bold.png)
+
+## SUSE Mono (Variable) [💾](../../fonts/SUSEMono/ttf/SUSEMono-VariableItalic.ttf)
+![SUSE Mono (Variable)](SUSEMono__ttf__SUSEMono-VariableItalic.png)
+
+## SUSE Mono (Variable) [💾](../../fonts/SUSEMono/ttf/SUSEMono-Variable.ttf)
+![SUSE Mono (Variable)](SUSEMono__ttf__SUSEMono-Variable.png)
 
 ## Syne Mono Regular [💾](../../fonts/SyneMono/ttf/Regular/SyneMono-Regular.ttf)
 ![Syne Mono Regular](SyneMono__ttf__Regular__SyneMono-Regular.png)
