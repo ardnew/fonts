@@ -1,8 +1,20 @@
 # fonts
 
-A curated collection of **163 font families** (1,388 font files) organized for easy installation and browsing.
+This repository serves two personal use cases:
 
-[**→ Browse font previews**](share/doc/fonts/README.md)
+1. A curated library of **163 font families** (1,388 font files) organized for easy installation and browsing.
+   - ### [Browse previews →](share/doc/fonts/README.md)
+2. Tools for managing font file libraries, including: 
+   - GNU Makefile to orchestrate all management operations with maximum concurrency
+   - Supports self-testing to verify all required tools are available and functioning (smoke test)
+   - Normalize file paths and names using a common, catalog-wide schema (dry-run capable)
+   - De-duplicate _all_ fonts – across any combination of static font files and [variable font](https://en.wikipedia.org/wiki/Variable_font) embeddings (dry-run capable)
+   - Stores duplicates with unique names in backup directories for manual confirmation and pruning
+   - Clear all access restrictions (see field [`fsType`](https://learn.microsoft.com/en-us/typography/opentype/spec/os2#fstype) defined in the [OpenType metrics table (OS/2)](https://learn.microsoft.com/en-us/typography/opentype/spec/os2))
+   - Generate exemplar preview images with groupings to compare frequently similar glyphs
+   - Construct FontConfig standard files and directories for all fonts (symlink-based font enablement)
+   - Automatically updates dynamic Markdown content including library statistics and preview gallery
+   - Bump version, create Git tag, and publish release including a `.zip` distribution package
 
 ## Quick Start
 
@@ -16,25 +28,23 @@ make smoke all
 sudo make install PREFIX=/usr
 ```
 
-The included scripts will then automatically:
-
-- locate, identify, and rename according to family/format/style,
-- de-duplicate (with [variable font](https://en.wikipedia.org/wiki/Variable_font) support),
-- clear all embedded usage restrictions, and
-- generate [preview images](share/doc/fonts).
-
 ## Common Tasks
 
-| Task | Command |
-|------|---------|
-| **Validate repository** | `make smoke` |
-| **Preview font changes** | `make dryrun` |
-| **Organize fonts** | `make normal` |
-| **Remove usage restrictions** | `make usage` |
-| **Generate previews** | `make previews` |
-| **Update statistics** | `make stats` |
-| **Install fonts** | `make install` |
-| **Remove duplicates** | `make clean` |
+| [`Makefile`](Makefile) Target | Description |
+|:-------:|:-----------|
+| `help` | **Summarize available targets** |
+| `smoke` | **Validate repository, required tools** |
+| `all` | **Targets: `normal` `usage` `previews` `stats`** |
+| `dryrun` | **Preview font changes** |
+| `normal` | **Organize fonts** |
+| `usage` | **Clear access/usage restrictions** |
+| `previews` | **Generate preview images** |
+| `stats` | **Update statistics** |
+| `install` | **Install fonts** |
+| `uninstall` | **Uninstall fonts** |
+| `fontconfig` | **Generate FontConfig metadata** |
+| `clean` | **Remove duplicates** (_with confirmation_) |
+| `release` | **Version, tag, publish to GitHub** |
 
 ## Repository Structure
 
@@ -58,18 +68,6 @@ Fonts are auto-organized by family and format using FontConfig metadata.
 - **Families:** 163
 - **Variable Fonts:** 44
 - **Formats:** 919 OTF, 469 TTF
-
-## Installation
-
-```bash
-# Default location (~/.local/share/fonts)
-make install
-
-# System-wide (/usr/share/fonts)
-sudo make install PREFIX=/usr
-```
-
-Fonts are automatically available after installation.
 
 <details>
 <summary><strong>Advanced Usage</strong></summary>
@@ -119,5 +117,6 @@ All scripts include `--help` for detailed options:
 - [`gen-stats.sh`](bin/gen-stats.sh) - Calculate repository statistics
 - [`rename-fonts.sh`](bin/rename-fonts.sh) - Organize fonts by metadata
 - [`set-usage.sh`](bin/set-usage.sh) - Remove font usage restrictions
+- [`gen-fontconfig.sh`](bin/gen-fontconfig.sh) - Generate FontConfig config files and directories
 
 **Requirements:** fontconfig, fontforge, fonttools, GNU parallel
