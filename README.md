@@ -62,7 +62,7 @@ Fonts are auto-organized by family and format using FontConfig metadata.
 
 ## Statistics
 
-> Generated 2026-02-08 • [view details](bin/gen-stats.sh)
+> Generated 2026-07-29 • [view details](bin/gen-stats.sh)
 
 - **Font Files:** 1,388
 - **Families:** 163

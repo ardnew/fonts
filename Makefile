@@ -28,9 +28,11 @@ help:
 	@echo "Font Organization:"
 	@echo "  make normal              - Organize fonts using FontConfig metadata"
 	@echo "  make normal-staged       - Organize only staged font files"
+	@echo "  make normal-unstaged     - Organize only tracked fonts with unstaged changes"
 	@echo "  make normal-untracked    - Organize only untracked font files"
 	@echo "  make dryrun              - Preview font organization changes (dry-run mode)"
 	@echo "  make dryrun-staged       - Preview staged font organization"
+	@echo "  make dryrun-unstaged     - Preview unstaged tracked font organization"
 	@echo "  make dryrun-untracked    - Preview untracked font organization"
 	@echo "  make smoke               - Quick smoke test: validate organization + verify targets"
 	@echo "  make clean               - Remove .duplicate/.delete directories (with confirmation)"
@@ -91,6 +93,11 @@ normal-untracked:
 	@echo "==> Organizing untracked fonts..."
 	$(BIN_DIR)/rename-fonts.sh --untracked
 
+.PHONY: normal-unstaged
+normal-unstaged:
+	@echo "==> Organizing tracked fonts with unstaged changes..."
+	$(BIN_DIR)/rename-fonts.sh --unstaged
+
 .PHONY: dryrun
 dryrun:
 	@echo "==> Running font organization in dry-run mode..."
@@ -105,6 +112,11 @@ dryrun-staged:
 dryrun-untracked:
 	@echo "==> Previewing untracked font organization..."
 	$(BIN_DIR)/rename-fonts.sh --untracked --dry-run --verbose
+
+.PHONY: dryrun-unstaged
+dryrun-unstaged:
+	@echo "==> Previewing tracked fonts with unstaged changes..."
+	$(BIN_DIR)/rename-fonts.sh --unstaged --dry-run --verbose
 
 .PHONY: smoke
 smoke:

@@ -16,6 +16,10 @@ FILE_MODE=false
 FILE_PATH=""
 DEST_ROOT=""
 RENAME_LIST_PATH=""
+SCOPED_MODE=""
+declare -A MOVE_ELIGIBLE=()
+declare -i SELECTED_COUNT=0
+declare -i CONTEXT_ONLY_MOVE_COUNT=0
 
 usage() {
   cat <<'EOF'
@@ -30,6 +34,12 @@ Options:
                         DEST directory. Example: --file /tmp/font.ttf:share/fonts
                         The font will be organized according to FontConfig
                         metadata and placed in DEST/<Family>/<format>/...
+--staged                Organize existing staged .otf/.ttf files under the
+                        fonts directory (files with unstaged changes fail)
+--unstaged              Organize tracked .otf/.ttf files with unstaged
+                        working-tree changes
+--untracked             Organize non-ignored untracked .otf/.ttf files under
+                        the fonts directory
 --dry-run               Show planned changes without applying them
 --prune-empty [MODE]    Remove now-empty directories after moves
                           MODE can be either one of the following:
@@ -187,6 +197,12 @@ declare -a RENAME_DESTS=()
 perform_move() {
   local src="$1"
   local desired="$2"
+
+  if [[ -n $SCOPED_MODE && -z ${MOVE_ELIGIBLE[$src]:-} ]]; then
+    ((++CONTEXT_ONLY_MOVE_COUNT))
+    log_verbose "Context only; leaving untouched: $(relative_path "$src")"
+    return
+  fi
 
   if [[ ! -e $src ]]; then
     log_warn "Source missing: $(relative_path "$src")"
@@ -363,6 +379,27 @@ while [[ $# -gt 0 ]]; do
     DEST_ROOT="${BASH_REMATCH[2]}"
     FILE_MODE=true
     ;;
+  --staged)
+    if [[ -n $SCOPED_MODE ]]; then
+      log_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --staged"
+      exit 1
+    fi
+    SCOPED_MODE="staged"
+    ;;
+  --unstaged)
+    if [[ -n $SCOPED_MODE ]]; then
+      log_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --unstaged"
+      exit 1
+    fi
+    SCOPED_MODE="unstaged"
+    ;;
+  --untracked)
+    if [[ -n $SCOPED_MODE ]]; then
+      log_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --untracked"
+      exit 1
+    fi
+    SCOPED_MODE="untracked"
+    ;;
   --dry-run)
     DRY_RUN=true
     ;;
@@ -415,6 +452,11 @@ if [[ ! -d $REPO_ROOT ]]; then
   exit 1
 fi
 
+if [[ $FILE_MODE == "true" && -n $SCOPED_MODE ]]; then
+  log_error "--file cannot be combined with --$SCOPED_MODE"
+  exit 1
+fi
+
 if [[ $FILE_MODE == "true" ]]; then
   if [[ ! -f $FILE_PATH ]]; then
     log_error "Font file not found: $FILE_PATH"
@@ -434,6 +476,61 @@ else
   if [[ ! -d $FONTS_DIR ]]; then
     log_error "Fonts directory not found: $FONTS_DIR"
     exit 1
+  fi
+fi
+
+declare -a SELECTED_FILES=()
+if [[ -n $SCOPED_MODE ]]; then
+  if ! GIT_TOPLEVEL=$(git -C "$REPO_ROOT" rev-parse --show-toplevel 2>/dev/null); then
+    log_error "--$SCOPED_MODE requires REPO_ROOT to be inside a Git worktree"
+    exit 1
+  fi
+  GIT_TOPLEVEL=$(realpath "$GIT_TOPLEVEL")
+  FONTS_DIR=$(realpath "$FONTS_DIR")
+  fonts_dir_lower=${FONTS_DIR,,}
+
+  declare -a git_paths=()
+  if [[ $SCOPED_MODE == "staged" ]]; then
+    mapfile -d '' -t git_paths < <(
+      git -C "$GIT_TOPLEVEL" diff --cached --name-only --diff-filter=ACMR -z
+    )
+  elif [[ $SCOPED_MODE == "unstaged" ]]; then
+    mapfile -d '' -t git_paths < <(
+      git -C "$GIT_TOPLEVEL" diff --name-only --diff-filter=ACMR -z
+    )
+  else
+    mapfile -d '' -t git_paths < <(
+      git -C "$GIT_TOPLEVEL" ls-files --others --exclude-standard -z
+    )
+  fi
+
+  for git_path in "${git_paths[@]}"; do
+    candidate=$(realpath -m "$GIT_TOPLEVEL/$git_path")
+    case "${candidate,,}" in
+    "$fonts_dir_lower"/*.otf | "$fonts_dir_lower"/*.ttf)
+      if [[ -f $candidate ]]; then
+        SELECTED_FILES+=("$candidate")
+        MOVE_ELIGIBLE[$candidate]="true"
+      fi
+      ;;
+    esac
+  done
+  SELECTED_COUNT=${#SELECTED_FILES[@]}
+
+  if [[ $SELECTED_COUNT -eq 0 ]]; then
+    log_info "No $SCOPED_MODE font files selected under $(relative_path "$FONTS_DIR"); nothing to do"
+    exit 0
+  fi
+
+  if [[ $SCOPED_MODE == "staged" ]]; then
+    for selected_file in "${SELECTED_FILES[@]}"; do
+      selected_git_path="${selected_file#$GIT_TOPLEVEL/}"
+      if ! git -C "$GIT_TOPLEVEL" diff --quiet -- "$selected_git_path"; then
+        log_error "Staged font also has unstaged changes: $selected_git_path"
+        log_error "Stage or discard its working-tree changes before using --staged"
+        exit 1
+      fi
+    done
   fi
 fi
 
@@ -468,6 +565,9 @@ else
   fi
 
   log_verbose "Found ${#FONT_FILES[@]} font files to analyze"
+  if [[ -n $SCOPED_MODE ]]; then
+    log_verbose "Selected $SELECTED_COUNT $SCOPED_MODE font file(s); remaining files are classification context only"
+  fi
 fi
 
 # Progress tracking for analysis phase
@@ -764,17 +864,25 @@ for key in "${GROUP_KEYS[@]}"; do
       done
     fi
 
-    # Process checksums and identify unique fonts
+    # Process checksums and identify unique fonts. In scoped mode, prefer an
+    # eligible representative so a context-only identical file cannot prevent
+    # the selected file from being organized.
     for i in "${!var_path_indices[@]}"; do
       idx="${var_path_indices[$i]}"
       checksum="${checksums[$i]}"
       if [[ -z ${var_checksums[$checksum]:-} ]]; then
         var_checksums[$checksum]="$idx"
-        var_unique_indices+=("$idx")
         log_verbose "    Unique: $(relative_path "${FILE_PATHS[$idx]}") [checksum: ${checksum:0:8}...]"
+      elif [[ -n $SCOPED_MODE && -n ${MOVE_ELIGIBLE[${FILE_PATHS[$idx]}]:-} &&
+        -z ${MOVE_ELIGIBLE[${FILE_PATHS[${var_checksums[$checksum]}]}]:-} ]]; then
+        log_verbose "    Selected duplicate becomes move representative: $(relative_path "${FILE_PATHS[$idx]}")"
+        var_checksums[$checksum]="$idx"
       else
         log_verbose "    Duplicate: $(relative_path "${FILE_PATHS[$idx]}") (same as index ${var_checksums[$checksum]})"
       fi
+    done
+    for checksum in "${!var_checksums[@]}"; do
+      var_unique_indices+=("${var_checksums[$checksum]}")
     done
 
     log_info "  Found ${#var_unique_indices[@]} unique variable font(s) (${#variable_indices[@]} total files)"
@@ -831,7 +939,14 @@ fi
 display_rename_list
 
 total_families=${#FAMILY_SEEN[@]}
-log_info "Processed ${#FILE_PATHS[@]} font files across $total_families families"
+if [[ -n $SCOPED_MODE ]]; then
+  log_info "Selected $SELECTED_COUNT $SCOPED_MODE font files; analyzed ${#FILE_PATHS[@]} files across $total_families families"
+  if [[ $CONTEXT_ONLY_MOVE_COUNT -gt 0 ]]; then
+    log_warn "Full normalization would move unselected family members; run the unrestricted target to organize them"
+  fi
+else
+  log_info "Processed ${#FILE_PATHS[@]} font files across $total_families families"
+fi
 log_verbose "Repository root: $(realpath "$REPO_ROOT")"
 log_verbose "Fonts directory: $(realpath "$FONTS_DIR")"
 log_verbose "Dry-run mode: $DRY_RUN"
