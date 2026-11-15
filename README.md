@@ -62,56 +62,18 @@ Fonts are auto-organized by family and format using FontConfig metadata.
 
 ## Statistics
 
-> Generated 2026-07-29 • [view details](bin/gen-stats.sh)
+> Generated 2026-11-15 • [view details](bin/gen-stats.sh)
 
 - **Font Files:** 1,388
 - **Families:** 163
 - **Variable Fonts:** 44
 - **Formats:** 919 OTF, 469 TTF
 
-<details>
-<summary><strong>Advanced Usage</strong></summary>
-
-### Smoke Test
-
-Validates font organization, checks prerequisites, and compares statistics:
-
-```bash
-make smoke
-```
-
-### Font Organization
-
-```bash
-# Preview changes with details
-bin/rename-fonts.sh --dry-run --verbose
-
-# Apply changes and remove empty directories
-bin/rename-fonts.sh --prune-empty
-```
-
-### Preview Generation
-
-```bash
-# Custom dimensions
-bin/gen-previews.sh --width 1000 --pixelsize 28
-```
-
-### Statistics
-
-```bash
-# Update README.md stats
-make stats
-
-# Compare without updating
-bin/gen-stats.sh --compare
-```
-
-</details>
-
 ## Tools
 
 All scripts include `--help` for detailed options:
+
+On compatible terminals, dry runs and font-processing jobs show progress spinners. Set `NO_COLOR=1` to disable them.
 
 - [`gen-previews.sh`](bin/gen-previews.sh) - Generate preview images
 - [`gen-stats.sh`](bin/gen-stats.sh) - Calculate repository statistics
@@ -119,4 +81,4 @@ All scripts include `--help` for detailed options:
 - [`set-usage.sh`](bin/set-usage.sh) - Remove font usage restrictions
 - [`gen-fontconfig.sh`](bin/gen-fontconfig.sh) - Generate FontConfig config files and directories
 
-**Requirements:** fontconfig, fontforge, fonttools, GNU parallel
+**Requirements:** Gum 2.0.2 or later, fontconfig, fontforge, fonttools, GNU parallel

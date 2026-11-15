@@ -13,22 +13,21 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="${REPO_ROOT:-$(dirname "$SCRIPT_DIR")}"
 FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
+source "$SCRIPT_DIR/ui.sh"
+ui_require_gum || exit 1
 PARALLEL_JOBS="${PARALLEL_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 COMPARE_MODE=false
 
 usage() {
-  cat <<'EOF'
-Usage: gen-stats.sh [options]
+  ui_heading 'Usage: gen-stats.sh [options]
 
-Generates accurate font statistics and updates the Statistics section
-in README.md.
+Generate font statistics and update the Statistics section in README.md.
 
 Options:
   --repo-root PATH    Override the repository root (defaults to script dir)
   --jobs NUM          Number of parallel jobs (default: CPU cores)
   --compare           Compare computed stats with current README.md without modifying
-  --help, -h          Show this help message
-EOF
+  --help, -h          Show this help message'
 }
 
 # Parse arguments
@@ -51,7 +50,7 @@ while [[ $# -gt 0 ]]; do
     exit 0
     ;;
   *)
-    echo "Unknown option: $1" >&2
+    ui_error "Unknown option: $1. Run with --help for usage."
     usage >&2
     exit 1
     ;;
@@ -59,7 +58,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! -d $FONTS_DIR ]]; then
-  echo "Error: Fonts directory not found: $FONTS_DIR" >&2
+  ui_error "Fonts directory not found: $FONTS_DIR"
   exit 1
 fi
 
@@ -67,7 +66,7 @@ pushd "$FONTS_DIR" &>/dev/null
 trap 'popd &>/dev/null' EXIT
 
 total_files=$(find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) | wc -l)
-echo "Analyzing ${total_files} font files..."
+ui_info "Analyze ${total_files} font files."
 
 # Function to analyze a single font file
 analyze_font() {
@@ -101,15 +100,43 @@ declare -A families
 # Use xargs for parallelization (more portable than GNU parallel)
 JOBLOG_FILE=$(mktemp)
 ERRORS_FILE=$(mktemp)
+ANALYSIS_OUTPUT_FILE=$(mktemp)
+
+run_analysis_jobs() {
+  local output_file="$1" errors_file="$2"
+  shift 2
+
+  if [[ -t 1 && -t 2 && ${TERM-} != dumb && -z ${NO_COLOR-} ]]; then
+    gum spin --title "Analyze font files." -- \
+      bash -c 'output_file=$1; errors_file=$2; shift 2; exec "$@" >"$output_file" 2>"$errors_file"' \
+      _ "$output_file" "$errors_file" "$@"
+  else
+    "$@" >"$output_file" 2>"$errors_file"
+  fi
+}
 
 if command -v parallel &>/dev/null && parallel --version 2>/dev/null | grep -q "GNU parallel"; then
-  # GNU parallel with progress bar and job logging
-  ANALYSIS_OUTPUT=$(find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) |
-    parallel -j "$PARALLEL_JOBS" --bar --joblog "$JOBLOG_FILE" analyze_font {} 2>"$ERRORS_FILE")
+  # GNU parallel with job logging
+  find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) |
+    run_analysis_jobs "$ANALYSIS_OUTPUT_FILE" "$ERRORS_FILE" \
+      parallel -j "$PARALLEL_JOBS" --joblog "$JOBLOG_FILE" analyze_font {} || {
+      status=$?
+      ui_error "Font analysis failed."
+      cat "$ERRORS_FILE" >&2
+      rm -f "$JOBLOG_FILE" "$ERRORS_FILE" "$ANALYSIS_OUTPUT_FILE"
+      exit "$status"
+    }
 else
   # Fallback to xargs -P
-  ANALYSIS_OUTPUT=$(find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) |
-    xargs -P "$PARALLEL_JOBS" -I {} bash -c 'analyze_font "$@"' _ {} 2>"$ERRORS_FILE")
+  find . -type f \( -iname "*.otf" -o -iname "*.ttf" \) |
+    run_analysis_jobs "$ANALYSIS_OUTPUT_FILE" "$ERRORS_FILE" \
+      xargs -P "$PARALLEL_JOBS" -I {} bash -c 'analyze_font "$@"' _ {} || {
+      status=$?
+      ui_error "Font analysis failed."
+      cat "$ERRORS_FILE" >&2
+      rm -f "$JOBLOG_FILE" "$ERRORS_FILE" "$ANALYSIS_OUTPUT_FILE"
+      exit "$status"
+    }
 fi
 
 # Display error diagnostics if any failures occurred
@@ -119,22 +146,17 @@ if [[ -f $JOBLOG_FILE ]]; then
 fi
 
 if [[ $FAILED_COUNT -gt 0 ]]; then
-  echo "" >&2
-  echo "=== Error Diagnostics ===" >&2
-  echo "Failed jobs: $FAILED_COUNT" >&2
+  ui_error "Analysis failed for $FAILED_COUNT jobs."
   if [[ -s $ERRORS_FILE ]]; then
-    echo "" >&2
-    echo "Error details:" >&2
+    ui_error "Additional command errors follow."
     cat "$ERRORS_FILE" >&2
   fi
-  echo "=========================" >&2
 fi
 
 rm -f "$JOBLOG_FILE" "$ERRORS_FILE"
 
 # Aggregate results
 
-# Process the analysis output
 while IFS='|' read -r ext family is_variable; do
   [[ -z $ext ]] && continue
 
@@ -148,7 +170,8 @@ while IFS='|' read -r ext family is_variable; do
   [[ $is_variable == "true" ]] && ((++variable_count))
 
   [[ -n $family ]] && families["$family"]=1
-done <<<"$ANALYSIS_OUTPUT"
+done <"$ANALYSIS_OUTPUT_FILE"
+rm -f "$ANALYSIS_OUTPUT_FILE"
 
 static_count=$((total_fonts - variable_count))
 family_count=${#families[@]}
@@ -177,7 +200,7 @@ EOF
 # Check if README.md exists
 README_PATH="$REPO_ROOT/README.md"
 if [[ ! -f $README_PATH ]]; then
-  echo "Error: README.md not found at $README_PATH" >&2
+  ui_error "README.md not found at $README_PATH"
   exit 1
 fi
 
@@ -231,20 +254,18 @@ if [[ $COMPARE_MODE == "true" ]]; then
     fi
 
     if [[ $has_diff == "true" ]]; then
-      echo "Statistics differ from README.md:"
-      echo ""
+      ui_info "Statistics differ from README.md:"
       for line in "${diff_lines[@]}"; do
-        echo "$line"
+        ui_info "$line"
       done
-      echo ""
       exit 1
     else
-      echo "Statistics match README.md (${total_fonts} fonts, ${family_count} families)"
+      ui_success "Statistics match README.md (${total_fonts} fonts, ${family_count} families)"
       exit 0
     fi
   else
-    echo "Warning: No Statistics section found in README.md" >&2
-    echo "Computed stats: ${total_fonts} fonts, ${family_count} families"
+    ui_warn "No Statistics section found in README.md."
+    ui_info "Computed stats: ${total_fonts} fonts, ${family_count} families."
     exit 1
   fi
 
@@ -290,5 +311,11 @@ else
     rm -f /tmp/stats_section.txt
   fi
 
-  echo "Done: ${total_fonts} fonts, ${family_count} families -> README.md"
+  if [[ $FAILED_COUNT -gt 0 ]]; then
+    ui_warn "Updated README.md after $FAILED_COUNT analysis jobs failed."
+  elif [[ -t 1 ]]; then
+    ui_success "Complete: ${total_fonts} fonts, ${family_count} families. Output: ${README_PATH}."
+  else
+    ui_success "Updated README.md with ${total_fonts} fonts across ${family_count} families."
+  fi
 fi

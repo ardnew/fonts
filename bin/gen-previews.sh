@@ -24,6 +24,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/ui.sh"
+ui_require_gum || exit 1
 REPO_ROOT="${REPO_ROOT:-$(dirname "$SCRIPT_DIR")}"
 FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
 
@@ -48,12 +50,11 @@ while [[ $# -gt 0 ]]; do
     shift 2
     ;;
   --help | -h)
-    sed -n '2,/^$/p' "$0" | sed 's/^# \?//'
+    ui_heading "$(sed -n '2,/^$/p' "$0" | sed 's/^# \?//')"
     exit 0
     ;;
   *)
-    echo "Unknown option: $1" >&2
-    echo "Run with --help for usage information" >&2
+    ui_error "Unknown option: $1. Run with --help for usage."
     exit 1
     ;;
   esac
@@ -67,8 +68,9 @@ pp="${REPO_ROOT}/share/doc/fonts"
 pm="${pp}/README.md"
 
 # Clean and recreate output directory
+ui_info "Create preview output directory: ${pp}."
 rm -rf "${pp}"
-mkdir -pv "${pp}"
+mkdir -p "${pp}"
 
 # Initialize README
 cat >"${pm}" <<'EOF'
@@ -86,7 +88,7 @@ shopt -s globstar extglob nullglob
 
 # Get total count
 total=$(find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) | wc -l)
-echo "Generating previews for ${total} font files..."
+ui_info "Generate previews for ${total} font files."
 
 # Phase 1: Pre-scan for CFF2 fonts (unsupported by fontimage)
 CFF2_FONTS_FILE=$(mktemp)
@@ -158,15 +160,36 @@ export FONTS_DIR pp PREVIEW_WIDTH PIXEL_SIZE CFF2_FONTS_FILE ENTRIES_DIR
 JOBLOG_FILE=$(mktemp)
 ERRORS_FILE=$(mktemp)
 
+run_preview_jobs() {
+  if [[ -t 1 && -t 2 && ${TERM-} != dumb && -z ${NO_COLOR-} ]]; then
+    gum spin --show-stdout --show-stderr --title "Generate previews." -- \
+      bash -c 'errors=$1; shift; exec "$@" 2>"$errors"' _ "$ERRORS_FILE" "$@"
+  else
+    "$@" 2>"$ERRORS_FILE"
+  fi
+}
+
 if command -v parallel &>/dev/null && parallel --version 2>/dev/null | grep -q "GNU parallel"; then
-  # GNU parallel with progress bar and job logging for error tracking
+  # GNU parallel with job logging for error tracking
   find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) |
-    parallel -j "$PARALLEL_JOBS" --bar --joblog "$JOBLOG_FILE" \
-      process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" "$ENTRIES_DIR" 2>"$ERRORS_FILE"
+    run_preview_jobs parallel -j "$PARALLEL_JOBS" --joblog "$JOBLOG_FILE" \
+      process_font {} "$pp" "$PREVIEW_WIDTH" "$PIXEL_SIZE" "$ENTRIES_DIR" || {
+    status=$?
+    ui_error "Preview generation failed."
+    cat "$ERRORS_FILE" >&2
+    rm -f "$JOBLOG_FILE" "$ERRORS_FILE"
+    exit "$status"
+  }
 else
   # Fallback to xargs -P
   find "${FONTS_DIR}" -type f \( -name "*.otf" -o -name "*.ttf" \) |
-    xargs -P "$PARALLEL_JOBS" -I {} bash -c "process_font '{}' '$pp' '$PREVIEW_WIDTH' '$PIXEL_SIZE' '$ENTRIES_DIR'" 2>"$ERRORS_FILE"
+    run_preview_jobs xargs -P "$PARALLEL_JOBS" -I {} bash -c "process_font '{}' '$pp' '$PREVIEW_WIDTH' '$PIXEL_SIZE' '$ENTRIES_DIR'" || {
+    status=$?
+    ui_error "Preview generation failed."
+    cat "$ERRORS_FILE" >&2
+    rm -f "$JOBLOG_FILE" "$ERRORS_FILE"
+    exit "$status"
+  }
 fi
 
 # Display error diagnostics if any failures occurred
@@ -176,17 +199,15 @@ if [[ -f $JOBLOG_FILE ]]; then
 fi
 
 if [[ $FAILED_COUNT -gt 0 ]]; then
-  echo ""
-  echo "=== Error Diagnostics ===" >&2
-  echo "Failed jobs: $FAILED_COUNT" >&2
+  ui_error "Failed to generate previews for $FAILED_COUNT jobs."
   if [[ -s $ERRORS_FILE ]]; then
-    echo "" >&2
-    echo "Error details:" >&2
-    grep -E "^FAIL\|" "$ERRORS_FILE" | while IFS='|' read -r _ path; do
-      echo "  - $path" >&2
-    done
+    failed_paths=$(grep -E "^FAIL\|" "$ERRORS_FILE" |
+      while IFS='|' read -r _ path; do printf '  - %s\n' "$path"; done || true)
+    if [[ -n $failed_paths ]]; then
+      ui_error "Failed fonts:
+$failed_paths"
+    fi
   fi
-  echo "=========================" >&2
 fi
 
 rm -f "$JOBLOG_FILE" "$ERRORS_FILE"
@@ -232,7 +253,13 @@ rm -rf "$ENTRIES_DIR"
 
 # Summary
 image_count=$(find "${pp}" -name "*.png" 2>/dev/null | wc -l)
-echo "Done: ${image_count} preview images -> ${pp}"
+if [[ $FAILED_COUNT -gt 0 ]]; then
+  ui_error "Generated ${image_count} previews, but ${FAILED_COUNT} jobs failed."
+elif [[ -t 1 ]]; then
+  ui_success "Complete: ${image_count} previews. Output: ${pp}."
+else
+  ui_success "Generated ${image_count} preview images in ${pp}."
+fi
 
 # Cleanup temporary files
 rm -f "$CFF2_FONTS_FILE"

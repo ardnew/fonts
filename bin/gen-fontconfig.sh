@@ -12,7 +12,10 @@ set -euo pipefail
 #   ${XDG_CONFIG_HOME}/fontconfig/conf.d/         - Enabled configurations (symlinks)
 
 # Configuration
-REPO_ROOT="${REPO_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/ui.sh"
+ui_require_gum || exit 1
+REPO_ROOT="${REPO_ROOT:-$(dirname "$SCRIPT_DIR")}"
 FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -28,7 +31,7 @@ VERBOSE=0
 DRY_RUN=0
 
 usage() {
-    cat <<EOF
+    ui_heading "$(cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
 
 Generate fontconfig configuration files for installed font families.
@@ -58,19 +61,15 @@ EXAMPLES:
 
     # Use custom directories
     XDG_CONFIG_HOME=~/.config $(basename "$0")
-
 EOF
+)"
 }
-
-log() {
-    echo "$@"
-}
-
 log_verbose() {
     if [[ $VERBOSE -eq 1 ]]; then
-        echo "$@"
+        ui_debug "$1"
     fi
 }
+
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -88,8 +87,8 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         *)
-            echo "Error: Unknown option: $1" >&2
-            usage
+            ui_error "Unknown option: $1. Run with --help for usage."
+            usage >&2
             exit 1
             ;;
     esac
@@ -97,22 +96,22 @@ done
 
 # Validate dependencies
 if ! command -v fc-query &>/dev/null; then
-    echo "Error: fc-query not found. Please install fontconfig." >&2
+    ui_error "fc-query is required. Install fontconfig."
     exit 1
 fi
 
 if [[ ! -d "$FONTS_DIR" ]]; then
-    echo "Error: Fonts directory not found: $FONTS_DIR" >&2
+    ui_error "Fonts directory not found: $FONTS_DIR"
     exit 1
 fi
 
 # Create directory structure
 create_dirs() {
     if [[ $DRY_RUN -eq 1 ]]; then
-        log "[DRY-RUN] Would create directories:"
-        log "  - $FONTCONFIG_DIR"
-        log "  - $CONF_AVAIL_DIR"
-        log "  - $CONF_D_DIR"
+        ui_info "[DRY-RUN] Would create directories:"
+        ui_info "  - $FONTCONFIG_DIR"
+        ui_info "  - $CONF_AVAIL_DIR"
+        ui_info "  - $CONF_D_DIR"
     else
         log_verbose "Creating fontconfig directories..."
         mkdir -p "$FONTCONFIG_DIR"
@@ -129,11 +128,11 @@ generate_main_config() {
     fi
 
     if [[ $DRY_RUN -eq 1 ]]; then
-        log "[DRY-RUN] Would create: $FONTS_CONF"
+        ui_info "[DRY-RUN] Would create: $FONTS_CONF"
         return
     fi
 
-    log "Creating main fontconfig file: $FONTS_CONF"
+    ui_info "Create main fontconfig file: $FONTS_CONF."
 
     cat > "$FONTS_CONF" <<'EOF'
 <?xml version="1.0"?>
@@ -196,7 +195,7 @@ generate_family_config() {
     sample_font=$(find "$family_dir" -type f \( -name "*.otf" -o -name "*.ttf" \) -not -path "*/.duplicate/*" -not -path "*/.delete/*" | head -1)
 
     if [[ -z "$sample_font" ]]; then
-        log_verbose "Warning: No valid fonts found in $family_dir"
+        log_verbose "No valid fonts found in $family_dir"
         return 1
     fi
 
@@ -209,12 +208,12 @@ generate_family_config() {
     font_class=$(detect_font_classification "$sample_font" "$fc_family")
 
     if [[ $DRY_RUN -eq 1 ]]; then
-        log "[DRY-RUN] Would generate: $(basename "$conf_file")"
-        log_verbose "            Family: $fc_family ($font_class)"
+        ui_info "[DRY-RUN] Would generate: $(basename "$conf_file")"
+        log_verbose "Family: $fc_family ($font_class)"
         return 0
     fi
 
-    log_verbose "Generating config for: $fc_family ($font_class)"
+    log_verbose "Generate config for: $fc_family ($font_class)"
 
     # Generate the .conf file
     cat > "$conf_file" <<EOF
@@ -249,7 +248,7 @@ enable_config() {
     # In dry-run mode, skip file existence checks
     if [[ $DRY_RUN -eq 0 ]]; then
         if [[ ! -f "$src" ]]; then
-            log_verbose "Warning: Config file not found: $src"
+            log_verbose "Config file not found: $src"
             return 1
         fi
 
@@ -260,17 +259,17 @@ enable_config() {
     fi
 
     if [[ $DRY_RUN -eq 1 ]]; then
-        log "[DRY-RUN] Would enable: $conf_name"
+        ui_info "[DRY-RUN] Would enable: $conf_name"
         return 0
     fi
 
-    log_verbose "Enabling: $conf_name"
+    log_verbose "Enable: $conf_name"
     ln -s "../conf.avail/$conf_name" "$dst"
 }
 
 # Main processing
 main() {
-    log "==> Generating fontconfig configuration"
+    ui_heading "Generate fontconfig configuration"
     # Create directory structure
     create_dirs
     # Generate main config
@@ -284,7 +283,7 @@ main() {
     done < <(find "$FONTS_DIR" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
 
     if [[ ${#families[@]} -eq 0 ]]; then
-        echo "Warning: No font families found in $FONTS_DIR" >&2
+        ui_warn "No font families found in $FONTS_DIR."
         exit 0
     fi
 
@@ -305,8 +304,8 @@ main() {
         fi
     done
 
-    log "    ${generated} available configs: $CONF_AVAIL_DIR"
-    log "    ${enabled} enabled configs: $CONF_D_DIR"
+    ui_info "${generated} available configs: $CONF_AVAIL_DIR"
+    ui_info "${enabled} enabled configs: $CONF_D_DIR"
 }
 
 main "$@"

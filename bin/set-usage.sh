@@ -17,60 +17,31 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/ui.sh"
+ui_require_gum || exit 1
 REPO_ROOT="${REPO_ROOT:-$(dirname "$SCRIPT_DIR")}"
 FONTS_DIR="${FONTS_DIR:-$REPO_ROOT/share/fonts}"
 PARALLEL_JOBS="${PARALLEL_JOBS:-$(nproc 2>/dev/null || echo 4)}"
 DRY_RUN=false
 VERBOSE=false
 
-# Map color names to terminfo setaf/setab codes
-declare -A colors=(
-  [black]=0
-  [red]=1
-  [green]=2
-  [yellow]=3
-  [blue]=4
-  [magenta]=5
-  [cyan]=6
-  [white]=7
-)
-
-nocolor() { printf "%s%s" "$(tput op 2>/dev/null || true)" "${1:-}"; }
-color() { printf "%s%s%s" "$(tput setaf "${colors[${1}]:-7}" 2>/dev/null || true)" "${2:-}" "$(nocolor)"; }
-
-log_info() {
-  printf '[%s] %s\n' "$(nocolor INFO)" "${1}"
-}
-
 log_verbose() {
   if [[ ${VERBOSE} == "true" ]]; then
-    printf '[%s] %s\n' "$(color cyan DBUG)" "${1}"
+    ui_debug "$1"
   fi
 }
-
-log_warn() {
-  printf '[%s] %s\n' "$(color yellow WARN)" "${1}" >&2
-}
-
-log_error() {
-  printf '[%s] %s\n' "$(color red FAIL)" "${1}" >&2
-}
-
 usage() {
-  cat <<'EOF'
-Usage: set-usage.sh [options]
+  ui_heading 'Usage: set-usage.sh [options]
 
-Modifies font usage restrictions by setting the OS/2 table fsType field
-bits 0-3 to value 0, which allows embedding, editing, and installation
-for private use.
+Set the OS/2 fsType usage bits 0-3 to 0. This allows embedding, editing, and
+installation for private use.
 
 Options:
   --repo-root PATH    Override the repository root (defaults to script dir)
   --jobs NUM          Number of parallel jobs (default: CPU cores)
   --dry-run           Show what would be modified without making changes
   --verbose           Enable verbose logging
-  --help, -h          Show this help message
-EOF
+  --help, -h          Show this help message'
 }
 
 # Parse arguments
@@ -97,7 +68,7 @@ while [[ $# -gt 0 ]]; do
     exit 0
     ;;
   *)
-    log_error "Unknown option: $1"
+    ui_error "Unknown option: $1. Run with --help for usage."
     usage >&2
     exit 1
     ;;
@@ -105,17 +76,16 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ ! -d $FONTS_DIR ]]; then
-  log_error "Fonts directory not found: $FONTS_DIR"
+  ui_error "Fonts directory not found: $FONTS_DIR"
   exit 1
 fi
 
 # Check for fonttools
 if ! command -v fonttools &>/dev/null; then
-  log_error "fonttools is required but was not found in PATH"
-  log_error "Install with: pip install fonttools"
+  ui_error "fonttools is required but was not found in PATH."
+  ui_error "Install fonttools with: pip install fonttools."
   exit 1
 fi
-
 relative_path() {
   local path="$1"
   if [[ $path == "$REPO_ROOT" ]]; then
@@ -202,6 +172,41 @@ process_font() {
 
 export -f process_font
 
+process_fonts_sequential() {
+  local dry_run="$1" results_file="$2" errors_file="$3"
+  local font_file
+  while IFS= read -r -d '' font_file; do
+    process_font "$font_file" "$dry_run" >>"$results_file" 2>>"$errors_file"
+  done
+}
+export -f process_fonts_sequential
+
+run_usage_parallel() {
+  local results_file="$1" errors_file="$2"
+  shift 2
+
+  if [[ -t 1 && -t 2 && ${TERM-} != dumb && -z ${NO_COLOR-} && $VERBOSE != true ]]; then
+    gum spin --title "Process font files." -- \
+      bash -c 'results_file=$1; errors_file=$2; shift 2; exec "$@" >"$results_file" 2>"$errors_file"' \
+      _ "$results_file" "$errors_file" "$@"
+  else
+    "$@" >"$results_file" 2>"$errors_file"
+  fi
+}
+
+run_usage_sequential() {
+  local dry_run="$1" results_file="$2" errors_file="$3"
+  # Font paths arrive as NUL-delimited input to avoid command-line limits.
+
+  if [[ -t 1 && -t 2 && ${TERM-} != dumb && -z ${NO_COLOR-} && $VERBOSE != true ]]; then
+    gum spin --title "Process font files." -- \
+      bash -c 'set -euo pipefail; process_fonts_sequential "$@"' \
+      _ "$dry_run" "$results_file" "$errors_file"
+  else
+    process_fonts_sequential "$dry_run" "$results_file" "$errors_file"
+  fi
+}
+
 log_verbose "Using $PARALLEL_JOBS parallel jobs"
 log_verbose "Dry-run mode: $DRY_RUN"
 
@@ -209,12 +214,11 @@ log_verbose "Dry-run mode: $DRY_RUN"
 mapfile -t FONT_FILES < <(find "$FONTS_DIR" -type f \( -iname "*.otf" -o -iname "*.ttf" \) | sort)
 
 if [[ ${#FONT_FILES[@]} -eq 0 ]]; then
-  log_info "No font files found"
+  ui_info "No font files found."
   exit 0
 fi
 
-echo "Processing ${#FONT_FILES[@]} font files..."
-
+ui_info "Process ${#FONT_FILES[@]} font files."
 # Create temp file for results
 RESULTS_FILE=$(mktemp)
 trap "rm -f '$RESULTS_FILE'" EXIT
@@ -226,12 +230,17 @@ ERRORS_FILE=$(mktemp)
 if command -v parallel &>/dev/null && parallel --version 2>/dev/null | grep -q "GNU parallel"; then
   log_verbose "Using GNU parallel for processing"
   printf '%s\n' "${FONT_FILES[@]}" |
-    parallel -j "$PARALLEL_JOBS" --bar --joblog "$JOBLOG_FILE" process_font {} "$DRY_RUN" >"$RESULTS_FILE" 2>"$ERRORS_FILE"
+    run_usage_parallel "$RESULTS_FILE" "$ERRORS_FILE" \
+      parallel -j "$PARALLEL_JOBS" --joblog "$JOBLOG_FILE" process_font {} "$DRY_RUN" || {
+    status=$?
+    ui_error "Font processing failed."
+    cat "$ERRORS_FILE" >&2
+    rm -f "$JOBLOG_FILE" "$ERRORS_FILE"
+    exit "$status"
+  }
 else
   log_verbose "Using sequential processing"
-  for font_file in "${FONT_FILES[@]}"; do
-    process_font "$font_file" "$DRY_RUN" >>"$RESULTS_FILE" 2>>"$ERRORS_FILE"
-  done
+  printf '%s\0' "${FONT_FILES[@]}" | run_usage_sequential "$DRY_RUN" "$RESULTS_FILE" "$ERRORS_FILE"
 fi
 
 # Check for parallel job failures
@@ -276,34 +285,35 @@ while IFS='|' read -r status info path; do
   esac
 done <"$RESULTS_FILE"
 
-# Display error diagnostics if any failures occurred
 if [[ $failed -gt 0 || $PARALLEL_FAILED -gt 0 ]]; then
-  echo "" >&2
-  echo "=== Error Diagnostics ===" >&2
-  echo "Processing failures: $failed" >&2
+  ui_error "Processing failures: $failed."
   if [[ $PARALLEL_FAILED -gt 0 ]]; then
-    echo "Parallel job failures: $PARALLEL_FAILED" >&2
+    ui_error "Parallel job failures: $PARALLEL_FAILED."
   fi
   if [[ ${#FAILED_FONTS[@]} -gt 0 ]]; then
-    echo "" >&2
-    echo "Failed fonts:" >&2
-    for font in "${FAILED_FONTS[@]}"; do
-      echo "  - $font" >&2
-    done
+    failed_fonts=$(printf '  - %s\n' "${FAILED_FONTS[@]}")
+    ui_error "Failed fonts:
+$failed_fonts"
   fi
   if [[ -s $ERRORS_FILE ]]; then
-    echo "" >&2
-    echo "Additional errors:" >&2
+    ui_error "Additional command errors follow."
     cat "$ERRORS_FILE" >&2
   fi
-  echo "=========================" >&2
 fi
 
 rm -f "$ERRORS_FILE"
 
 # Summary
 if [[ $DRY_RUN == "true" ]]; then
-  echo "Done: $modified would be modified, $unchanged unchanged, $skipped skipped"
+  summary="$modified would be modified, $unchanged unchanged, $skipped skipped"
 else
-  echo "Done: $modified modified, $unchanged unchanged, $skipped skipped"
+  summary="$modified modified, $unchanged unchanged, $skipped skipped"
+fi
+
+if [[ $failed -gt 0 || $PARALLEL_FAILED -gt 0 ]]; then
+  ui_error "Processing completed with errors: $summary."
+elif [[ -t 1 ]]; then
+  ui_success "Complete: $summary."
+else
+  ui_success "Processed: $summary."
 fi

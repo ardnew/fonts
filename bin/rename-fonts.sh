@@ -5,6 +5,8 @@
 set -euo pipefail
 
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+source "$SCRIPT_DIR/ui.sh"
+ui_require_gum || exit 1
 REPO_ROOT=${REPO_ROOT:-$(dirname "${SCRIPT_DIR}")}
 FONTS_DIR=${FONTS_DIR:-$REPO_ROOT/share/fonts}
 
@@ -12,84 +14,91 @@ DRY_RUN=false
 PRUNE_EMPTY=false
 PRUNE_MODE="force"
 VERBOSE=false
+TABLE_MODE=false
 FILE_MODE=false
 FILE_PATH=""
 DEST_ROOT=""
 RENAME_LIST_PATH=""
 SCOPED_MODE=""
+SPINNER_ENABLED=false
+SPINNER_DIR=""
+SPINNER_PID=""
 declare -A MOVE_ELIGIBLE=()
 declare -i SELECTED_COUNT=0
 declare -i CONTEXT_ONLY_MOVE_COUNT=0
 
 usage() {
-  cat <<'EOF'
-Usage: rename_fonts.sh [options]
+  local help
+  help=$(
+    cat <<'EOF'
+Usage: rename-fonts.sh [options]
 
-Organises all font files in the repository according to the
-FontConfig-driven layout described in .github/copilot-instructions.md.
+Organize font files by FontConfig metadata.
 
 Options:
---repo-root PATH        Override the repository root (defaults to script dir)
---file PATH:DEST        Process a single font file at PATH and place it under
-                        DEST directory. Example: --file /tmp/font.ttf:share/fonts
-                        The font will be organized according to FontConfig
-                        metadata and placed in DEST/<Family>/<format>/...
---staged                Organize existing staged .otf/.ttf files under the
-                        fonts directory (files with unstaged changes fail)
---unstaged              Organize tracked .otf/.ttf files with unstaged
-                        working-tree changes
---untracked             Organize non-ignored untracked .otf/.ttf files under
-                        the fonts directory
---dry-run               Show planned changes without applying them
---prune-empty [MODE]    Remove now-empty directories after moves
-                          MODE can be either one of the following:
-                            - force    # remove all directories (default)
-                            - confirm  # interactively remove directories
---rename-list PATH      Write list of rename operations to PATH
-                        - If PATH is "-", always print the list to stdout
-                        - If PATH is specified, write to file and reference it
-                        - If not specified, auto-decide based on list length
-                          and terminal size (print if short, write if long)
---verbose               Enable verbose logging (analysis and processing details)
-                        Combine with --dry-run to review how every font would
-                        be identified and renamed without applying any changes
---help, -h              Show this cruft and exit
+--repo-root PATH        Set the repository root (default: script directory)
+--file PATH:DEST        Process one font file and place it under DEST.
+                        Example: --file /tmp/font.ttf:share/fonts
+--staged                Organize staged .otf/.ttf files. Fail if they also
+                        have unstaged changes.
+--unstaged              Organize tracked .otf/.ttf files with unstaged changes
+--untracked             Organize non-ignored, untracked .otf/.ttf files
+--dry-run               Show planned moves. Do not move files.
+--prune-empty [MODE]    Remove empty directories after moves.
+                        MODE: force (default) or confirm
+--rename-list PATH      Write rename operations to PATH.
+                        Use "-" to print to stdout. Without this option, print
+                        a short list or write a long list to a file.
+--verbose               Show analysis and processing details.
+                        Combine with --dry-run to review planned moves.
+--help, -h              Show this help and exit
 EOF
-}
-
-# Map color names to terminfo setaf/setab codes.
-declare -A colors=(
-  [black]=0
-  [red]=1
-  [green]=2
-  [yellow]=3
-  [blue]=4
-  [magenta]=5
-  [cyan]=6
-  [white]=7
-)
-
-nocolor() { printf "%s%s" "$(tput op)" "${1:-}"; }
-color() { printf "%s%s%s" "$(tput setaf "${colors[${1}]:-7}")" "${2:-}" "$(nocolor)"; }
-
-log_info() {
-  printf '[%s] %s\n' "$(nocolor INFO)" "${1}"
+  )
+  ui_heading "$help"
 }
 
 log_verbose() {
   if [[ ${VERBOSE} == "true" ]]; then
-    printf '[%s] %s\n' "$(color cyan DBUG)" "${1}"
+    ui_debug "$1"
   fi
 }
 
-log_warn() {
-  printf '[%s] %s\n' "$(color yellow WARN)" "${1}" >&2
+log_info() {
+  if [[ $TABLE_MODE != "true" ]]; then
+    ui_info "$1"
+  fi
 }
 
-log_error() {
-  printf '[%s] %s\n' "$(color red FAIL)" "${1}" >&2
+
+start_spinner() {
+  [[ $SPINNER_ENABLED == "true" && -z $SPINNER_PID ]] || return 0
+  if ! SPINNER_DIR=$(mktemp -d); then
+    SPINNER_DIR=""
+    return 0
+  fi
+  gum spin --title "Analyze fonts and plan moves." -- \
+    bash -c 'while [[ ! -e $1/stop ]]; do sleep 0.1; done' _ "$SPINNER_DIR" &
+  SPINNER_PID=$!
 }
 
+stop_spinner() {
+  if [[ -n $SPINNER_PID ]]; then
+    : >"$SPINNER_DIR/stop" || kill "$SPINNER_PID" 2>/dev/null || true
+    wait "$SPINNER_PID" 2>/dev/null || true
+  fi
+  if [[ -n $SPINNER_DIR ]]; then
+    rm -rf "$SPINNER_DIR" 2>/dev/null || true
+  fi
+  SPINNER_PID=""
+  SPINNER_DIR=""
+  trap - INT TERM
+}
+
+cleanup_spinner() {
+  local status=$?
+  stop_spinner
+  return "$status"
+}
 relative_path() {
   local path="$1"
   if [[ $path == "$REPO_ROOT" ]]; then
@@ -205,7 +214,8 @@ perform_move() {
   fi
 
   if [[ ! -e $src ]]; then
-    log_warn "Source missing: $(relative_path "$src")"
+    stop_spinner
+    ui_warn "Source missing: $(relative_path "$src")"
     return
   fi
 
@@ -217,7 +227,8 @@ perform_move() {
   fi
 
   if [[ $resolved != "$desired" ]]; then
-    log_warn "Destination conflict for $(relative_path "$desired"); using $(relative_path "$resolved")"
+    stop_spinner
+    ui_warn "Destination conflict for $(relative_path "$desired"); using $(relative_path "$resolved")"
   fi
 
   # Must use pre-increment so that this line evaluates to non-zero
@@ -229,19 +240,50 @@ perform_move() {
   RENAME_DESTS+=("$resolved")
 
   if [[ $DRY_RUN == "true" ]]; then
-    log_info "Would move $(relative_path "$src") -> $(relative_path "$resolved")"
+    if [[ $TABLE_MODE != "true" ]]; then
+      ui_info "Would move $(relative_path "$src") -> $(relative_path "$resolved")"
+    fi
   else
     mkdir -p "$(dirname "$resolved")"
     mv "$src" "$resolved"
-    log_info "Moved $(relative_path "$src") -> $(relative_path "$resolved")"
+    ui_info "Moved $(relative_path "$src") -> $(relative_path "$resolved")"
     ((++EXECUTED_MOVES))
   fi
+}
+
+# Quote CSV cells so commas, quotes, and embedded newlines remain intact.
+
+print_rename_table_csv() {
+  printf '"Source","Destination"\n'
+  local i source_path destination_path
+  for i in "${!RENAME_SOURCES[@]}"; do
+    source_path=${RENAME_SOURCES[$i]}
+    destination_path=${RENAME_DESTS[$i]}
+    if [[ $source_path == "$REPO_ROOT" ]]; then
+      source_path="."
+    elif [[ $source_path == "$REPO_ROOT"/* ]]; then
+      source_path=${source_path#"$REPO_ROOT"/}
+    fi
+    if [[ $destination_path == "$REPO_ROOT" ]]; then
+      destination_path="."
+    elif [[ $destination_path == "$REPO_ROOT"/* ]]; then
+      destination_path=${destination_path#"$REPO_ROOT"/}
+    fi
+    source_path=${source_path//\"/\"\"}
+    destination_path=${destination_path//\"/\"\"}
+    printf '"%s","%s"\n' "$source_path" "$destination_path"
+  done
 }
 
 display_rename_list() {
   if [[ ${#RENAME_SOURCES[@]} -eq 0 ]]; then
     return
   fi
+  if [[ $TABLE_MODE == "true" ]]; then
+    print_rename_table_csv | ui_table
+    return
+  fi
+
 
   # Build the list content
   local list_lines=()
@@ -253,12 +295,12 @@ display_rename_list() {
   if [[ -n $RENAME_LIST_PATH ]]; then
     if [[ $RENAME_LIST_PATH == "-" ]]; then
       # Always print to stdout
-      printf '\n%s\n' "=== Rename Operations ==="
+      ui_heading $'\n=== Rename Operations ==='
       printf '%s\n' "${list_lines[@]}"
     else
       # Write to file
       printf '%s\n' "${list_lines[@]}" >"$RENAME_LIST_PATH"
-      log_info "Rename operations written to: $RENAME_LIST_PATH"
+      ui_info "Rename operations written to: $RENAME_LIST_PATH"
     fi
     return
   fi
@@ -285,20 +327,20 @@ display_rename_list() {
     # Write to a temporary file in the repo root
     local list_file="$REPO_ROOT/.font-renames.txt"
     printf '%s\n' "${list_lines[@]}" >"$list_file"
-    log_info "Rename operations written to: $(relative_path "$list_file")"
-    log_info "  ($num_renames operations - too many to display)"
+    ui_info "Rename operations written to: $(relative_path "$list_file")"
+    ui_info "  ($num_renames operations - too many to display)"
   else
     # Print to stdout
-    printf '\n%s\n' "=== Rename Operations ==="
+    ui_heading $'\n=== Rename Operations ==='
     printf '%s\n' "${list_lines[@]}"
   fi
 }
 
 prune_empty_directories() {
-  log_info "Pruning empty directories under $(relative_path "$FONTS_DIR")"
+  ui_info "Pruning empty directories under $(relative_path "$FONTS_DIR")"
 
-  # Store empty directories in an array to avoid read conflicts
   local empty_dirs=()
+  local dir response choice
   while IFS= read -r dir; do
     empty_dirs+=("$dir")
   done < <(find "$FONTS_DIR" -mindepth 1 -type d -empty | sort -r)
@@ -312,43 +354,64 @@ prune_empty_directories() {
 
   if [[ $DRY_RUN == "true" ]]; then
     for dir in "${empty_dirs[@]}"; do
-      log_info "Would remove $(relative_path "$dir")"
+      ui_info "Would remove $(relative_path "$dir")"
     done
   else
     for dir in "${empty_dirs[@]}"; do
       if [[ $PRUNE_MODE == "confirm" ]]; then
-        while true; do
-          printf 'Remove %s? [Y/n/q] ' "$(relative_path "$dir")" >&2
-          read -r response
-          # Default to yes if empty
-          if [[ -z $response ]]; then
-            response="y"
+        if [[ -t 0 ]]; then
+          if ! choice=$(ui_choose_prune "Remove $(relative_path "$dir")?"); then
+            return
           fi
-          # Convert to lowercase
-          response="${response,,}"
-
-          # Check for unambiguous match
-          case "$response" in
-          y | ye | yes)
-            log_info "Removing $(relative_path "$dir")"
+          case "$choice" in
+          Remove)
+            ui_info "Removing $(relative_path "$dir")"
             rmdir "$dir"
-            break
             ;;
-          n | no)
-            log_info "Skipping $(relative_path "$dir")"
-            break
+          Skip)
+            ui_info "Skipping $(relative_path "$dir")"
             ;;
-          q | qu | qui | quit)
-            log_info "Quit requested; stopping prune operation"
+          Quit)
+            ui_info "Quit requested; stopping prune operation"
             return
             ;;
           *)
-            printf 'Unrecognized input "%s". Please enter [Y]es, [n]o, or [q]uit.\n' "$response" >&2
+            return
             ;;
           esac
-        done
+        else
+          while true; do
+            ui_info "Remove $(relative_path "$dir")? [Y/n/q]" >&2
+            if ! IFS= read -r response; then
+              return
+            fi
+            if [[ -z $response ]]; then
+              response="y"
+            fi
+            response="${response,,}"
+
+            case "$response" in
+            y | ye | yes)
+              ui_info "Removing $(relative_path "$dir")"
+              rmdir "$dir"
+              break
+              ;;
+            n | no)
+              ui_info "Skipping $(relative_path "$dir")"
+              break
+              ;;
+            q | qu | qui | quit)
+              ui_info "Quit requested; stopping prune operation"
+              return
+              ;;
+            *)
+              ui_warn "Input '$response' is not valid. Enter yes, no, or quit."
+              ;;
+            esac
+          done
+        fi
       else
-        log_info "Removing $(relative_path "$dir")"
+        ui_info "Removing $(relative_path "$dir")"
         rmdir "$dir"
       fi
     done
@@ -360,7 +423,7 @@ while [[ $# -gt 0 ]]; do
   --repo-root)
     shift
     if [[ $# -eq 0 ]]; then
-      log_error "--repo-root requires a path"
+      ui_error "--repo-root requires a path"
       exit 1
     fi
     REPO_ROOT="$(realpath "$1")"
@@ -368,11 +431,11 @@ while [[ $# -gt 0 ]]; do
   --file)
     shift
     if [[ $# -eq 0 ]]; then
-      log_error "--file requires a PATH:DEST argument"
+      ui_error "--file requires a PATH:DEST argument"
       exit 1
     fi
     if [[ ! $1 =~ ^([^:]+):(.+)$ ]]; then
-      log_error "--file argument must be in format PATH:DEST (e.g., /tmp/font.ttf:share/fonts)"
+      ui_error "--file argument must be in format PATH:DEST (e.g., /tmp/font.ttf:share/fonts)"
       exit 1
     fi
     FILE_PATH="${BASH_REMATCH[1]}"
@@ -381,21 +444,21 @@ while [[ $# -gt 0 ]]; do
     ;;
   --staged)
     if [[ -n $SCOPED_MODE ]]; then
-      log_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --staged"
+      ui_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --staged"
       exit 1
     fi
     SCOPED_MODE="staged"
     ;;
   --unstaged)
     if [[ -n $SCOPED_MODE ]]; then
-      log_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --unstaged"
+      ui_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --unstaged"
       exit 1
     fi
     SCOPED_MODE="unstaged"
     ;;
   --untracked)
     if [[ -n $SCOPED_MODE ]]; then
-      log_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --untracked"
+      ui_error "Git scope flags are mutually exclusive; cannot combine --$SCOPED_MODE and --untracked"
       exit 1
     fi
     SCOPED_MODE="untracked"
@@ -409,7 +472,7 @@ while [[ $# -gt 0 ]]; do
   --rename-list)
     shift
     if [[ $# -eq 0 ]]; then
-      log_error "--rename-list requires a path (use '-' for stdout)"
+      ui_error "--rename-list requires a path (use '-' for stdout)"
       exit 1
     fi
     RENAME_LIST_PATH="$1"
@@ -424,7 +487,7 @@ while [[ $# -gt 0 ]]; do
         PRUNE_MODE="$1"
         ;;
       *)
-        log_error "Invalid --prune-empty mode: $1 (expected 'force' or 'confirm')"
+        ui_error "Invalid --prune-empty mode: $1 (expected 'force' or 'confirm')"
         exit 1
         ;;
       esac
@@ -439,7 +502,7 @@ while [[ $# -gt 0 ]]; do
     exit 0
     ;;
   *)
-    log_error "Unknown option: $1"
+    ui_error "Unknown option: $1"
     usage
     exit 1
     ;;
@@ -447,19 +510,29 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
+if [[ $DRY_RUN == "true" && $VERBOSE == "false" && -z $RENAME_LIST_PATH && -t 1 ]]; then
+  TABLE_MODE=true
+fi
+
+if [[ $DRY_RUN == "true" && $VERBOSE == "false" && $TABLE_MODE == "true" &&
+  -t 1 && -t 2 && ${TERM:-dumb} != "dumb" && -z ${NO_COLOR-} ]]; then
+  SPINNER_ENABLED=true
+fi
+
+
 if [[ ! -d $REPO_ROOT ]]; then
-  log_error "Repository root not found: $REPO_ROOT"
+  ui_error "Repository root not found: $REPO_ROOT"
   exit 1
 fi
 
 if [[ $FILE_MODE == "true" && -n $SCOPED_MODE ]]; then
-  log_error "--file cannot be combined with --$SCOPED_MODE"
+  ui_error "--file cannot be combined with --$SCOPED_MODE"
   exit 1
 fi
 
 if [[ $FILE_MODE == "true" ]]; then
   if [[ ! -f $FILE_PATH ]]; then
-    log_error "Font file not found: $FILE_PATH"
+    ui_error "Font file not found: $FILE_PATH"
     exit 1
   fi
   # Make FILE_PATH absolute
@@ -474,7 +547,7 @@ if [[ $FILE_MODE == "true" ]]; then
   log_verbose "File mode: processing $FILE_PATH -> $DEST_ROOT"
 else
   if [[ ! -d $FONTS_DIR ]]; then
-    log_error "Fonts directory not found: $FONTS_DIR"
+    ui_error "Fonts directory not found: $FONTS_DIR"
     exit 1
   fi
 fi
@@ -482,7 +555,7 @@ fi
 declare -a SELECTED_FILES=()
 if [[ -n $SCOPED_MODE ]]; then
   if ! GIT_TOPLEVEL=$(git -C "$REPO_ROOT" rev-parse --show-toplevel 2>/dev/null); then
-    log_error "--$SCOPED_MODE requires REPO_ROOT to be inside a Git worktree"
+    ui_error "--$SCOPED_MODE requires REPO_ROOT to be inside a Git worktree"
     exit 1
   fi
   GIT_TOPLEVEL=$(realpath "$GIT_TOPLEVEL")
@@ -518,7 +591,7 @@ if [[ -n $SCOPED_MODE ]]; then
   SELECTED_COUNT=${#SELECTED_FILES[@]}
 
   if [[ $SELECTED_COUNT -eq 0 ]]; then
-    log_info "No $SCOPED_MODE font files selected under $(relative_path "$FONTS_DIR"); nothing to do"
+    ui_info "No $SCOPED_MODE font files selected under $(relative_path "$FONTS_DIR"); nothing to do"
     exit 0
   fi
 
@@ -526,8 +599,8 @@ if [[ -n $SCOPED_MODE ]]; then
     for selected_file in "${SELECTED_FILES[@]}"; do
       selected_git_path="${selected_file#$GIT_TOPLEVEL/}"
       if ! git -C "$GIT_TOPLEVEL" diff --quiet -- "$selected_git_path"; then
-        log_error "Staged font also has unstaged changes: $selected_git_path"
-        log_error "Stage or discard its working-tree changes before using --staged"
+        ui_error "Staged font also has unstaged changes: $selected_git_path"
+        ui_error "Stage or discard its working-tree changes before using --staged"
         exit 1
       fi
     done
@@ -535,7 +608,7 @@ if [[ -n $SCOPED_MODE ]]; then
 fi
 
 if ! command -v fc-query >/dev/null 2>&1; then
-  log_error "fc-query is required but was not found in PATH"
+  ui_error "fc-query is required but was not found in PATH"
   exit 1
 fi
 
@@ -560,7 +633,7 @@ else
   mapfile -t FONT_FILES < <(find "$FONTS_DIR" -type f \( -iname '*.otf' -o -iname '*.ttf' \) | sort)
 
   if [[ ${#FONT_FILES[@]} -eq 0 ]]; then
-    log_info "No font files found under $(relative_path "$FONTS_DIR")"
+    ui_info "No font files found under $(relative_path "$FONTS_DIR")"
     exit 0
   fi
 
@@ -578,26 +651,28 @@ is_tty=false
 if [[ -t 2 ]]; then
   is_tty=true
 fi
-
-# Track last reported percentage to avoid duplicates
 last_percent=-1
+
+if [[ $SPINNER_ENABLED == "true" && $total_files -gt 0 ]]; then
+  trap cleanup_spinner EXIT
+  trap 'exit 130' INT
+  trap 'exit 143' TERM
+  start_spinner
+fi
 
 for font_file in "${FONT_FILES[@]}"; do
   ((++processed))
 
-  # Show progress every N files (or if verbose)
-  if [[ $VERBOSE == "false" ]]; then
+  if [[ $VERBOSE == "false" && $TABLE_MODE == "false" ]]; then
     if [[ $is_tty == "true" ]]; then
-      # Interactive mode: overwrite same line every N files
       if [[ $((processed % progress_interval)) -eq 0 ]]; then
-        printf '\rAnalyzing fonts: %d/%d' "$processed" "$total_files" >&2
+        ui_info "Analyzing fonts: $processed/$total_files" >&2
       fi
     else
-      # Non-interactive mode: show 10% milestones
       percent=$((processed * 100 / total_files))
       milestone=$((percent / 10 * 10))
       if [[ $milestone -ne $last_percent && $((percent % 10)) -le $((progress_interval * 100 / total_files)) ]]; then
-        printf 'Analyzing fonts: %d%%\n' "$milestone" >&2
+        ui_info "Analyzing fonts: $milestone%" >&2
         last_percent=$milestone
       fi
     fi
@@ -607,7 +682,8 @@ for font_file in "${FONT_FILES[@]}"; do
 
   metadata=$(fc-query --format '%{family[0]}\n%{style[0]}\n%{variable}\n' "$font_file" 2>/dev/null || true)
   if [[ -z $metadata ]]; then
-    log_warn "Skipping (fc-query failed): $(relative_path "$font_file")"
+    stop_spinner
+    ui_warn "Skipping (fc-query failed): $(relative_path "$font_file")"
     continue
   fi
 
@@ -621,7 +697,8 @@ for font_file in "${FONT_FILES[@]}"; do
 
   if [[ -z $family ]]; then
     family=$(basename "$(dirname "$font_file")")
-    log_warn "Missing family metadata; using directory name '$family' for $(relative_path "$font_file")"
+    stop_spinner
+    ui_warn "Missing family metadata; using directory name '$family' for $(relative_path "$font_file")"
   fi
 
   if [[ -z $style ]]; then
@@ -639,7 +716,8 @@ for font_file in "${FONT_FILES[@]}"; do
   local_format="${font_file##*.}"
   local_format="${local_format,,}"
   if [[ $local_format != "otf" && $local_format != "ttf" ]]; then
-    log_warn "Unsupported font extension in $(relative_path "$font_file")"
+    stop_spinner
+    ui_warn "Unsupported font extension in $(relative_path "$font_file")"
     continue
   fi
 
@@ -687,17 +765,17 @@ for font_file in "${FONT_FILES[@]}"; do
 
 done
 
-# Clear progress line if it was shown
-if [[ $VERBOSE == "false" && $total_files -gt 0 ]]; then
+if [[ $VERBOSE == "false" && $TABLE_MODE == "false" && $total_files -gt 0 ]]; then
   if [[ $is_tty == "true" ]]; then
-    printf '\rAnalyzing fonts: %d/%d (complete)\n' "$total_files" "$total_files" >&2
+    ui_info "Analyzing fonts: $total_files/$total_files (complete)" >&2
   else
-    printf 'Analyzing fonts: 100%% (complete)\n' >&2
+    ui_info "Analyzing fonts: 100% (complete)" >&2
   fi
 fi
 
 if [[ ${#FILE_PATHS[@]} -eq 0 ]]; then
-  log_info "No usable font files found under $(relative_path "$FONTS_DIR")"
+  stop_spinner
+  ui_info "No usable font files found under $(relative_path "$FONTS_DIR")"
   exit 0
 fi
 
@@ -852,7 +930,8 @@ for key in "${GROUP_KEYS[@]}"; do
       checksum_errors=$(mktemp)
       mapfile -t checksums < <(printf '%s\n' "${var_paths[@]}" | parallel -j "$(nproc)" 'md5sum {} 2>/dev/null | awk "{print \$1}"' 2>"$checksum_errors")
       if [[ -s $checksum_errors ]]; then
-        log_warn "Errors during MD5 computation:"
+        stop_spinner
+        ui_warn "Errors during MD5 computation:"
         cat "$checksum_errors" >&2
       fi
       rm -f "$checksum_errors"
@@ -929,6 +1008,7 @@ for key in "${GROUP_KEYS[@]}"; do
   fi
 
 done
+stop_spinner
 
 if [[ $PRUNE_EMPTY == "true" ]]; then
   log_verbose "Prune empty directories mode: $PRUNE_MODE"
@@ -940,21 +1020,21 @@ display_rename_list
 
 total_families=${#FAMILY_SEEN[@]}
 if [[ -n $SCOPED_MODE ]]; then
-  log_info "Selected $SELECTED_COUNT $SCOPED_MODE font files; analyzed ${#FILE_PATHS[@]} files across $total_families families"
+  ui_info "Selected $SELECTED_COUNT $SCOPED_MODE font files; analyzed ${#FILE_PATHS[@]} files across $total_families families"
   if [[ $CONTEXT_ONLY_MOVE_COUNT -gt 0 ]]; then
-    log_warn "Full normalization would move unselected family members; run the unrestricted target to organize them"
+    ui_warn "Full normalization would move unselected family members; run the unrestricted target to organize them"
   fi
 else
-  log_info "Processed ${#FILE_PATHS[@]} font files across $total_families families"
+  ui_info "Processed ${#FILE_PATHS[@]} font files across $total_families families"
 fi
 log_verbose "Repository root: $(realpath "$REPO_ROOT")"
 log_verbose "Fonts directory: $(realpath "$FONTS_DIR")"
 log_verbose "Dry-run mode: $DRY_RUN"
 log_verbose "Verbose mode: $VERBOSE"
 if [[ $DRY_RUN == "true" ]]; then
-  log_info "Planned moves: $PLANNED_MOVES (dry run)"
+  ui_info "Planned moves: $PLANNED_MOVES (dry run)"
 else
-  log_info "Executed moves: $EXECUTED_MOVES"
+  ui_info "Executed moves: $EXECUTED_MOVES"
 fi
 
 exit 0
